@@ -2,7 +2,7 @@ import users from "../models/users.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const createAccount = async (payload) => {
+async function createAccount(payload) {
   const { firstName, lastName, email, role } = payload;
 
   if (!firstName || !lastName || !payload.password || !email || !role) {
@@ -32,9 +32,9 @@ const createAccount = async (payload) => {
     status: "success",
     data: newUser,
   };
-};
+}
 
-const login = async (payload) => {
+async function login(payload) {
   const { email, password } = payload;
   const foundAccount = await users.findOne({ email: email }).lean();
   if (!foundAccount) {
@@ -70,7 +70,7 @@ const login = async (payload) => {
     status: "success",
     data: foundAccount,
   };
-};
+}
 
 export default {
   createAccount,

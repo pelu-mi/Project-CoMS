@@ -1,6 +1,6 @@
 import usersServices from "../services/users.services.js";
 
-const createAccount = async (req, res) => {
+async function createAccount(req, res) {
   try {
     const response = await usersServices.createAccount(req.body);
     res.status(response.statusCode).json(response);
@@ -10,20 +10,18 @@ const createAccount = async (req, res) => {
       status: "failure",
     });
   }
-};
+}
 
-const login = async (req, res) => {
-  //   try {
-  //     const response = await usersServices.login(req.body);
-  //     res.status(response.statusCode).json(response);
-  //   } catch (error) {
-  //     res.status(500).json({
-  //       message: "Unable to login",
-  //       status: "failure",
-  //     });
-  //   }
-  const response = await usersServices.login(req.body);
-  res.status(response.statusCode).json(response);
-};
+async function login(req, res) {
+  try {
+    const response = await usersServices.login(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to login",
+      status: "failure",
+    });
+  }
+}
 
 export default { createAccount, login };
