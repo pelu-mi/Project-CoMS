@@ -1,10 +1,26 @@
 import PropTypes from "prop-types";
-import { CssBaseline, ThemeProvider as MuiThemeProvider } from "@mui/material";
+import {
+  CssBaseline,
+  GlobalStyles,
+  ThemeProvider as MuiThemeProvider,
+  css,
+} from "@mui/material";
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/700.css";
 import theme from "./theme";
 
 export const ThemeProvider = ({ children }) => {
   return (
     <MuiThemeProvider theme={theme}>
+      <GlobalStyles
+        styles={css`
+          body {
+            font-family: "Inter", Arial, sans-serif;
+          }
+        `}
+      />
       <CssBaseline />
       {children}
     </MuiThemeProvider>
