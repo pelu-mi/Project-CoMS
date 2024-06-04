@@ -127,4 +127,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+node_modules
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,sublimetext,windows,macos,linux
