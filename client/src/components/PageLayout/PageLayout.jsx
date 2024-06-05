@@ -7,7 +7,9 @@ export const PageLayout = ({ children }) => {
   return (
     <>
       <NavBar />
-      <Container sx={{ paddingTop: "64px" }}>{children}</Container>
+      <Container sx={{ paddingTop: "64px", height: "100%" }}>
+        {children}
+      </Container>
     </>
   );
 };

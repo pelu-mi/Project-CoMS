@@ -16,6 +16,12 @@ export const ThemeProvider = ({ children }) => {
     <MuiThemeProvider theme={theme}>
       <GlobalStyles
         styles={css`
+          html,
+          body,
+          #root {
+            height: 100%;
+          }
+
           body {
             font-family: "Inter", Arial, sans-serif;
           }
