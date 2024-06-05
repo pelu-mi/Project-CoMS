@@ -1,12 +1,16 @@
 import { Root } from "pages/Root";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "context/ThemeProvider/ThemeProvider.jsx";
+
+import { ThemeProvider } from "context/ThemeProvider";
+import { UserProvider } from "context/UserProvider/UserProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <Root />
+        <UserProvider>
+          <Root />
+        </UserProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

@@ -11,10 +11,17 @@ import { PageLayout } from "components/PageLayout";
 import { useState } from "react";
 import { LOGIN_ROUTE } from "routes";
 import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
+import { useUser } from "context/UserProvider/UserProvider";
+
+const ROLES = {
+  student: "student",
+  instructor: "instructor",
+};
 
 export const CreateAccountPage = () => {
+  const { createAccount } = useUser();
   const [formInputs, setFormInputs] = useState({
-    role: "student",
+    role: ROLES.student,
     firstName: "",
     lastName: "",
     email: "",
@@ -32,22 +39,28 @@ export const CreateAccountPage = () => {
     setFormInputs((prev) => ({ ...prev, role: event.target.name }));
   };
 
-  const handleOnSubmit = () => {};
+  const handleCreateAccount = (event) => {
+    event.preventDefault();
+
+    createAccount(formInputs);
+  };
 
   return (
     <PageLayout>
       <StyledLayout>
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
-            <StyledForm onSubmit={handleOnSubmit}>
+            <StyledForm onSubmit={handleCreateAccount}>
               <Grid container flexDirection="column" gap="16px">
                 <Typography variant="h5">Create an account for:</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <Button
-                      name="student"
+                      name={ROLES.student}
                       variant={
-                        formInputs.role === "student" ? "contained" : "outlined"
+                        formInputs.role === ROLES.student
+                          ? "contained"
+                          : "outlined"
                       }
                       fullWidth
                       sx={{ height: "100%" }}
@@ -59,9 +72,11 @@ export const CreateAccountPage = () => {
                   </Grid>
                   <Grid item xs={6}>
                     <Button
-                      name="instructor"
+                      name={ROLES.instructor}
                       variant={
-                        formInputs.role !== "student" ? "contained" : "outlined"
+                        formInputs.role !== ROLES.student
+                          ? "contained"
+                          : "outlined"
                       }
                       fullWidth
                       sx={{ height: "100%" }}
