@@ -1,9 +1,16 @@
-import { AppBar, Container } from "@mui/material";
+import { Box, Container, Toolbar } from "@mui/material";
+import { StyledAppBar } from "./NavBar.styled";
 
 export const NavBar = () => {
+  const pages = ["Courses"];
+
   return (
-    <AppBar position="fixed" sx={{ height: "60px" }}>
-      <Container maxWidth="xl">This is navbar</Container>
-    </AppBar>
+    <StyledAppBar position="fixed" color="transparent">
+      <Container maxWidth="xl" sx={{ height: "100%" }}>
+        <Toolbar disableGutters>
+          <Box component="img" src="./full-logo.svg" />
+        </Toolbar>
+      </Container>
+    </StyledAppBar>
   );
 };
