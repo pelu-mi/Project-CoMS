@@ -31,7 +31,7 @@ export const LoginPage = () => {
     <PageLayout>
       <StyledLayout>
         <Grid container justifyContent="center" alignItems="center">
-          <Grid item md={5} lg={4} xl={3}>
+          <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
             <StyledForm onSubmit={handleOnSubmit}>
               <StyledLogo component="img" src="./logo.svg" />
 
