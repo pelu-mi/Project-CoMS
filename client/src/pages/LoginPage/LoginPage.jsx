@@ -11,8 +11,10 @@ import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
 import { useState } from "react";
 import { CREATE_ACCOUNT_ROUTE } from "routes";
 import { PageLayout } from "components/PageLayout";
+import { useUser } from "context/UserProvider/UserProvider";
 
 export const LoginPage = () => {
+  const { login } = useUser();
   const [formInputs, setFormInputs] = useState({
     email: "",
     password: "",
@@ -25,14 +27,18 @@ export const LoginPage = () => {
     }));
   };
 
-  const handleOnSubmit = () => {};
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    login(formInputs);
+  };
 
   return (
     <PageLayout>
       <StyledLayout>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
-            <StyledForm onSubmit={handleOnSubmit}>
+            <StyledForm onSubmit={handleLogin}>
               <StyledLogo component="img" src="./logo.svg" />
 
               <TextField
