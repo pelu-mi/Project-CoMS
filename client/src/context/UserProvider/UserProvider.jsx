@@ -10,7 +10,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
-    () => JSON.parse(window.localStorage.getItem("user")) || null
+    () => JSON.parse(localStorage.getItem("user")) || null
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
       const { firstName, lastName, email, role } = userResponse.data;
 
       setUser({ firstName, lastName, email, role });
-      window.localStorage.setItem(
+      localStorage.setItem(
         "user",
         JSON.stringify({ firstName, lastName, email, role })
       );
@@ -45,7 +45,7 @@ export const UserProvider = ({ children }) => {
       const { firstName, lastName, email, role } = userResponse.data;
 
       setUser({ firstName, lastName, email, role });
-      window.localStorage.setItem(
+      localStorage.setItem(
         "user",
         JSON.stringify({ firstName, lastName, email, role })
       );

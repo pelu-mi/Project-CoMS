@@ -1,20 +1,18 @@
 import { Box, Button, Container, Toolbar } from "@mui/material";
 import { StyledAppBar, StyledNavLogo } from "./NavBar.styled";
-import { useState } from "react";
 import { MobileMenus, UserMenus } from "./units";
+import { useUser } from "context/UserProvider/UserProvider";
 
 export const pages = ["Courses"];
 
 export const NavBar = () => {
-  const [user, setUser] = useState(null);
+  const { user } = useUser();
 
   return (
     <>
       <StyledAppBar position="fixed">
         <Container maxWidth="xl" sx={{ height: "100%" }}>
           <Toolbar disableGutters>
-            {/* TODO: responsive side menu */}
-            {/* TODO: show if login */}
             <Box
               sx={{
                 flexGrow: 1,

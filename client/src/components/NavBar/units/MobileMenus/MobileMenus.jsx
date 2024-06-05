@@ -10,6 +10,7 @@ import {
 import { pages } from "components/NavBar/NavBar";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import { StyledNavLogo } from "components/NavBar/NavBar.styled";
 
 export const MobileMenus = () => {
   const [openMobileNav, setOpenMobileNav] = useState(false);
@@ -24,6 +25,11 @@ export const MobileMenus = () => {
       onClick={toggleMobileNav(false)}
     >
       <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <StyledNavLogo component="img" src="./full-logo.svg" />
+          </ListItemButton>
+        </ListItem>
         {pages.map((page) => (
           <ListItem key={page} disablePadding>
             <ListItemButton>

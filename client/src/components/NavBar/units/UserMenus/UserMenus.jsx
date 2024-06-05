@@ -7,12 +7,16 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { useUser } from "context/UserProvider/UserProvider";
 import { useState } from "react";
 
-const settings = ["Profile", "Logout"];
-
 export const UserMenus = () => {
+  const { user, logout } = useUser();
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const settings = [
+    { title: "Profile", action: () => {} },
+    { title: "Logout", action: logout },
+  ];
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -26,7 +30,7 @@ export const UserMenus = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/.jpg" />
+          <Avatar alt={`${user.firstName} ${user.lastName}`} src="/.jpg" />
         </IconButton>
       </Tooltip>
       <Menu
@@ -45,9 +49,17 @@ export const UserMenus = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
+        {settings.map(({ title, action }) => (
+          <MenuItem
+            key={title}
+            onClick={() => {
+              handleCloseUserMenu();
+              action();
+            }}
+          >
+            <Typography textAlign="center" onClick={action}>
+              {title}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>
