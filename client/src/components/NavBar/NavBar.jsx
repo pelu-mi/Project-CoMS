@@ -11,7 +11,7 @@ export const NavBar = () => {
   return (
     <>
       <StyledAppBar position="fixed">
-        <Container maxWidth="xl" sx={{ height: "100%" }}>
+        <Container sx={{ height: "100%" }}>
           <Toolbar disableGutters>
             <Box
               sx={{
