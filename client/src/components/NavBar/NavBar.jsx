@@ -18,7 +18,7 @@ export const pages = ["Courses"];
 const settings = ["Profile", "Logout"];
 
 export const NavBar = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
