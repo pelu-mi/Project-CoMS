@@ -49,12 +49,16 @@ const theme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
-        containedPrimary: {
+        contained: {
+          padding: "12px 20px",
+        },
+        outlined: {
           padding: "12px 20px",
         },
       },
       defaultProps: {
         disableElevation: true,
+        variant: "contained",
       },
     },
     MuiDivider: {

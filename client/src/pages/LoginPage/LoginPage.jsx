@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { StyledLoginForm, StyledLoginLayout, StyledLogo } from "./styled";
+import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
 import { useState } from "react";
 import { CREATE_ACCOUNT_ROUTE } from "routes";
 import { PageLayout } from "components/PageLayout";
@@ -29,10 +29,10 @@ export const LoginPage = () => {
 
   return (
     <PageLayout>
-      <StyledLoginLayout>
-        <Grid container justifyContent="center">
-          <Grid md={5} lg={4} xl={3}>
-            <StyledLoginForm onSubmit={handleOnSubmit}>
+      <StyledLayout>
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid item md={5} lg={4} xl={3}>
+            <StyledForm onSubmit={handleOnSubmit}>
               <StyledLogo component="img" src="./logo.svg" />
 
               <TextField
@@ -57,9 +57,7 @@ export const LoginPage = () => {
                 fullWidth
               />
 
-              <Button type="submit" variant="contained">
-                Login
-              </Button>
+              <Button type="submit">Login</Button>
 
               <Divider sx={{ width: "100%" }}>OR</Divider>
 
@@ -69,10 +67,10 @@ export const LoginPage = () => {
                   Create account
                 </Link>
               </Typography>
-            </StyledLoginForm>
+            </StyledForm>
           </Grid>
         </Grid>
-      </StyledLoginLayout>
+      </StyledLayout>
     </PageLayout>
   );
 };
