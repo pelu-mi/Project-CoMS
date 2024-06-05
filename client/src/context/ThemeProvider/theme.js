@@ -5,6 +5,9 @@ const theme = createTheme({
     primary: {
       main: "#3851DD",
     },
+    secondary: {
+      main: "#3851DD",
+    },
     error: {
       main: "#F26A6A",
     },
@@ -37,6 +40,38 @@ const theme = createTheme({
     },
     h5: {
       fontWeight: 500,
+    },
+    button: {
+      textTransform: "none",
+      fontSize: "16px",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+          padding: "12px 20px",
+        },
+      },
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontSize: "14px",
+          fontWeight: 500,
+          color: theme.palette.grey[400],
+        }),
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontWeight: 500,
+        },
+      },
     },
   },
 });

@@ -1,8 +1,14 @@
+import { Root } from "pages/Root";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "context/ThemeProvider/ThemeProvider.jsx";
+
 function App() {
   return (
-    <>
-      <h1>Course Management</h1>
-    </>
+    <BrowserRouter>
+      <ThemeProvider>
+        <Root />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
