@@ -24,4 +24,28 @@ async function login(req, res) {
   }
 }
 
-export default { createAccount, login };
+async function createCourse(req, res) {
+  try {
+    const response = await usersServices.createCourse(req.user, req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to create course",
+      status: "failure",
+    });
+  }
+}
+
+async function getInstructorCourseLIst(req, res) {
+  try {
+    const response = await usersServices.getInstructorCourseLIst(req.user);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get courses",
+      status: "failure",
+    });
+  }
+}
+
+export default { createAccount, login, createCourse, getInstructorCourseLIst };
