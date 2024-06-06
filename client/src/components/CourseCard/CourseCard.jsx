@@ -1,19 +1,15 @@
-import {
-  Box,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, CardActionArea, CardContent, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
-import { StyledCard, StyledIconWrapper } from "./CourseCard.styled";
+import {
+  StyledCard,
+  StyledCardMedia,
+  StyledIconWrapper,
+} from "./CourseCard.styled";
 import { useUser } from "context";
 import { ROLES } from "constants/role";
 
 export const CourseCard = ({ image = "", title, description }) => {
-  const theme = useTheme();
   const { user } = useUser();
   return (
     <StyledCard elevation={0}>
@@ -27,15 +23,7 @@ export const CourseCard = ({ image = "", title, description }) => {
         disableRipple
       >
         <Box width="100%" position="relative">
-          <CardMedia
-            image={image}
-            title={title}
-            sx={{
-              height: 120,
-              width: "100%",
-              background: !image ? theme.palette.grey[200] : "none",
-            }}
-          />
+          <StyledCardMedia image={image} title={title} />
 
           {user.role === ROLES.instructor && (
             <StyledIconWrapper variant="outlined">

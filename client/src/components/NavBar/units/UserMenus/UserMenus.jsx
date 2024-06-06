@@ -1,17 +1,20 @@
+import { useTheme } from "@emotion/react";
 import {
   Avatar,
   Box,
-  IconButton,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useUser } from "context/UserProvider/UserProvider";
 import { useState } from "react";
+import { StyledButton } from "./UserMenus.styled";
 
 export const UserMenus = () => {
   const { user, logout } = useUser();
+  const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = useState(null);
   const settings = [
     { title: "Profile", action: () => {} },
@@ -29,9 +32,21 @@ export const UserMenus = () => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt={`${user.firstName} ${user.lastName}`} src="/.jpg" />
-        </IconButton>
+        <StyledButton
+          startIcon={
+            <Avatar
+              alt={`${user.firstName} ${user.lastName}`}
+              src="/.jpg"
+              sx={{ background: theme.palette.primary.main }}
+            />
+          }
+          endIcon={<ExpandMoreIcon />}
+          variant="outlined"
+          disableRipple
+          onClick={handleOpenUserMenu}
+        >
+          {user.firstName}
+        </StyledButton>
       </Tooltip>
       <Menu
         sx={{ mt: "45px" }}
