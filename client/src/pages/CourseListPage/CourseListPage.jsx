@@ -19,6 +19,7 @@ import { useState } from "react";
 import { CourseCard } from "components/CourseCard";
 import { useNavigate } from "react-router-dom";
 import { CreateCourseModal } from "./components/CreateCourseModal";
+import { ROLES } from "constants/role";
 
 const courses = [
   {
@@ -83,7 +84,9 @@ export const CourseListPage = () => {
               variant="h5"
               sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
             >
-              My Courses (20)
+              {user.role === ROLES.instructor
+                ? `My Courses(20)`
+                : `Enrolled Courses`}
             </Typography>
 
             <StyledActionContainer>
