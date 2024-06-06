@@ -6,16 +6,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Navigate, Link as RouterLink } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
 import { useState } from "react";
-import { LOGIN_ROUTE } from "routes";
+import { HOME_ROUTE, LOGIN_ROUTE } from "routes";
 import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
 import { useUser } from "context/UserProvider/UserProvider";
 import { ROLES } from "constants/role";
 
 export const CreateAccountPage = () => {
-  const { createAccount } = useUser();
+  const { createAccount, user } = useUser();
   const [formInputs, setFormInputs] = useState({
     role: ROLES.student,
     firstName: "",
@@ -40,6 +40,8 @@ export const CreateAccountPage = () => {
 
     createAccount(formInputs);
   };
+
+  if (user) return <Navigate to={HOME_ROUTE} />;
 
   return (
     <PageLayout>

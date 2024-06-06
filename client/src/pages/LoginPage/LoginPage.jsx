@@ -6,15 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Navigate, Link as RouterLink } from "react-router-dom";
 import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
 import { useState } from "react";
-import { CREATE_ACCOUNT_ROUTE } from "routes";
+import { CREATE_ACCOUNT_ROUTE, HOME_ROUTE } from "routes";
 import { PageLayout } from "components/PageLayout";
 import { useUser } from "context/UserProvider/UserProvider";
 
 export const LoginPage = () => {
-  const { login } = useUser();
+  const { login, user } = useUser();
   const [formInputs, setFormInputs] = useState({
     email: "",
     password: "",
@@ -32,6 +32,8 @@ export const LoginPage = () => {
 
     login(formInputs);
   };
+
+  if (user) return <Navigate to={HOME_ROUTE} />;
 
   return (
     <PageLayout>
