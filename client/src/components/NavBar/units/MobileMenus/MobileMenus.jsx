@@ -10,12 +10,14 @@ import {
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { StyledNavLogo } from "components/NavBar/NavBar.styled";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MENUS } from "constants/menus";
 import { HOME_ROUTE } from "routes";
+import { StyledIconButton, StyledListItemButton } from "./MobileMenus.styled";
 
 export const MobileMenus = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [openMobileNav, setOpenMobileNav] = useState(false);
 
   const toggleMobileNav = (newOpen) => () => {
@@ -36,9 +38,14 @@ export const MobileMenus = () => {
         </ListItem>
         {MENUS.map(({ title, path }) => (
           <ListItem key={title} disablePadding onClick={() => navigate(path)}>
-            <ListItemButton>
-              <ListItemText primary={title} />
-            </ListItemButton>
+            <StyledListItemButton active={path === pathname}>
+              <ListItemText
+                primary={title}
+                primaryTypographyProps={{
+                  fontWeight: path === pathname ? 600 : 500,
+                }}
+              />
+            </StyledListItemButton>
           </ListItem>
         ))}
       </List>
@@ -47,15 +54,16 @@ export const MobileMenus = () => {
 
   return (
     <Box sx={{ flexGrow: 1, display: { xs: "flex", sm: "none" } }}>
-      <IconButton
+      <StyledIconButton
         size="large"
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
+        color="secondary"
         onClick={toggleMobileNav(true)}
       >
-        <MenuIcon />
-      </IconButton>
+        <MenuIcon sx={{ width: "28px", height: "28px" }} />
+      </StyledIconButton>
 
       <Drawer open={openMobileNav} onClose={toggleMobileNav(false)}>
         {DrawerList}

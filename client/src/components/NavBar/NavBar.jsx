@@ -1,14 +1,15 @@
-import { Box, Button, Container, Toolbar, Typography } from "@mui/material";
-import { StyledAppBar, StyledNavLogo } from "./NavBar.styled";
+import { Box, Container, Toolbar } from "@mui/material";
+import { StyledAppBar, StyledNavButton, StyledNavLogo } from "./NavBar.styled";
 import { MobileMenus, UserMenus } from "./units";
 import { useUser } from "context/UserProvider/UserProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MENUS } from "constants/menus";
 import { HOME_ROUTE } from "routes";
 
 export const NavBar = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   return (
     <StyledAppBar position="fixed">
@@ -27,14 +28,17 @@ export const NavBar = () => {
             />
             {user &&
               MENUS.map(({ title, path }) => (
-                <Button
-                  key={title}
-                  variant="text"
-                  onClick={() => navigate(path)}
-                  disableRipple
-                >
-                  {title}
-                </Button>
+                <>
+                  <StyledNavButton
+                    key={title}
+                    variant="text"
+                    onClick={() => navigate(path)}
+                    disableRipple
+                    active={path === pathname}
+                  >
+                    {title}
+                  </StyledNavButton>
+                </>
               ))}
           </Box>
 
