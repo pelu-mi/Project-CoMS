@@ -9,7 +9,7 @@ import {
 import { useUser } from "context";
 import { ROLES } from "constants/role";
 
-export const CourseCard = ({ image = "", title, description }) => {
+export const CourseCard = ({ image = "", title, description, onClickEdit }) => {
   const { user } = useUser();
   return (
     <StyledCard elevation={0}>
@@ -26,7 +26,7 @@ export const CourseCard = ({ image = "", title, description }) => {
           <StyledCardMedia image={image} title={title} />
 
           {user.role === ROLES.instructor && (
-            <StyledIconWrapper variant="outlined">
+            <StyledIconWrapper variant="outlined" onClick={onClickEdit}>
               <EditIcon color="primary" />
             </StyledIconWrapper>
           )}
@@ -71,4 +71,5 @@ CourseCard.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  onClickEdit: PropTypes.func,
 };
