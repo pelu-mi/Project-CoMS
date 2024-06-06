@@ -102,13 +102,15 @@ export const CourseListPage = () => {
                 }}
               />
 
-              <Button
-                startIcon={<AddIcon />}
-                sx={{ minHeight: 56, flexGrow: 1 }}
-                onClick={() => setOpenCreateAccount(true)}
-              >
-                Create Course
-              </Button>
+              {user.role === ROLES.instructor && (
+                <Button
+                  startIcon={<AddIcon />}
+                  sx={{ minHeight: 56, flexGrow: 1 }}
+                  onClick={() => setOpenCreateAccount(true)}
+                >
+                  Create Course
+                </Button>
+              )}
             </StyledActionContainer>
           </Box>
 
