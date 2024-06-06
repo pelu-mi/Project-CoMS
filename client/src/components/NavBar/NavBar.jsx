@@ -2,10 +2,9 @@ import { Box, Button, Container, Toolbar } from "@mui/material";
 import { StyledAppBar, StyledNavLogo } from "./NavBar.styled";
 import { MobileMenus, UserMenus } from "./units";
 import { useUser } from "context/UserProvider/UserProvider";
-import { COURSE_LIST_ROUTE } from "routes";
 import { useNavigate } from "react-router-dom";
-
-export const pages = [{ title: "Courses", path: COURSE_LIST_ROUTE }];
+import { MENUS } from "constants/menus";
+import { HOME_ROUTE } from "routes";
 
 export const NavBar = () => {
   const { user } = useUser();
@@ -22,10 +21,18 @@ export const NavBar = () => {
                 display: { xs: !user ? "flex" : "none", sm: "flex" },
               }}
             >
-              <StyledNavLogo component="img" src="./full-logo.svg" />
+              <StyledNavLogo
+                component="img"
+                src="./full-logo.svg"
+                onClick={() => navigate(HOME_ROUTE)}
+              />
               {user &&
-                pages.map(({ title, path }) => (
-                  <Button key={title} variant="text" onClick={navigate(path)}>
+                MENUS.map(({ title, path }) => (
+                  <Button
+                    key={title}
+                    variant="text"
+                    onClick={() => navigate(path)}
+                  >
                     {title}
                   </Button>
                 ))}

@@ -7,17 +7,21 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import { pages } from "components/NavBar/NavBar";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { StyledNavLogo } from "components/NavBar/NavBar.styled";
+import { useNavigate } from "react-router-dom";
+import { MENUS } from "constants/menus";
+import { HOME_ROUTE } from "routes";
 
 export const MobileMenus = () => {
+  const navigate = useNavigate();
   const [openMobileNav, setOpenMobileNav] = useState(false);
 
   const toggleMobileNav = (newOpen) => () => {
     setOpenMobileNav(newOpen);
   };
+
   const DrawerList = (
     <Box
       sx={{ width: 250 }}
@@ -25,15 +29,15 @@ export const MobileMenus = () => {
       onClick={toggleMobileNav(false)}
     >
       <List>
-        <ListItem disablePadding>
+        <ListItem disablePadding onClick={() => navigate(HOME_ROUTE)}>
           <ListItemButton>
             <StyledNavLogo component="img" src="./full-logo.svg" />
           </ListItemButton>
         </ListItem>
-        {pages.map((page) => (
-          <ListItem key={page} disablePadding>
+        {MENUS.map(({ title, path }) => (
+          <ListItem key={title} disablePadding onClick={() => navigate(path)}>
             <ListItemButton>
-              <ListItemText primary={page} />
+              <ListItemText primary={title} />
             </ListItemButton>
           </ListItem>
         ))}

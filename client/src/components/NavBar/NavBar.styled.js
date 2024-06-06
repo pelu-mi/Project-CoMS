@@ -8,4 +8,5 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 export const StyledNavLogo = styled(Box)({
   marginRight: 24,
+  cursor: "pointer",
 });

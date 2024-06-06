@@ -6,13 +6,16 @@ const theme = createTheme({
       main: "#3851DD",
     },
     secondary: {
-      main: "#3851DD",
+      main: "#313131",
     },
     error: {
       main: "#F26A6A",
     },
     success: {
       main: "#20C11D",
+    },
+    text: {
+      main: "#313131",
     },
   },
   breakpoints: {
@@ -47,6 +50,7 @@ const theme = createTheme({
     button: {
       textTransform: "none",
       fontSize: "16px",
+      fontWeight: 600,
     },
   },
   components: {
@@ -58,6 +62,9 @@ const theme = createTheme({
         outlined: {
           padding: "12px 20px",
         },
+        outlinedSecondary: ({ theme }) => ({
+          borderColor: theme.palette.grey[400],
+        }),
       },
       defaultProps: {
         disableElevation: true,
