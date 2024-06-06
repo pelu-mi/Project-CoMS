@@ -36,10 +36,13 @@ const theme = createTheme({
       fontWeight: 500,
     },
     h4: {
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h5: {
-      fontWeight: 500,
+      fontWeight: 600,
+    },
+    h6: {
+      fontWeight: 600,
     },
     button: {
       textTransform: "none",

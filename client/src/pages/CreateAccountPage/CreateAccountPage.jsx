@@ -12,11 +12,7 @@ import { useState } from "react";
 import { LOGIN_ROUTE } from "routes";
 import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
 import { useUser } from "context/UserProvider/UserProvider";
-
-const ROLES = {
-  student: "student",
-  instructor: "instructor",
-};
+import { ROLES } from "constants/role";
 
 export const CreateAccountPage = () => {
   const { createAccount } = useUser();

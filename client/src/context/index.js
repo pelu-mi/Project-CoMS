@@ -1,2 +1,2 @@
 export { ThemeProvider } from "./ThemeProvider";
-export { UserProvider } from "./UserProvider";
+export { UserProvider, useUser } from "./UserProvider/UserProvider";
