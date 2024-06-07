@@ -4,7 +4,7 @@ export const StyledLayout = styled("div")({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "100%",
+  minHeight: "100%",
   padding: "24px 0",
 });
 

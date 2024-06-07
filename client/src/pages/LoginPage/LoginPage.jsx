@@ -34,7 +34,6 @@ export const LoginPage = () => {
 
               <TextField
                 label="Email"
-                type="email"
                 placeholder="example@mail.com"
                 fullWidth
                 error={errors.email}

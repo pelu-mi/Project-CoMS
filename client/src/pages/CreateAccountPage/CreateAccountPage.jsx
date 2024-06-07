@@ -8,37 +8,26 @@ import {
 } from "@mui/material";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
-import { useState } from "react";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes";
 import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
 import { useUser } from "context/UserProvider/UserProvider";
 import { ROLES } from "constants/role";
+import { useCreateAccountForm } from "./hooks/useCreateAccountForm";
 
 export const CreateAccountPage = () => {
-  const { createAccount, user } = useUser();
-  const [formInputs, setFormInputs] = useState({
-    role: ROLES.student,
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+  const { user } = useUser();
 
-  const handleOnChange = (event) => {
-    setFormInputs((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useCreateAccountForm();
+  const role = watch("role");
 
-  const handleSelectingRole = (event) => {
-    setFormInputs((prev) => ({ ...prev, role: event.target.name }));
-  };
-
-  const handleCreateAccount = (event) => {
-    event.preventDefault();
-
-    createAccount(formInputs);
+  const handleRole = (event) => {
+    setValue("role", event.target.name);
   };
 
   if (user) return <Navigate to={HOME_ROUTE} />;
@@ -48,7 +37,7 @@ export const CreateAccountPage = () => {
       <StyledLayout>
         <Grid container justifyContent="center">
           <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
-            <StyledForm onSubmit={handleCreateAccount}>
+            <StyledForm onSubmit={handleSubmit}>
               <Grid container flexDirection="column" gap="16px">
                 <Typography variant="h5">Create an account for:</Typography>
                 <Grid container spacing={2}>
@@ -56,14 +45,12 @@ export const CreateAccountPage = () => {
                     <Button
                       name={ROLES.student}
                       variant={
-                        formInputs.role === ROLES.student
-                          ? "contained"
-                          : "outlined"
+                        role === ROLES.student ? "contained" : "outlined"
                       }
                       fullWidth
                       sx={{ height: "100%" }}
                       disableRipple
-                      onClick={handleSelectingRole}
+                      onClick={handleRole}
                     >
                       Student
                     </Button>
@@ -72,57 +59,52 @@ export const CreateAccountPage = () => {
                     <Button
                       name={ROLES.instructor}
                       variant={
-                        formInputs.role !== ROLES.student
-                          ? "contained"
-                          : "outlined"
+                        role !== ROLES.student ? "contained" : "outlined"
                       }
                       fullWidth
                       sx={{ height: "100%" }}
                       disableRipple
-                      onClick={handleSelectingRole}
+                      onClick={handleRole}
                     >
                       Instructor
                     </Button>
                   </Grid>
                 </Grid>
               </Grid>
+              <input type="hidden" value={role} {...register("role")} />
 
               <TextField
-                label="First Name"
-                name="firstName"
+                label="First Name *"
                 placeholder="Enter your first name"
-                value={formInputs.firstName}
-                onChange={handleOnChange}
                 fullWidth
+                error={errors.firstName}
+                helperText={errors.firstName?.message}
+                {...register("firstName")}
               />
               <TextField
-                label="Last Name"
-                name="lastName"
+                label="Last Name *"
                 placeholder="Enter your last name"
-                value={formInputs.lastName}
-                onChange={handleOnChange}
                 fullWidth
+                error={errors.lastName}
+                helperText={errors.lastName?.message}
+                {...register("lastName")}
               />
               <TextField
-                label="Email"
-                type="email"
-                name="email"
+                label="Email *"
                 placeholder="example@mail.com"
-                value={formInputs.email}
-                required
-                onChange={handleOnChange}
                 fullWidth
+                error={errors.email}
+                helperText={errors.email?.message}
+                {...register("email")}
               />
-
               <TextField
-                label="Password"
+                label="Password *"
                 type="password"
-                name="password"
                 placeholder="At least 8 characters"
-                value={formInputs.password}
-                required
-                onChange={handleOnChange}
                 fullWidth
+                error={errors.password}
+                helperText={errors.password?.message}
+                {...register("password")}
               />
 
               <Button type="submit">Create Account</Button>
