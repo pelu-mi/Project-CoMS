@@ -11,9 +11,11 @@ const theme = createTheme({
     },
     error: {
       main: "#F26A6A",
+      background: "#FEF0F0",
     },
     success: {
       main: "#20C11D",
+      background: "#F4FCF4",
     },
     text: {
       primary: "#313131",

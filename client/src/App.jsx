@@ -1,16 +1,17 @@
 import { Root } from "pages/Root";
 import { BrowserRouter } from "react-router-dom";
 
-import { ThemeProvider } from "context/ThemeProvider";
-import { UserProvider } from "context/UserProvider/UserProvider";
+import { SnackbarProvider, ThemeProvider, UserProvider } from "context";
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <UserProvider>
-          <Root />
-        </UserProvider>
+        <SnackbarProvider>
+          <UserProvider>
+            <Root />
+          </UserProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
