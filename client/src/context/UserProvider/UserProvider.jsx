@@ -16,22 +16,24 @@ export const UserProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const handleUserResponse = (userResponse) => {
+    const { firstName, lastName, email, role } = userResponse.data;
+    setUser({ firstName, lastName, email, role });
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ firstName, lastName, email, role })
+    );
+    navigate(COURSE_LIST_ROUTE);
+  };
+
   const createAccount = async (userPayload) => {
     setLoading(true);
     setError(null);
     try {
       const userResponse = await createAccountApi(userPayload);
-      const { firstName, lastName, email, role } = userResponse.data;
-
-      setUser({ firstName, lastName, email, role });
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ firstName, lastName, email, role })
-      );
-      navigate(COURSE_LIST_ROUTE);
+      handleUserResponse(userResponse);
     } catch (error) {
-      setError(error.message || "An unknown error occurred");
-      console.log(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -42,17 +44,9 @@ export const UserProvider = ({ children }) => {
     setError(null);
     try {
       const userResponse = await loginApi(payload);
-      const { firstName, lastName, email, role } = userResponse.data;
-
-      setUser({ firstName, lastName, email, role });
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ firstName, lastName, email, role })
-      );
-      navigate(COURSE_LIST_ROUTE);
+      handleUserResponse(userResponse);
     } catch (error) {
-      setError(error.message || "An unknown error occurred");
-      console.log(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -64,9 +58,14 @@ export const UserProvider = ({ children }) => {
     navigate(LOGIN_ROUTE);
   };
 
+  const reset = () => {
+    setError(null);
+    setLoading(false);
+  };
+
   return (
     <UserContext.Provider
-      value={{ user, createAccount, login, logout, loading, error }}
+      value={{ user, createAccount, login, logout, loading, error, reset }}
     >
       {children}
     </UserContext.Provider>

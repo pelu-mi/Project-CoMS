@@ -14,7 +14,7 @@ import { PageLayout } from "components/PageLayout";
 import { useUser } from "context/UserProvider/UserProvider";
 
 export const LoginPage = () => {
-  const { login, user } = useUser();
+  const { login, user, error } = useUser();
   const [formInputs, setFormInputs] = useState({
     email: "",
     password: "",
@@ -52,6 +52,7 @@ export const LoginPage = () => {
                 required
                 onChange={handleOnChange}
                 fullWidth
+                error={error}
               />
 
               <TextField
@@ -63,6 +64,8 @@ export const LoginPage = () => {
                 required
                 onChange={handleOnChange}
                 fullWidth
+                error={error}
+                helperText={error && "Email or password is incorrect!"}
               />
 
               <Button type="submit">Login</Button>
