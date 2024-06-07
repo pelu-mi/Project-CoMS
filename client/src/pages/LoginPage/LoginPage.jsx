@@ -8,30 +8,19 @@ import {
 } from "@mui/material";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
-import { useState } from "react";
 import { CREATE_ACCOUNT_ROUTE, HOME_ROUTE } from "routes";
 import { PageLayout } from "components/PageLayout";
 import { useUser } from "context/UserProvider/UserProvider";
+import { useLoginForm } from "./hooks/useLoginForm";
 
 export const LoginPage = () => {
-  const { login, user, error } = useUser();
-  const [formInputs, setFormInputs] = useState({
-    email: "",
-    password: "",
-  });
+  const { user } = useUser();
 
-  const handleOnChange = (event) => {
-    setFormInputs((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleLogin = (event) => {
-    event.preventDefault();
-
-    login(formInputs);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useLoginForm();
 
   if (user) return <Navigate to={HOME_ROUTE} />;
 
@@ -40,32 +29,27 @@ export const LoginPage = () => {
       <StyledLayout>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
-            <StyledForm onSubmit={handleLogin}>
+            <StyledForm onSubmit={handleSubmit}>
               <StyledLogo component="img" src="./logo.svg" />
 
               <TextField
                 label="Email"
                 type="email"
-                name="email"
                 placeholder="example@mail.com"
-                value={formInputs.email}
-                required
-                onChange={handleOnChange}
                 fullWidth
-                error={error}
+                error={errors.email}
+                helperText={errors.email?.message}
+                {...register("email")}
               />
 
               <TextField
                 label="Password"
                 type="password"
-                name="password"
                 placeholder="Enter your password"
-                value={formInputs.password}
-                required
-                onChange={handleOnChange}
                 fullWidth
-                error={error}
-                helperText={error && "Email or password is incorrect!"}
+                error={errors.password}
+                helperText={errors.password?.message}
+                {...register("password")}
               />
 
               <Button type="submit">Login</Button>
