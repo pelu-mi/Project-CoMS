@@ -48,4 +48,35 @@ async function getInstructorCourseLIst(req, res) {
   }
 }
 
-export default { createAccount, login, createCourse, getInstructorCourseLIst };
+async function getCourseDetails(req, res) {
+  try {
+    const response = await usersServices.getCourseDetails(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get courses] details",
+      status: "failure",
+    });
+  }
+}
+
+async function addCourseContent(req, res) {
+  try {
+    const response = await usersServices.addCourseContent(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to create course content",
+      status: "failure",
+    });
+  }
+}
+
+export default {
+  createAccount,
+  login,
+  createCourse,
+  getInstructorCourseLIst,
+  getCourseDetails,
+  addCourseContent,
+};

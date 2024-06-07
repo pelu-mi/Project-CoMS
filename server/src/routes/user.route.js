@@ -20,4 +20,15 @@ router.get(
   userControllers.getInstructorCourseLIst
 );
 
+router.get(
+  "/coursedetails",
+  userControllers.getCourseDetails
+);
+
+router.post(
+  "/addcoursecontent",
+  authMiddleware.authenticate,
+  userControllers.addCourseContent
+);
+
 export default router;
