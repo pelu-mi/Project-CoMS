@@ -37,9 +37,9 @@ export const UserProvider = ({ children }) => {
 
     try {
       // Create Account
-      await createAccountApi(payload);
+      const createAccountResponse = await createAccountApi(payload);
       // Call success snackbar
-      enqueueSnackbar("Successfully Created Account", { variant: "success" });
+      enqueueSnackbar(createAccountResponse.message, { variant: "success" });
       // Login
       const userResponse = await loginApi({ email, password });
       handleUserResponse(userResponse);
