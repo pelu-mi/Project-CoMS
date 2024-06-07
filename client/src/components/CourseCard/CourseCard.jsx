@@ -1,10 +1,11 @@
-import { Box, CardActionArea, CardContent, Typography } from "@mui/material";
+import { Box, CardActionArea, CardContent } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
 import {
   StyledCard,
   StyledCardMedia,
   StyledIconWrapper,
+  StyledTypography,
 } from "./CourseCard.styled";
 import { useUser } from "context";
 import { ROLES } from "constants/role";
@@ -33,34 +34,17 @@ export const CourseCard = ({ image = "", title, description, onClickEdit }) => {
         </Box>
 
         <CardContent sx={{ width: "100%" }}>
-          <Typography
+          <StyledTypography
             mb={1}
             variant="body1"
             fontWeight={600}
             lineHeight={1.4}
-            sx={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: "2",
-              WebkitBoxOrient: "vertical",
-            }}
           >
             {title}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: "3",
-              WebkitBoxOrient: "vertical",
-            }}
-          >
+          </StyledTypography>
+          <StyledTypography variant="body2" color="text.secondary">
             {description}
-          </Typography>
+          </StyledTypography>
         </CardContent>
       </CardActionArea>
     </StyledCard>

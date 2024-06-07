@@ -3,7 +3,6 @@ import {
   Button,
   Grid,
   InputAdornment,
-  Pagination,
   TextField,
   Typography,
   useTheme,
@@ -20,34 +19,7 @@ import { CourseCard } from "components/CourseCard";
 import { useNavigate } from "react-router-dom";
 import { CreateCourseModal } from "./components/CreateCourseModal";
 import { ROLES } from "constants/role";
-
-const courses = [
-  {
-    title: "CS700 - Software Development Fundamentals",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.",
-  },
-  {
-    title: "CS730",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.",
-  },
-  {
-    title: "CS730 - Human-computer Interaction Fundamentals",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.",
-  },
-  {
-    title: "CS730",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.",
-  },
-  {
-    title: "CS730 - Human-computer Interaction Fundamentals",
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.amet consectetur. Cursus turpis euismod.",
-  },
-];
+import { useCourseListQuery } from "services/api/course/useCourseListQuery";
 
 export const CourseListPage = () => {
   const { user } = useUser();
@@ -55,12 +27,15 @@ export const CourseListPage = () => {
   const theme = useTheme();
 
   const [openCreateAccount, setOpenCreateAccount] = useState(false);
+
   // NOTE: Pagination for next phase
   // const [page, setPage] = useState(1);
   // const [totalPages] = useState(1);
   // const handlePagination = (event, value) => {
   //   setPage(value);
   // };
+
+  const { courses } = useCourseListQuery();
 
   return (
     <>
@@ -118,7 +93,7 @@ export const CourseListPage = () => {
             {courses.map((course, index) => (
               <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
                 <CourseCard
-                  title={course.title}
+                  title={course.name}
                   description={course.description}
                   onClick={() => navigate("/")}
                 />
