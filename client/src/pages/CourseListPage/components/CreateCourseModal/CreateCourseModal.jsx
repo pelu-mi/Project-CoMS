@@ -1,41 +1,36 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { Modal } from "components/Modal";
-import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useCreateCoursForm } from "pages/CourseListPage/hooks/useCreateCourseForm";
 
 export const CreateCourseModal = ({ onClose, ...res }) => {
-  const [formInputs, setFormInputs] = useState({
-    courseName: "",
-    courseDescription: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useCreateCoursForm({ onClose });
 
-  const handleOnChange = (event) => {
-    setFormInputs((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
+  const handleClose = () => {
+    onClose();
+    reset();
   };
-
-  useEffect(() => {
-    console.log("formInputs", formInputs);
-  }, [formInputs, setFormInputs]);
 
   return (
     <Modal
       title="Create Course"
       aria-labelledby="create-account-form"
       aria-describedby="create-account-form"
-      {...{ ...res, onClose }}
+      {...{ ...res, onClose: handleClose }}
     >
       <Grid container mt={4} gap={3}>
         <TextField
-          label="Course Name"
-          name="courseName"
+          label="Course Name *"
           placeholder="Enter your course name"
-          value={formInputs.email}
-          required
-          onChange={handleOnChange}
           fullWidth
+          error={errors.name}
+          helperText={errors.name?.message}
+          {...register("name")}
         />
 
         <TextField
@@ -44,8 +39,8 @@ export const CreateCourseModal = ({ onClose, ...res }) => {
           multiline
           rows={3}
           maxRows={5}
-          onChange={handleOnChange}
           fullWidth
+          {...register("description")}
         />
 
         <Grid container spacing={2}>
@@ -55,13 +50,13 @@ export const CreateCourseModal = ({ onClose, ...res }) => {
               color="secondary"
               fullWidth
               disableRipple
-              onClick={onClose}
+              onClick={handleClose}
             >
               Cancel
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Button sx={{ height: "100%" }} fullWidth>
+            <Button sx={{ height: "100%" }} fullWidth onClick={handleSubmit}>
               Create Course
             </Button>
           </Grid>
