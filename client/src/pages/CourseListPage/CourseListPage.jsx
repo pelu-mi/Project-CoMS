@@ -55,12 +55,12 @@ export const CourseListPage = () => {
   const theme = useTheme();
 
   const [openCreateAccount, setOpenCreateAccount] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages] = useState(1);
-
-  const handlePagination = (event, value) => {
-    setPage(value);
-  };
+  // NOTE: Pagination for next phase
+  // const [page, setPage] = useState(1);
+  // const [totalPages] = useState(1);
+  // const handlePagination = (event, value) => {
+  //   setPage(value);
+  // };
 
   return (
     <>
@@ -126,14 +126,15 @@ export const CourseListPage = () => {
             ))}
           </Grid>
 
-          <Box display="flex" justifyContent="flex-end" mt={2}>
+          {/* NOTE: Pagination for next phase */}
+          {/* <Box display="flex" justifyContent="flex-end" mt={2}>
             <Pagination
               count={totalPages}
               page={page}
               shape="rounded"
               onChange={handlePagination}
             />
-          </Box>
+          </Box> */}
         </StyledCourseContainer>
       </Box>
       <CreateCourseModal
