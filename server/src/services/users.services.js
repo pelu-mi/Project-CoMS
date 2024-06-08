@@ -1,5 +1,6 @@
 import users from "../models/users.model.js";
 import course from "../models/course.model.js";
+import courseContent from "../models/courseContent.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -103,9 +104,41 @@ async function getInstructorCourseLIst(user) {
   };
 }
 
+async function getCourseDetails(payload) {
+  const { _id } = payload;
+  const foundCourse = await course.findOne({ _id: _id });
+  return {
+    message: "Courses details displayed below",
+    statusCode: 200,
+    status: "success",
+    data: foundCourse,
+  };
+}
+
+async function addCourseContent(payload) {
+  const { title, description, link } = payload;
+  const foundContent = await courseContent.findOne({ title: title });
+  if (foundContent) {
+    return {
+      message: "content already exists",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+  const newContent = await courseContent.create(payload);
+  return {
+    message: "Course COntent Created Successfully",
+    statusCode: 200,
+    status: "success",
+    data: newContent,
+  };
+}
+
 export default {
   createAccount,
   login,
   createCourse,
   getInstructorCourseLIst,
+  getCourseDetails,
+  addCourseContent,
 };
