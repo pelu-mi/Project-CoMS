@@ -1,7 +1,8 @@
 import { object, string } from "yup";
 import { useForm } from "hooks/useForm";
-import { createCourseApi } from "services/api/course/createCourseApi";
+import { useCreateCourseMutation } from "services/api/course/useCreateCourseMutation";
 import { useSnackbar } from "notistack";
+import { useQueryClient } from "@tanstack/react-query";
 
 const validationSchema = object({
   name: string().required("Course Name is required"),
@@ -11,24 +12,22 @@ const validationSchema = object({
 export const useCreateCoursForm = ({ onClose }) => {
   const { enqueueSnackbar } = useSnackbar();
   const form = useForm({ validationSchema });
+  const queryClient = useQueryClient();
 
-  const onSubmit = async (formValues) => {
-    try {
-      // Create Course
-      const response = await createCourseApi(formValues);
-      console.log("create course response", response);
-      // Call success snackbar
-      enqueueSnackbar(response.message, { variant: "success" });
-
+  const { mutateAsync: createCourse } = useCreateCourseMutation({
+    onSuccess: async (data) => {
+      enqueueSnackbar(data.message, { variant: "success" });
       onClose();
-    } catch (error) {
-      // Call error snackbar
+      form.reset();
+      await queryClient.invalidateQueries("/user/instructorcourselist");
+    },
+    onError: (error) => {
       enqueueSnackbar(error.message, { variant: "error" });
-    }
-  };
+    },
+  });
 
   return {
     ...form,
-    handleSubmit: form.handleSubmit(onSubmit),
+    handleSubmit: form.handleSubmit(createCourse),
   };
 };

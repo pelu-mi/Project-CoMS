@@ -30,7 +30,7 @@ export const useCreateAccountForm = () => {
   });
 
   const onSubmit = async (formValues) => {
-    createAccount(formValues);
+    await createAccount(formValues);
   };
 
   return {

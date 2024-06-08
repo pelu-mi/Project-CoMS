@@ -3,11 +3,12 @@ import { createContext, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { COURSE_LIST_ROUTE, LOGIN_ROUTE } from "routes";
-import { createAccountApi } from "services/api/user/createAccountApi";
-import { loginApi } from "services/api/user/loginApi";
+import { useCreateAccountMutation } from "services/api/user/useCreateAccountMutation";
+
 import cookie from "js-cookie";
 import { ACCESS_TOKEN_COOKIE_KEY, ACCESS_USER_KEY } from "constants/auth";
 import { useSnackbar } from "notistack";
+import { useLoginMutation } from "services/api/user/useLoginMutation";
 
 const UserContext = createContext();
 
@@ -15,7 +16,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem(ACCESS_USER_KEY)) || null
   );
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -31,40 +31,24 @@ export const UserProvider = ({ children }) => {
     navigate(COURSE_LIST_ROUTE);
   };
 
-  const createAccount = async (payload) => {
-    const { email, password } = payload;
-    setLoading(true);
+  const { mutateAsync: createAccount, isPending: isCreateAccountPending } =
+    useCreateAccountMutation({
+      onSuccess: async (response, requestPayload) => {
+        const { email, password } = requestPayload;
+        enqueueSnackbar(response.message, { variant: "success" });
 
-    try {
-      // Create Account
-      const createAccountResponse = await createAccountApi(payload);
-      // Call success snackbar
-      enqueueSnackbar(createAccountResponse.message, { variant: "success" });
-      // Login
-      const userResponse = await loginApi({ email, password });
-      handleUserResponse(userResponse);
-    } catch (error) {
-      // Call error snackbar
-      enqueueSnackbar(error.message, { variant: "error" });
-    } finally {
-      setLoading(false);
-    }
-  };
+        await login({ email, password });
+      },
+      onError: (error) => {
+        enqueueSnackbar(error.message, { variant: "error" });
+      },
+    });
 
-  const login = async (payload, formSetError) => {
-    setLoading(true);
-    try {
-      // Login
-      const userResponse = await loginApi(payload);
-      handleUserResponse(userResponse);
-    } catch (error) {
-      // Set form error
-      formSetError("email");
-      formSetError("password", { message: "Email or password is incorrect!" });
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { mutateAsync: login, isPending: isLoginPending } = useLoginMutation({
+    onSuccess: async (response) => {
+      handleUserResponse(response);
+    },
+  });
 
   const logout = () => {
     localStorage.removeItem(ACCESS_USER_KEY);
@@ -80,7 +64,7 @@ export const UserProvider = ({ children }) => {
         createAccount,
         login,
         logout,
-        loading,
+        loading: isCreateAccountPending || isLoginPending,
       }}
     >
       {children}
