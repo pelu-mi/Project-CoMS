@@ -1,8 +1,9 @@
-import { Box, CardActionArea, CardContent } from "@mui/material";
+import { Box, CardContent } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
 import {
   StyledCard,
+  StyledCardActionArea,
   StyledCardMedia,
   StyledIconWrapper,
   StyledTypography,
@@ -20,15 +21,7 @@ export const CourseCard = ({
   const { user } = useUser();
   return (
     <StyledCard elevation={0} {...{ onClick }}>
-      <CardActionArea
-        sx={{
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-        }}
-        disableRipple
-      >
+      <StyledCardActionArea disableRipple>
         <Box width="100%" position="relative">
           <StyledCardMedia image={image} title={title} />
 
@@ -52,7 +45,7 @@ export const CourseCard = ({
             {description}
           </StyledTypography>
         </CardContent>
-      </CardActionArea>
+      </StyledCardActionArea>
     </StyledCard>
   );
 };
