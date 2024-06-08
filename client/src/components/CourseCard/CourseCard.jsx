@@ -10,10 +10,16 @@ import {
 import { useUser } from "context";
 import { ROLES } from "constants/role";
 
-export const CourseCard = ({ image = "", title, description, onClickEdit }) => {
+export const CourseCard = ({
+  image = "",
+  title,
+  description,
+  onClick,
+  onClickEdit,
+}) => {
   const { user } = useUser();
   return (
-    <StyledCard elevation={0}>
+    <StyledCard elevation={0} {...{ onClick }}>
       <CardActionArea
         sx={{
           height: "100%",
@@ -55,5 +61,6 @@ CourseCard.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  onClick: PropTypes.func,
   onClickEdit: PropTypes.func,
 };

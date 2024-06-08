@@ -23,6 +23,7 @@ import { ROLES } from "constants/role";
 import { useCourseListQuery } from "services/api/course/useCourseListQuery";
 import { Loader } from "components/Loader";
 import InboxIcon from "@mui/icons-material/Inbox";
+import { COURSE_LIST_ROUTE } from "routes";
 
 export const CourseListPage = () => {
   const { user } = useUser();
@@ -86,7 +87,7 @@ export const CourseListPage = () => {
               <CourseCard
                 title={course.name}
                 description={course.description}
-                onClick={() => navigate("/")}
+                onClick={() => navigate(`${COURSE_LIST_ROUTE}/${course._id}`)}
               />
             </Grid>
           ))}
