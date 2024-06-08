@@ -6,10 +6,10 @@ export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   border: `1px solid ${theme.palette.grey[300]}`,
 }));
 
-export const StyledListItemButton = styled(ListItemButton)(
-  ({ theme, active }) => ({
-    borderRight: "3px solid",
-    borderRightColor: active ? theme.palette.primary.main : "transparent",
-    color: active ? theme.palette.primary.main : theme.palette.text,
-  })
-);
+export const StyledListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== "active",
+})(({ theme, active = false }) => ({
+  borderRight: "3px solid",
+  borderRightColor: active ? theme.palette.primary.main : "transparent",
+  color: active ? theme.palette.primary.main : theme.palette.text,
+}));

@@ -28,17 +28,15 @@ export const NavBar = () => {
             />
             {user &&
               MENUS.map(({ title, path }) => (
-                <>
-                  <StyledNavButton
-                    key={title}
-                    variant="text"
-                    onClick={() => navigate(path)}
-                    disableRipple
-                    active={path === pathname}
-                  >
-                    {title}
-                  </StyledNavButton>
-                </>
+                <StyledNavButton
+                  key={title}
+                  variant="text"
+                  onClick={() => navigate(path)}
+                  disableRipple
+                  active={path === pathname}
+                >
+                  {title}
+                </StyledNavButton>
               ))}
           </Box>
 

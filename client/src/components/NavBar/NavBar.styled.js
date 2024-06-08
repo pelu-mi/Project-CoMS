@@ -11,7 +11,9 @@ export const StyledNavLogo = styled(Box)({
   cursor: "pointer",
 });
 
-export const StyledNavButton = styled(Button)(({ theme, active = false }) => ({
+export const StyledNavButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "active",
+})(({ theme, active = false }) => ({
   height: "64px",
   borderRadius: 0,
   fontWeight: active ? 600 : 500,
