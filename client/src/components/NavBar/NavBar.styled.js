@@ -1,4 +1,5 @@
-import { AppBar, Box, Button, styled } from "@mui/material";
+import { AppBar, Button, styled } from "@mui/material";
+import { FullLogoIcon } from "components/Icon";
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
@@ -6,9 +7,11 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: "white",
 }));
 
-export const StyledNavLogo = styled(Box)({
+export const StyledNavLogo = styled(FullLogoIcon)({
   marginRight: 24,
   cursor: "pointer",
+  height: "42px",
+  width: "auto",
 });
 
 export const StyledNavButton = styled(Button, {

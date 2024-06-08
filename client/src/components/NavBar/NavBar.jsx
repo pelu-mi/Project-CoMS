@@ -18,14 +18,11 @@ export const NavBar = () => {
           <Box
             sx={{
               flexGrow: 1,
+              alignItems: "center",
               display: { xs: !user ? "flex" : "none", sm: "flex" },
             }}
           >
-            <StyledNavLogo
-              component="img"
-              src="./full-logo.svg"
-              onClick={() => navigate(HOME_ROUTE)}
-            />
+            <StyledNavLogo onClick={() => navigate(HOME_ROUTE)} />
             {user &&
               MENUS.map(({ title, path }) => (
                 <StyledNavButton

@@ -1,4 +1,5 @@
-import { Box, styled } from "@mui/material";
+import { styled } from "@mui/material";
+import { LogoIcon } from "components/Icon";
 
 export const StyledLayout = styled("div")({
   display: "flex",
@@ -23,6 +24,7 @@ export const StyledForm = styled("form")(({ theme }) => ({
   },
 }));
 
-export const StyledLogo = styled(Box)({
+export const StyledLogo = styled(LogoIcon)({
   width: 100,
+  height: 100,
 });

@@ -1,7 +1,6 @@
 import {
   Box,
   Drawer,
-  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -33,7 +32,7 @@ export const MobileMenus = () => {
       <List>
         <ListItem disablePadding onClick={() => navigate(HOME_ROUTE)}>
           <ListItemButton>
-            <StyledNavLogo component="img" src="./full-logo.svg" />
+            <StyledNavLogo />
           </ListItemButton>
         </ListItem>
         {MENUS.map(({ title, path }) => (
