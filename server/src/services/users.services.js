@@ -127,10 +127,52 @@ async function addCourseContent(payload) {
   }
   const newContent = await courseContent.create(payload);
   return {
-    message: "Course COntent Created Successfully",
+    message: "Course Content Created Successfully",
     statusCode: 200,
     status: "success",
     data: newContent,
+  };
+}
+
+async function addStudents(payload) {
+  await course.findByIdAndUpdate(
+    payload.courseId,
+    { $addToSet: { "students.relatedIds": { $each: payload.studentIds } } },
+    { new: true, useFindAndModify: false }
+  );
+  const populatedCourse = await course
+    .findById(payload.courseId)
+    .populate("students.relatedIds");
+
+  return {
+    message: "Students registered Successfully",
+    statusCode: 200,
+    status: "success",
+    data: populatedCourse,
+  };
+}
+async function editCourse(payload) {
+  // Find the course by ID and update it with the provided payload
+  const updatedCourse = await course.findByIdAndUpdate(
+    payload.courseId,
+    { $set: payload }, // Update the fields provided in the payload
+    { new: true, useFindAndModify: false }
+  );
+
+  // Check if the course was found and updated
+  if (!updatedCourse) {
+    return {
+      message: "Course not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Course updated successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedCourse,
   };
 }
 
@@ -141,4 +183,6 @@ export default {
   getInstructorCourseLIst,
   getCourseDetails,
   addCourseContent,
+  addStudents,
+  editCourse,
 };
