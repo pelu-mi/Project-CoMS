@@ -6,7 +6,7 @@ export const StyledMaterialDesignContent = styled(MaterialDesignContent)(
     "&.notistack-MuiContent": {
       ...theme.typography.body1,
       fontWeight: 500,
-      boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",
+      boxShadow: theme.customVariables.boxShadow,
       borderRadius: "8px",
     },
     "&.notistack-MuiContent-success": {

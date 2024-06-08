@@ -5,6 +5,7 @@ const theme = createTheme({
     primary: {
       main: "#3851DD",
       background: "#F5F6FF",
+      icon: "#C3CBF5",
     },
     secondary: {
       main: "#313131",
@@ -97,6 +98,9 @@ const theme = createTheme({
         },
       },
     },
+  },
+  customVariables: {
+    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",
   },
 });
 

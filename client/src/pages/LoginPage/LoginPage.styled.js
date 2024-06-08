@@ -16,7 +16,7 @@ export const StyledForm = styled("form")(({ theme }) => ({
   padding: 32,
   border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: 8,
-  boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",
+  boxShadow: theme.customVariables.boxShadow,
 
   [theme.breakpoints.down("md")]: {
     padding: "40px 24px",

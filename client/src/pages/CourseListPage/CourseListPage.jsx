@@ -11,6 +11,7 @@ import { useUser } from "context/UserProvider/UserProvider";
 import {
   StyledActionContainer,
   StyledCourseContainer,
+  StyledEmptyLayout,
 } from "./CourseListPage.styled";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,6 +21,8 @@ import { useNavigate } from "react-router-dom";
 import { CreateCourseModal } from "./components/CreateCourseModal";
 import { ROLES } from "constants/role";
 import { useCourseListQuery } from "services/api/course/useCourseListQuery";
+import { Loader } from "components/Loader";
+import InboxIcon from "@mui/icons-material/Inbox";
 
 export const CourseListPage = () => {
   const { user } = useUser();
@@ -35,7 +38,80 @@ export const CourseListPage = () => {
   //   setPage(value);
   // };
 
-  const { courses } = useCourseListQuery();
+  const { courses, isFetching } = useCourseListQuery();
+
+  const renderTitle = () => {
+    let title = "";
+
+    if (user.role === ROLES.instructor) {
+      title += "My Courses";
+    } else {
+      title += "Enrolled Courses";
+    }
+
+    if (courses.length > 0) {
+      title += ` (${courses.length})`;
+    }
+
+    return title;
+  };
+
+  const renderCreateCourseButton = () => {
+    if (user.role === ROLES.instructor)
+      return (
+        <Button
+          startIcon={<AddIcon />}
+          sx={{ minHeight: 56, flexGrow: 1 }}
+          onClick={() => setOpenCreateAccount(true)}
+        >
+          Create Course
+        </Button>
+      );
+  };
+
+  const renderCourses = () => {
+    if (isFetching) {
+      return (
+        <StyledEmptyLayout>
+          <Loader />
+        </StyledEmptyLayout>
+      );
+    }
+
+    if (courses.length) {
+      return (
+        <Grid container spacing={2}>
+          {courses.map((course, index) => (
+            <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
+              <CourseCard
+                title={course.name}
+                description={course.description}
+                onClick={() => navigate("/")}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    }
+
+    return (
+      <StyledEmptyLayout>
+        <Box textAlign="center">
+          <InboxIcon
+            sx={{
+              width: "140px",
+              height: "140px",
+              color: theme.palette.primary.icon,
+            }}
+          />
+          <Typography variant="h6" color="text.secondary" fontWeight={500}>
+            No Courses
+          </Typography>
+        </Box>
+        {renderCreateCourseButton()}
+      </StyledEmptyLayout>
+    );
+  };
 
   return (
     <>
@@ -59,9 +135,7 @@ export const CourseListPage = () => {
               variant="h5"
               sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
             >
-              {user.role === ROLES.instructor
-                ? `My Courses(20)`
-                : `Enrolled Courses`}
+              {renderTitle()}
             </Typography>
 
             <StyledActionContainer>
@@ -77,29 +151,11 @@ export const CourseListPage = () => {
                 }}
               />
 
-              {user.role === ROLES.instructor && (
-                <Button
-                  startIcon={<AddIcon />}
-                  sx={{ minHeight: 56, flexGrow: 1 }}
-                  onClick={() => setOpenCreateAccount(true)}
-                >
-                  Create Course
-                </Button>
-              )}
+              {renderCreateCourseButton()}
             </StyledActionContainer>
           </Box>
 
-          <Grid container spacing={2}>
-            {courses.map((course, index) => (
-              <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
-                <CourseCard
-                  title={course.name}
-                  description={course.description}
-                  onClick={() => navigate("/")}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          {renderCourses()}
 
           {/* NOTE: Pagination for next phase */}
           {/* <Box display="flex" justifyContent="flex-end" mt={2}>
