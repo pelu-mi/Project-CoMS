@@ -50,6 +50,7 @@ export const StyledTypography = styled(Typography)({
 export const StyledLinkText = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   color: theme.palette.text.primary,
+  cursor: "pointer",
 
   ":hover": {
     textDecoration: "underline",

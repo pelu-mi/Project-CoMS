@@ -73,12 +73,12 @@ export const CourseDetailPage = () => {
     if (contents.length) {
       return (
         <Grid container spacing={2}>
-          {contents.map((course, index) => (
-            <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
+          {contents.map((content, index) => (
+            <Grid item key={`${index}-${content.title}`} xs={12} sm={4} md={3}>
               <CourseContentCard
-                title={course.title}
-                description={course.description}
-                onClick={() => navigate(`#`)}
+                title={content.title}
+                description={content.description}
+                link={content.link}
               />
             </Grid>
           ))}
