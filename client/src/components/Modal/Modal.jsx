@@ -8,6 +8,8 @@ export const Modal = ({
   title,
   onClose,
   hideCloseIcon = false,
+  modalStyles,
+  contentStyles,
   ...rest
 }) => {
   return (
@@ -15,9 +17,10 @@ export const Modal = ({
       {...{ ...rest, onClose }}
       sx={{
         marginX: "16px",
+        ...modalStyles,
       }}
     >
-      <StyledContent>
+      <StyledContent sx={contentStyles}>
         {(title || !hideCloseIcon) && (
           <Box display="flex" alignItems="center">
             {title && <Typography variant="h5">{title}</Typography>}
@@ -34,5 +37,7 @@ Modal.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
   onClose: PropTypes.func,
+  modalStyles: PropTypes.object,
+  contentStyles: PropTypes.object,
   hideCloseIcon: PropTypes.bool,
 };
