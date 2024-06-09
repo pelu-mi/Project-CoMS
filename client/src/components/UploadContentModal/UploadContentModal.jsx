@@ -1,18 +1,33 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
+import { useContentForm } from "./hooks/useContentForm";
 
-export const UploadContentModal = ({ onClose, ...rest }) => {
+export const UploadContentModal = ({
+  courseId,
+  defaultValues,
+  onClose,
+  ...rest
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useContentForm({
+    courseId,
+    defaultValues,
+    onClose,
+  });
+
   const handleClose = () => {
     onClose();
-    // reset();
+    reset();
   };
 
   return (
     <Modal
-      title="Upload Content"
-      aria-labelledby="create-account-form"
-      aria-describedby="create-account-form"
+      title={defaultValues ? "Edit Content" : "Upload Content"}
       {...{ ...rest, onClose: handleClose }}
     >
       <Grid container mt={4} gap={3}>
@@ -20,27 +35,29 @@ export const UploadContentModal = ({ onClose, ...rest }) => {
           label="Title *"
           placeholder="Enter your content title"
           fullWidth
-          //   error={errors.title}
-          //   helperText={errors.title?.message}
-          //   {...register("title")}
+          error={errors.title}
+          helperText={errors.title?.message}
+          {...register("title")}
         />
 
         <TextField
-          label="Description"
+          label="Description *"
           placeholder="Enter your content description"
           multiline
           rows={3}
           fullWidth
-          //   {...register("description")}
+          error={errors.description}
+          helperText={errors.description?.message}
+          {...register("description")}
         />
 
         <TextField
-          label="Link"
+          label="Link *"
           placeholder="Enter your content link"
           fullWidth
-          //   error={errors.link}
-          //   helperText={errors.link?.message}
-          //   {...register("link")}
+          error={errors.link}
+          helperText={errors.link?.message}
+          {...register("link")}
         />
 
         <Grid container spacing={2}>
@@ -57,8 +74,8 @@ export const UploadContentModal = ({ onClose, ...rest }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             {/* TODO: Connect endpoint */}
-            <Button sx={{ height: "100%" }} fullWidth onClick={() => {}}>
-              Post
+            <Button sx={{ height: "100%" }} fullWidth onClick={handleSubmit}>
+              {defaultValues ? "Save Changes" : "Post"}
             </Button>
           </Grid>
         </Grid>
@@ -68,5 +85,7 @@ export const UploadContentModal = ({ onClose, ...rest }) => {
 };
 
 UploadContentModal.propTypes = {
+  courseId: PropTypes.string,
+  defaultValues: PropTypes.object,
   onClose: PropTypes.func,
 };

@@ -29,7 +29,7 @@ import { FileAlertIcon } from "components/Icon";
 import { Loader } from "components/Loader";
 import { AddStudentModal } from "./components/AddStudentModal";
 import { useState } from "react";
-import { UploadContentModal } from "./components/UploadContentModal";
+import { UploadContentModal } from "components/UploadContentModal";
 import { CourseModal } from "components/CourseModal";
 import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQuery";
 import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
@@ -182,6 +182,7 @@ export const CourseDetailPage = () => {
       />
       <UploadContentModal
         open={openUploadModal}
+        courseId={courseId}
         onClose={() => setOpenUploadModal(false)}
       />
       {!isCourseFetching && (
