@@ -109,8 +109,20 @@ async function getAllCourseContent(req, res) {
 }
 
 async function getAllUnregisteredStudents(req, res) {
+  try {
+    const response = await usersServices.getAllUnregisteredStudents(req.params);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get students",
+      status: "failure",
+    });
+  }
+}
+
+async function getAllRegisteredStudents(req, res) {
   // try {
-  //   const response = await usersServices.getAllUnregisteredStudents(req.params);
+  //   const response = await usersServices.getAllRegisteredStudents(req.params);
   //   res.status(response.statusCode).json(response);
   // } catch (error) {
   //   res.status(500).json({
@@ -118,7 +130,8 @@ async function getAllUnregisteredStudents(req, res) {
   //     status: "failure",
   //   });
   // }
-  const response = await usersServices.getAllUnregisteredStudents(req.params);
+
+  const response = await usersServices.getAllRegisteredStudents(req.params);
   res.status(response.statusCode).json(response);
 }
 
@@ -133,4 +146,5 @@ export default {
   editCourse,
   getAllCourseContent,
   getAllUnregisteredStudents,
+  getAllRegisteredStudents,
 };

@@ -41,4 +41,10 @@ router.get(
   authMiddleware.authenticate,
   userControllers.getAllUnregisteredStudents
 );
+
+router.get(
+  "/registeredstudents/:courseId",
+  authMiddleware.authenticate,
+  userControllers.getAllRegisteredStudents
+);
 export default router;

@@ -221,6 +221,33 @@ async function getAllUnregisteredStudents(payload) {
   };
 }
 
+async function getAllRegisteredStudents(payload) {
+  const { courseId } = payload;
+  const presentCourse = await course.findById(courseId);
+  if (!course) {
+    return {
+      message: "Course not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+  const registeredStudentIds =
+    (presentCourse.students && presentCourse.students.relatedIds) || [];
+
+  // Find all registered students
+  const registeredStudents = await users.find({
+    role: "student",
+    _id: { $in: registeredStudentIds },
+  });
+
+  return {
+    message: "Registered students displayed below",
+    statusCode: 200,
+    status: "success",
+    data: registeredStudents,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -232,4 +259,5 @@ export default {
   editCourse,
   getAllCourseContent,
   getAllUnregisteredStudents,
+  getAllRegisteredStudents,
 };
