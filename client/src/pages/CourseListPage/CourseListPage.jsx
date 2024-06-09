@@ -30,7 +30,7 @@ export const CourseListPage = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const [openCreateAccount, setOpenCreateAccount] = useState(false);
+  const [openCreateAccountModal, setOpenCreateAccountModal] = useState(false);
 
   // NOTE: Pagination for next phase
   // const [page, setPage] = useState(1);
@@ -63,7 +63,7 @@ export const CourseListPage = () => {
         <Button
           startIcon={<AddIcon />}
           sx={{ minHeight: 56, flexGrow: 1 }}
-          onClick={() => setOpenCreateAccount(true)}
+          onClick={() => setOpenCreateAccountModal(true)}
         >
           Create Course
         </Button>
@@ -170,8 +170,8 @@ export const CourseListPage = () => {
         </StyledCourseContainer>
       </Box>
       <CreateCourseModal
-        open={openCreateAccount}
-        onClose={() => setOpenCreateAccount(false)}
+        open={openCreateAccountModal}
+        onClose={() => setOpenCreateAccountModal(false)}
       />
     </>
   );
