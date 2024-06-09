@@ -28,12 +28,15 @@ import { CourseContentCard } from "components/CourseContentCard";
 import { FileAlertIcon } from "components/Icon";
 import { Loader } from "components/Loader";
 import { useCourseDetailQuery } from "services/api/course/useCourseDetailQuery";
+import { AddStudentModal } from "./components/AddStudentModal";
+import { useState } from "react";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
   const theme = useTheme();
   const navigate = useNavigate();
   let { courseId } = useParams();
+  const [openStudentModal, setOpenStudentModal] = useState();
 
   const { course } = useCourseDetailQuery(courseId);
 
@@ -130,7 +133,7 @@ export const CourseDetailPage = () => {
               <Button
                 variant="outlined"
                 startIcon={<PersonAddIcon />}
-                onClick={() => {}}
+                onClick={() => setOpenStudentModal(true)}
                 sx={{ flexGrow: "1" }}
               >
                 Students
@@ -182,6 +185,11 @@ export const CourseDetailPage = () => {
 
         <StyledContentContainer>{renderContents()}</StyledContentContainer>
       </Box>
+
+      <AddStudentModal
+        open={openStudentModal}
+        onClose={() => setOpenStudentModal(false)}
+      />
     </>
   );
 };

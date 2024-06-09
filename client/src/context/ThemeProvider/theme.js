@@ -98,6 +98,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiAvatar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          background: theme.palette.primary.main,
+        }),
+      },
+    },
   },
   customVariables: {
     boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",

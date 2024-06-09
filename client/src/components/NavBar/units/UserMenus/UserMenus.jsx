@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import {
   Avatar,
   Box,
@@ -14,7 +13,7 @@ import { StyledButton } from "./UserMenus.styled";
 
 export const UserMenus = () => {
   const { user, logout } = useUser();
-  const theme = useTheme();
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const settings = [
     { title: "Profile", action: () => {} },
@@ -34,11 +33,7 @@ export const UserMenus = () => {
       <Tooltip title="Open settings">
         <StyledButton
           startIcon={
-            <Avatar
-              alt={`${user.firstName} ${user.lastName}`}
-              src="/.jpg"
-              sx={{ background: theme.palette.primary.main }}
-            />
+            <Avatar alt={`${user.firstName} ${user.lastName}`} src="/.jpg" />
           }
           endIcon={<ExpandMoreIcon />}
           variant="outlined"
