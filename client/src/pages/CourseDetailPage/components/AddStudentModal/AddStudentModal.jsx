@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Grid,
+  IconButton,
   ListItem,
   ListItemIcon,
   TextField,
@@ -95,15 +96,17 @@ export const AddStudentModal = ({ onClose, ...res }) => {
                   <Typography mr="auto">
                     {student.firstName} {student.lastName}
                   </Typography>
-                  <DeleteIcon
-                    sx={{ cursor: "pointer" }}
-                    color="error"
-                    onClick={() => {
-                      setRegisterdStudents((prev) =>
-                        prev.filter(({ id }) => id !== student.id)
-                      );
-                    }}
-                  />
+                  <IconButton color="error">
+                    <DeleteIcon
+                      sx={{ cursor: "pointer" }}
+                      color="error"
+                      onClick={() => {
+                        setRegisterdStudents((prev) =>
+                          prev.filter(({ id }) => id !== student.id)
+                        );
+                      }}
+                    />
+                  </IconButton>
                 </StyledListItem>
               ))}
           </StyledRegisteredList>
