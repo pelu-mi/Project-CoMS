@@ -10,3 +10,4 @@ export const EDIT_COURSE_API_KEY = "/user/editcourse";
 // Course details
 export const GET_COURSE_DETAILS_API_KEY = "/user/coursedetails";
 export const GET_COURSE_CONTENT_API_KEY = "/user/allcoursecontent";
+export const ADD_COURSE_CONTENT_API_KEY = "/user/addcoursecontent";
