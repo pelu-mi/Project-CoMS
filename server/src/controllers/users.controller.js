@@ -72,6 +72,31 @@ async function addCourseContent(req, res) {
   }
 }
 
+async function addStudents(req, res) {
+  try {
+    const response = await usersServices.addStudents(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to add students",
+      status: "failure",
+    });
+  }
+}
+
+async function editCourse(req, res) {
+  try {
+    const response = await usersServices.editCourse(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to edit course",
+      status: "failure",
+    });
+  }
+}
+
+
 export default {
   createAccount,
   login,
@@ -79,4 +104,6 @@ export default {
   getInstructorCourseLIst,
   getCourseDetails,
   addCourseContent,
+  addStudents,
+  editCourse
 };
