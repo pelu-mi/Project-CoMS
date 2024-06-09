@@ -32,6 +32,7 @@ import { AddStudentModal } from "./components/AddStudentModal";
 import { useState } from "react";
 import { UploadContentModal } from "./components/UploadContentModal";
 import { CourseModal } from "components/CourseModal";
+import { useCourseContentQuery } from "services/api/course/useCourseContentQuery";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
@@ -42,20 +43,10 @@ export const CourseDetailPage = () => {
   const [openUploadModal, setOpenUploadModal] = useState();
   const [openEditCourseModal, setOpenEditCourseModal] = useState();
 
-  const { course, isFetching } = useCourseDetailQuery(courseId);
-
-  const contents = [
-    {
-      title: "Brad traversy python tutorial",
-      description: "IN depth dive into the world of python",
-      link: "evmoeornornfkermglke",
-    },
-    {
-      title: "Brad traversy python tutorial",
-      description: "IN depth dive into the world of python",
-      link: "evmoeornornfkermglke",
-    },
-  ];
+  const { course, isFetching: isCourseFetching } =
+    useCourseDetailQuery(courseId);
+  const { contents, isFetching: isContentFetching } =
+    useCourseContentQuery(courseId);
 
   const renderUploadContentButton = () => {
     if (user.role === ROLES.instructor)
@@ -71,13 +62,13 @@ export const CourseDetailPage = () => {
   };
 
   const renderContents = () => {
-    // if (isFetching) {
-    //   return (
-    //     <StyledEmptyLayout>
-    //       <Loader />
-    //     </StyledEmptyLayout>
-    //   );
-    // }
+    if (isContentFetching) {
+      return (
+        <StyledEmptyLayout>
+          <Loader />
+        </StyledEmptyLayout>
+      );
+    }
 
     if (contents.length) {
       return (
@@ -193,7 +184,7 @@ export const CourseDetailPage = () => {
         open={openUploadModal}
         onClose={() => setOpenUploadModal(false)}
       />
-      {!isFetching && (
+      {!isCourseFetching && (
         <CourseModal
           open={openEditCourseModal}
           onClose={() => setOpenEditCourseModal(false)}
