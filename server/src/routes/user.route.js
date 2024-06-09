@@ -47,4 +47,10 @@ router.get(
   authMiddleware.authenticate,
   userControllers.getAllRegisteredStudents
 );
+
+router.post(
+  "/editcourse",
+  authMiddleware.authenticate,
+  userControllers.editCourse
+);
 export default router;
