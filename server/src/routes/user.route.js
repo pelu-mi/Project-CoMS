@@ -20,7 +20,7 @@ router.get(
   userControllers.getInstructorCourseLIst
 );
 
-router.get("/coursedetails", userControllers.getCourseDetails);
+router.get("/coursedetails/:courseId", userControllers.getCourseDetails);
 
 router.post(
   "/addcoursecontent",
@@ -34,10 +34,17 @@ router.post(
   userControllers.addStudents
 );
 
-router.post(
-  "/editcourse",
+router.get("/allcoursecontent/:courseId", userControllers.getAllCourseContent);
+
+router.get(
+  "/getunregisteredstudents/:courseId",
   authMiddleware.authenticate,
-  userControllers.editCourse
+  userControllers.getAllUnregisteredStudents
 );
 
+router.get(
+  "/registeredstudents/:courseId",
+  authMiddleware.authenticate,
+  userControllers.getAllRegisteredStudents
+);
 export default router;
