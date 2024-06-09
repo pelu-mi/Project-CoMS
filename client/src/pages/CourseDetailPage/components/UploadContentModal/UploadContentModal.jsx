@@ -2,7 +2,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 
-export const UploadContentModal = ({ onClose, ...res }) => {
+export const UploadContentModal = ({ onClose, ...rest }) => {
   const handleClose = () => {
     onClose();
     // reset();
@@ -13,7 +13,7 @@ export const UploadContentModal = ({ onClose, ...res }) => {
       title="Upload Content"
       aria-labelledby="create-account-form"
       aria-describedby="create-account-form"
-      {...{ ...res, onClose: handleClose }}
+      {...{ ...rest, onClose: handleClose }}
     >
       <Grid container mt={4} gap={3}>
         <TextField

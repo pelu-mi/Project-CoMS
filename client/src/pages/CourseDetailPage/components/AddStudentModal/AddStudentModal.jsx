@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { StyledListItem, StyledRegisteredList } from "./AddStudentModal.styled";
 
-export const AddStudentModal = ({ onClose, ...res }) => {
+export const AddStudentModal = ({ onClose, ...rest }) => {
   // TODO: Get all students for list
   const [registerdStudents, setRegisterdStudents] = useState([
     {
@@ -35,7 +35,7 @@ export const AddStudentModal = ({ onClose, ...res }) => {
       title="Students"
       aria-labelledby="add-student-form"
       aria-describedby="add-student-form"
-      {...{ ...res, onClose }}
+      {...{ ...rest, onClose }}
     >
       <Grid container mt={4} gap={3}>
         <Autocomplete

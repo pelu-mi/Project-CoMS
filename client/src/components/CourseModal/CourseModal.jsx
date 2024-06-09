@@ -3,7 +3,7 @@ import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 import { useCourseForm } from "./hooks/useCourseForm";
 
-export const CourseModal = ({ defaultValues, onClose, ...res }) => {
+export const CourseModal = ({ defaultValues, onClose, ...rest }) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ export const CourseModal = ({ defaultValues, onClose, ...res }) => {
   return (
     <Modal
       title={defaultValues ? "Edit Course" : "Create Course"}
-      {...{ ...res, onClose: handleClose }}
+      {...{ ...rest, onClose: handleClose }}
     >
       <Grid container mt={4} gap={3}>
         <TextField

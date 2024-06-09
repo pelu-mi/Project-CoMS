@@ -8,11 +8,11 @@ export const Modal = ({
   title,
   onClose,
   hideCloseIcon = false,
-  ...res
+  ...rest
 }) => {
   return (
     <MuiModal
-      {...{ ...res, onClose }}
+      {...{ ...rest, onClose }}
       sx={{
         marginX: "16px",
       }}
