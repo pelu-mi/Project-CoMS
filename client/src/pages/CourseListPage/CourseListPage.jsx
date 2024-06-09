@@ -171,7 +171,6 @@ export const CourseListPage = () => {
       </Box>
       <CreateCourseModal
         open={openCreateAccount}
-        // refetchCourseList={refetch}
         onClose={() => setOpenCreateAccount(false)}
       />
     </>
