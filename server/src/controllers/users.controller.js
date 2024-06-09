@@ -121,18 +121,15 @@ async function getAllUnregisteredStudents(req, res) {
 }
 
 async function getAllRegisteredStudents(req, res) {
-  // try {
-  //   const response = await usersServices.getAllRegisteredStudents(req.params);
-  //   res.status(response.statusCode).json(response);
-  // } catch (error) {
-  //   res.status(500).json({
-  //     message: "Unable to get students",
-  //     status: "failure",
-  //   });
-  // }
-
-  const response = await usersServices.getAllRegisteredStudents(req.params);
-  res.status(response.statusCode).json(response);
+  try {
+    const response = await usersServices.getAllRegisteredStudents(req.params);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get students",
+      status: "failure",
+    });
+  }
 }
 
 export default {
