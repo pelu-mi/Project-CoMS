@@ -42,7 +42,7 @@ export const CourseDetailPage = () => {
   const [openUploadModal, setOpenUploadModal] = useState();
   const [openEditCourseModal, setOpenEditCourseModal] = useState();
 
-  const { course } = useCourseDetailQuery(courseId);
+  const { course, isFetching } = useCourseDetailQuery(courseId);
 
   const contents = [
     {
@@ -119,16 +119,11 @@ export const CourseDetailPage = () => {
       <Box pb={4}>
         <StyledBanner image="" />
 
-        {course.name}
-
         <StyledTitleContainer>
           <StyledTypographyWrapper>
-            <StyledTypography variant="h4">
-              CS730 - Human-computer Interaction Fundamentals
-            </StyledTypography>
+            <StyledTypography variant="h4">{course.name}</StyledTypography>
             <StyledTypography variant="body1" color="text.secondary">
-              Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.
-              Lorem ipsum dolor sit amet consectetur. Cursus turpis euismod.
+              {course.description}
             </StyledTypography>
           </StyledTypographyWrapper>
 
@@ -198,16 +193,17 @@ export const CourseDetailPage = () => {
         open={openUploadModal}
         onClose={() => setOpenUploadModal(false)}
       />
-      {/* TODO: Add default values from get course detail */}
-      <CourseModal
-        open={openEditCourseModal}
-        onClose={() => setOpenEditCourseModal(false)}
-        defaultValues={{
-          courseId: "123",
-          name: "Placeholder for name",
-          description: "Placeholder for description",
-        }}
-      />
+      {!isFetching && (
+        <CourseModal
+          open={openEditCourseModal}
+          onClose={() => setOpenEditCourseModal(false)}
+          defaultValues={{
+            courseId,
+            name: course.name,
+            description: course.description,
+          }}
+        />
+      )}
     </>
   );
 };

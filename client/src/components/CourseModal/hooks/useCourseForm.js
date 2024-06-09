@@ -40,11 +40,13 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
   });
 
   const { mutateAsync: editCourse } = useEditCourseMutation({
-    onSuccess: async (data) => {
+    onSuccess: async (data, payload) => {
       enqueueSnackbar(data.message, { variant: "success" });
       onClose();
       await queryClient.invalidateQueries(GET_COURSES_API_KEY);
-      await queryClient.invalidateQueries(GET_COURSE_DETAILS_API_KEY);
+      await queryClient.invalidateQueries(
+        `${GET_COURSE_DETAILS_API_KEY}/${payload.courseId}`
+      );
     },
     onError: (error) => {
       enqueueSnackbar(error.message, { variant: "error" });
