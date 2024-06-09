@@ -79,7 +79,7 @@ export const AddStudentModal = ({ onClose, ...res }) => {
         />
         <Grid item xs={12}>
           <Typography variant="body1" mb={1}>
-            Registered Students{" "}
+            Students in this class{" "}
             {registerdStudents.length > 0 && `(${registerdStudents.length})`}
           </Typography>
           <StyledRegisteredList>
