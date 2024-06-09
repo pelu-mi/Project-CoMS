@@ -20,7 +20,7 @@ export const Modal = ({
       <StyledContent>
         {(title || !hideCloseIcon) && (
           <Box display="flex" alignItems="center">
-            {title && <Typography variant="h5">Create Course</Typography>}
+            {title && <Typography variant="h5">{title}</Typography>}
             {!hideCloseIcon && <StyledClosedIcon onClick={onClose} />}
           </Box>
         )}
