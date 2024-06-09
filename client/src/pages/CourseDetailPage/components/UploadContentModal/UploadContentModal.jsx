@@ -30,7 +30,6 @@ export const UploadContentModal = ({ onClose, ...res }) => {
           placeholder="Enter your content description"
           multiline
           rows={3}
-          maxRows={5}
           fullWidth
           //   {...register("description")}
         />

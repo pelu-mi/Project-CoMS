@@ -31,6 +31,7 @@ import { useCourseDetailQuery } from "services/api/course/useCourseDetailQuery";
 import { AddStudentModal } from "./components/AddStudentModal";
 import { useState } from "react";
 import { UploadContentModal } from "./components/UploadContentModal";
+import { CourseModal } from "components/CourseModal";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
@@ -39,6 +40,7 @@ export const CourseDetailPage = () => {
   let { courseId } = useParams();
   const [openStudentModal, setOpenStudentModal] = useState();
   const [openUploadModal, setOpenUploadModal] = useState();
+  const [openEditCourseModal, setOpenEditCourseModal] = useState();
 
   const { course } = useCourseDetailQuery(courseId);
 
@@ -144,7 +146,7 @@ export const CourseDetailPage = () => {
               <Button
                 variant="outlined"
                 startIcon={<EditIcon />}
-                onClick={() => {}}
+                onClick={() => setOpenEditCourseModal(true)}
                 sx={{ flexGrow: "1" }}
               >
                 <nobr>Edit Course</nobr>
@@ -195,6 +197,16 @@ export const CourseDetailPage = () => {
       <UploadContentModal
         open={openUploadModal}
         onClose={() => setOpenUploadModal(false)}
+      />
+      {/* TODO: Add default values from get course detail */}
+      <CourseModal
+        open={openEditCourseModal}
+        onClose={() => setOpenEditCourseModal(false)}
+        defaultValues={{
+          courseId: "123",
+          name: "Placeholder for name",
+          description: "Placeholder for description",
+        }}
       />
     </>
   );

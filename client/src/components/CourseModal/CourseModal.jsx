@@ -1,15 +1,15 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
-import { useCreateCoursForm } from "pages/CourseListPage/hooks/useCreateCourseForm";
+import { useCourseForm } from "./hooks/useCourseForm";
 
-export const CreateCourseModal = ({ onClose, ...res }) => {
+export const CourseModal = ({ defaultValues, onClose, ...res }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useCreateCoursForm({ onClose });
+  } = useCourseForm({ defaultValues, onClose });
 
   const handleClose = () => {
     onClose();
@@ -18,9 +18,7 @@ export const CreateCourseModal = ({ onClose, ...res }) => {
 
   return (
     <Modal
-      title="Create Course"
-      aria-labelledby="create-account-form"
-      aria-describedby="create-account-form"
+      title={defaultValues ? "Edit Course" : "Create Course"}
       {...{ ...res, onClose: handleClose }}
     >
       <Grid container mt={4} gap={3}>
@@ -38,7 +36,6 @@ export const CreateCourseModal = ({ onClose, ...res }) => {
           placeholder="Enter your course description"
           multiline
           rows={3}
-          maxRows={5}
           fullWidth
           {...register("description")}
         />
@@ -57,7 +54,7 @@ export const CreateCourseModal = ({ onClose, ...res }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button sx={{ height: "100%" }} fullWidth onClick={handleSubmit}>
-              Create Course
+              {defaultValues ? "Save Changes" : "Create Course"}
             </Button>
           </Grid>
         </Grid>
@@ -66,6 +63,7 @@ export const CreateCourseModal = ({ onClose, ...res }) => {
   );
 };
 
-CreateCourseModal.propTypes = {
+CourseModal.propTypes = {
+  defaultValues: PropTypes.object,
   onClose: PropTypes.func,
 };

@@ -18,19 +18,20 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { CourseCard } from "components/CourseCard";
 import { useNavigate } from "react-router-dom";
-import { CreateCourseModal } from "./components/CreateCourseModal";
 import { ROLES } from "constants/role";
 import { useCourseListQuery } from "services/api/course/useCourseListQuery";
 import { Loader } from "components/Loader";
 import InboxIcon from "@mui/icons-material/Inbox";
 import { COURSE_LIST_ROUTE } from "routes";
+import { CourseModal } from "components/CourseModal";
 
 export const CourseListPage = () => {
   const { user } = useUser();
+
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const [openCreateAccountModal, setOpenCreateAccountModal] = useState(false);
+  const [openCreateCourseModal, setOpenCreateCourseModal] = useState(false);
 
   // NOTE: Pagination for next phase
   // const [page, setPage] = useState(1);
@@ -63,7 +64,7 @@ export const CourseListPage = () => {
         <Button
           startIcon={<AddIcon />}
           sx={{ minHeight: 56, flexGrow: 1 }}
-          onClick={() => setOpenCreateAccountModal(true)}
+          onClick={() => setOpenCreateCourseModal(true)}
         >
           Create Course
         </Button>
@@ -85,7 +86,8 @@ export const CourseListPage = () => {
           {courses.map((course, index) => (
             <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
               <CourseCard
-                title={course.name}
+                courseId={course._id}
+                name={course.name}
                 description={course.description}
                 onClick={() => navigate(`${COURSE_LIST_ROUTE}/${course._id}`)}
               />
@@ -169,9 +171,9 @@ export const CourseListPage = () => {
           </Box> */}
         </StyledCourseContainer>
       </Box>
-      <CreateCourseModal
-        open={openCreateAccountModal}
-        onClose={() => setOpenCreateAccountModal(false)}
+      <CourseModal
+        open={openCreateCourseModal}
+        onClose={() => setOpenCreateCourseModal(false)}
       />
     </>
   );

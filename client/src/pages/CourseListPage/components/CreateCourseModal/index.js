@@ -1,1 +1,0 @@
-export { CreateCourseModal } from "./CreateCourseModal";
