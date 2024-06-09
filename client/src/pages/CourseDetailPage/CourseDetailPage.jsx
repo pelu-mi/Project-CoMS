@@ -27,12 +27,15 @@ import {
 import { CourseContentCard } from "components/CourseContentCard";
 import { FileAlertIcon } from "components/Icon";
 import { Loader } from "components/Loader";
+import { useCourseDetailQuery } from "services/api/course/useCourseDetailQuery";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
   const theme = useTheme();
   const navigate = useNavigate();
-  // let { courseId } = useParams();
+  let { courseId } = useParams();
+
+  const { course } = useCourseDetailQuery(courseId);
 
   const contents = [
     {
@@ -108,6 +111,8 @@ export const CourseDetailPage = () => {
     <>
       <Box pb={4}>
         <StyledBanner image="" />
+
+        {course.name}
 
         <StyledTitleContainer>
           <StyledTypographyWrapper>
