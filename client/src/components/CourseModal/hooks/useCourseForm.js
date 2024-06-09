@@ -2,6 +2,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
 import { useCreateCourseMutation } from "services/api/course/useCreateCourseMutation";
+import { useEditCourseMutation } from "services/api/course/useEditCourseMutation";
+import {
+  GET_COURSES_API_KEY,
+  GET_COURSE_DETAILS_API_KEY,
+} from "services/constants";
 import { object, string } from "yup";
 
 const validationSchema = object({
@@ -27,7 +32,19 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
       enqueueSnackbar(data.message, { variant: "success" });
       onClose();
       form.reset();
-      await queryClient.invalidateQueries("/user/instructorcourselist");
+      await queryClient.invalidateQueries(GET_COURSES_API_KEY);
+    },
+    onError: (error) => {
+      enqueueSnackbar(error.message, { variant: "error" });
+    },
+  });
+
+  const { mutateAsync: editCourse } = useEditCourseMutation({
+    onSuccess: async (data) => {
+      enqueueSnackbar(data.message, { variant: "success" });
+      onClose();
+      await queryClient.invalidateQueries(GET_COURSES_API_KEY);
+      await queryClient.invalidateQueries(GET_COURSE_DETAILS_API_KEY);
     },
     onError: (error) => {
       enqueueSnackbar(error.message, { variant: "error" });
@@ -41,8 +58,10 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
     };
 
     if (courseId) {
-      // Call edit course with courseId
+      // Call edit course endpoint
+      await editCourse({ courseId, name, description });
     } else {
+      // Call create course endpoint
       await createCourse(payload);
     }
   };
