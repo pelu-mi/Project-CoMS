@@ -50,11 +50,11 @@ async function getInstructorCourseLIst(req, res) {
 
 async function getCourseDetails(req, res) {
   try {
-    const response = await usersServices.getCourseDetails(req.body);
+    const response = await usersServices.getCourseDetails(req.params);
     res.status(response.statusCode).json(response);
   } catch (error) {
     res.status(500).json({
-      message: "Unable to get courses] details",
+      message: "Unable to get courses details",
       status: "failure",
     });
   }
@@ -96,6 +96,31 @@ async function editCourse(req, res) {
   }
 }
 
+async function getAllCourseContent(req, res) {
+  try {
+    const response = await usersServices.getAllCourseContent(req.params);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get course content",
+      status: "failure",
+    });
+  }
+}
+
+async function getAllUnregisteredStudents(req, res) {
+  // try {
+  //   const response = await usersServices.getAllUnregisteredStudents(req.params);
+  //   res.status(response.statusCode).json(response);
+  // } catch (error) {
+  //   res.status(500).json({
+  //     message: "Unable to get students",
+  //     status: "failure",
+  //   });
+  // }
+  const response = await usersServices.getAllUnregisteredStudents(req.params);
+  res.status(response.statusCode).json(response);
+}
 
 export default {
   createAccount,
@@ -105,5 +130,7 @@ export default {
   getCourseDetails,
   addCourseContent,
   addStudents,
-  editCourse
+  editCourse,
+  getAllCourseContent,
+  getAllUnregisteredStudents,
 };

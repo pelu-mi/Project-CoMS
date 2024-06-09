@@ -105,13 +105,32 @@ async function getInstructorCourseLIst(user) {
 }
 
 async function getCourseDetails(payload) {
-  const { _id } = payload;
-  const foundCourse = await course.findOne({ _id: _id });
+  const { courseId } = payload;
+  const foundCourse = await course.findOne({ _id: courseId });
   return {
     message: "Courses details displayed below",
     statusCode: 200,
     status: "success",
     data: foundCourse,
+  };
+}
+
+async function getAllCourseContent(payload) {
+  const { courseId } = payload;
+  const foundContent = await courseContent.find({ course: courseId });
+  if (!foundContent) {
+    return {
+      message: "Course not found",
+      statusCode: 200,
+      status: "success",
+      data: foundCourse,
+    };
+  }
+  return {
+    message: "Courses contents displayed below",
+    statusCode: 200,
+    status: "success",
+    data: foundContent,
   };
 }
 
@@ -176,6 +195,32 @@ async function editCourse(payload) {
   };
 }
 
+async function getAllUnregisteredStudents(payload) {
+  const courseToAddStudents = await course.findOne({ _id: payload.courseId });
+  if (!courseToAddStudents) {
+    return {
+      message: "Course not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+  const registeredStudentIds =
+    (courseToAddStudents.students && courseToAddStudents.students.relatedIds) ||
+    [];
+
+  // Find all students who are not registered for the course
+  const unregisteredStudents = await users.find({
+    role: "student",
+    _id: { $nin: registeredStudentIds },
+  });
+  return {
+    message: "All unregistered students displayed below",
+    statusCode: 200,
+    status: "success",
+    data: unregisteredStudents,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -185,4 +230,6 @@ export default {
   addCourseContent,
   addStudents,
   editCourse,
+  getAllCourseContent,
+  getAllUnregisteredStudents,
 };
