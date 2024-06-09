@@ -27,12 +27,12 @@ import {
 import { CourseContentCard } from "components/CourseContentCard";
 import { FileAlertIcon } from "components/Icon";
 import { Loader } from "components/Loader";
-import { useCourseDetailQuery } from "services/api/course/useCourseDetailQuery";
 import { AddStudentModal } from "./components/AddStudentModal";
 import { useState } from "react";
 import { UploadContentModal } from "./components/UploadContentModal";
 import { CourseModal } from "components/CourseModal";
-import { useCourseContentQuery } from "services/api/course/useCourseContentQuery";
+import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQuery";
+import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
