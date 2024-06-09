@@ -30,6 +30,7 @@ import { Loader } from "components/Loader";
 import { useCourseDetailQuery } from "services/api/course/useCourseDetailQuery";
 import { AddStudentModal } from "./components/AddStudentModal";
 import { useState } from "react";
+import { UploadContentModal } from "./components/UploadContentModal";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
@@ -37,6 +38,7 @@ export const CourseDetailPage = () => {
   const navigate = useNavigate();
   let { courseId } = useParams();
   const [openStudentModal, setOpenStudentModal] = useState();
+  const [openUploadModal, setOpenUploadModal] = useState();
 
   const { course } = useCourseDetailQuery(courseId);
 
@@ -59,7 +61,7 @@ export const CourseDetailPage = () => {
         <Button
           startIcon={<FileUploadIcon />}
           sx={{ minHeight: 56, flexGrow: 1 }}
-          onClick={() => {}}
+          onClick={() => setOpenUploadModal(true)}
         >
           Upload Content
         </Button>
@@ -189,6 +191,10 @@ export const CourseDetailPage = () => {
       <AddStudentModal
         open={openStudentModal}
         onClose={() => setOpenStudentModal(false)}
+      />
+      <UploadContentModal
+        open={openUploadModal}
+        onClose={() => setOpenUploadModal(false)}
       />
     </>
   );
