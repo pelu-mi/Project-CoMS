@@ -75,7 +75,7 @@ export const CourseDetailPage = () => {
           {contents.map((content, index) => (
             <Grid item key={`${index}-${content.title}`} xs={12} sm={4} md={3}>
               <CourseContentCard
-                courseId={content._id}
+                courseContentId={content._id}
                 title={content.title}
                 description={content.description}
                 link={content.link}
@@ -182,7 +182,6 @@ export const CourseDetailPage = () => {
       />
       <UploadContentModal
         open={openUploadModal}
-        courseId={courseId}
         onClose={() => setOpenUploadModal(false)}
       />
       {!isCourseFetching && (

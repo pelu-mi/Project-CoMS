@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
+import { useParams } from "react-router-dom";
 import { useAddCourseContentMutation } from "services/api/courseDetail/useAddCourseContentMutation";
 import { useEditCourseContentMutation } from "services/api/courseDetail/useEditCourseContentMutation";
 import { GET_COURSE_CONTENT_API_KEY } from "services/constants";
@@ -19,7 +20,7 @@ export const useContentForm = ({ courseId, defaultValues, onClose }) => {
   const form = useForm({
     validationSchema,
     defaultValues: defaultValues || {
-      courseId,
+      courseContentId: null,
       title: "",
       descripton: "",
       link: "",
@@ -53,20 +54,19 @@ export const useContentForm = ({ courseId, defaultValues, onClose }) => {
     },
   });
 
-  const onSubmit = async ({ courseId, title, description, link }) => {
+  const onSubmit = async ({ courseContentId, title, description, link }) => {
     const payload = {
-      course: courseId,
       title,
       description,
       link,
     };
 
-    if (defaultValues) {
-      // Call edit course endpoint
-      await editContent(payload);
+    if (courseContentId) {
+      // Call edit content endpoint
+      await editContent({ courseContentId, ...payload });
     } else {
-      // Call create course endpoint
-      await addContent(payload);
+      // Call create content endpoint
+      await addContent({ courseId, ...payload });
     }
   };
 

@@ -15,7 +15,12 @@ import { ROLES } from "constants/role";
 import { UploadContentModal } from "components/UploadContentModal";
 import { useState } from "react";
 
-export const CourseContentCard = ({ courseId, title, description, link }) => {
+export const CourseContentCard = ({
+  courseContentId,
+  title,
+  description,
+  link,
+}) => {
   const { user } = useUser();
   const [openEditContentModal, setOpenEditContentModal] = useState(false);
 
@@ -61,7 +66,7 @@ export const CourseContentCard = ({ courseId, title, description, link }) => {
         open={openEditContentModal}
         onClose={() => setOpenEditContentModal(false)}
         defaultValues={{
-          courseId,
+          courseContentId,
           title,
           description,
           link,
@@ -72,7 +77,7 @@ export const CourseContentCard = ({ courseId, title, description, link }) => {
 };
 
 CourseContentCard.propTypes = {
-  courseId: PropTypes.string.isRequired,
+  courseContentId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
