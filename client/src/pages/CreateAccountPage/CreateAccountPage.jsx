@@ -36,7 +36,7 @@ export const CreateAccountPage = () => {
     <PageLayout>
       <StyledLayout>
         <Grid container justifyContent="center">
-          <Grid item xs={12} sm={7} md={5} lg={4} xl={3}>
+          <Grid item xs={12} sm={7} md={5} lg={4}>
             <StyledForm onSubmit={handleSubmit}>
               <Grid container flexDirection="column" gap="16px">
                 <Typography variant="h5">Create an account for:</Typography>
