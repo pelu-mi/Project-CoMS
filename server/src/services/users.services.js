@@ -187,6 +187,31 @@ async function editCourse(payload) {
   };
 }
 
+async function editCourseContent(payload) {
+  // Find the course by ID and update it with the provided payload
+  const updatedCourseContent = await courseContent.findByIdAndUpdate(
+    payload.courseContentId,
+    { $set: payload }, // Update the fields provided in the payload
+    { new: true, useFindAndModify: false }
+  );
+
+  // Check if the course was found and updated
+  if (!updatedCourseContent) {
+    return {
+      message: "Course content not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Course Content updated successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedCourseContent,
+  };
+}
+
 async function getAllUnregisteredStudents(payload) {
   const courseToAddStudents = await course.findOne({ _id: payload.courseId });
   if (!courseToAddStudents) {
@@ -240,6 +265,17 @@ async function getAllRegisteredStudents(payload) {
   };
 }
 
+async function getAllStudents() {
+  const students = await users.find({ role: "student" }).lean();
+  const noOfStudents = students.length;
+  return {
+    message: `All ${noOfStudents} students displayed below`,
+    statusCode: 200,
+    status: "success",
+    data: students,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -249,7 +285,9 @@ export default {
   addCourseContent,
   addStudents,
   editCourse,
+  editCourseContent,
   getAllCourseContent,
   getAllUnregisteredStudents,
   getAllRegisteredStudents,
+  getAllStudents,
 };
