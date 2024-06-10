@@ -22,6 +22,7 @@ import { GET_REGISTERED_STUDENTS_API_KEY } from "services/constants";
 import { useRegisteredStudentsQuery } from "services/api/courseDetail/useRegisteredStudentsQuery";
 import { useStudentsQuery } from "services/api/courseDetail/useStudentsQuery";
 import { sortByKey } from "utils/sortByKey";
+import { stringAvatar } from "utils/stringAvatar";
 
 export const AddStudentModal = ({ onClose, ...rest }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -82,8 +83,8 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
           renderOption={(props, option) => (
             <ListItem {...props} value={option._id} key={option._id}>
               <Avatar
-                alt={`${option.firstName} ${option.lastName}src="/.jpg"`}
                 src="/.jpg"
+                {...stringAvatar(`${option.firstName} ${option.lastName}`)}
               />
               <Typography ml="14px">
                 {option.firstName} {option.lastName}
@@ -122,8 +123,10 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
                 <StyledListItem key={index}>
                   <ListItemIcon value={student._id}>
                     <Avatar
-                      alt={`${student.firstName} ${student.lastName}src="/.jpg"`}
                       src="/.jpg"
+                      {...stringAvatar(
+                        `${student.firstName} ${student.lastName}`
+                      )}
                     />
                   </ListItemIcon>
                   <Typography mr="auto">

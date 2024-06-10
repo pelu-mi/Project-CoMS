@@ -13,6 +13,7 @@ import { useUser } from "context/UserProvider/UserProvider";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
+import { stringAvatar } from "utils/stringAvatar";
 
 export const UserMenus = () => {
   const { user } = useUser();
@@ -47,7 +48,10 @@ export const UserMenus = () => {
         <Tooltip title="Open settings">
           <StyledButton
             startIcon={
-              <Avatar alt={`${user.firstName} ${user.lastName}`} src="/.jpg" />
+              <Avatar
+                src="/.jpg"
+                {...stringAvatar(`${user.firstName} ${user.lastName}`)}
+              />
             }
             endIcon={<ExpandMoreIcon />}
             variant="outlined"
