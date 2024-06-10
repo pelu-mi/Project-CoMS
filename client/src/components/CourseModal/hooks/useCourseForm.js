@@ -4,7 +4,8 @@ import { useSnackbar } from "notistack";
 import { useCreateCourseMutation } from "services/api/course/useCreateCourseMutation";
 import { useEditCourseMutation } from "services/api/course/useEditCourseMutation";
 import {
-  GET_COURSES_API_KEY,
+  GET_INSTRUCTOR_COURSES_API_KEY,
+  GET_STUDENT_COURSES_API_KEY,
   GET_COURSE_DETAILS_API_KEY,
 } from "services/constants";
 import { object, string } from "yup";
@@ -32,7 +33,8 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
       enqueueSnackbar(data.message, { variant: "success" });
       onClose();
       form.reset();
-      await queryClient.invalidateQueries(GET_COURSES_API_KEY);
+      await queryClient.invalidateQueries(GET_INSTRUCTOR_COURSES_API_KEY);
+      await queryClient.invalidateQueries(GET_STUDENT_COURSES_API_KEY);
     },
     onError: (error) => {
       enqueueSnackbar(error.message, { variant: "error" });
@@ -43,7 +45,8 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
     onSuccess: async (data, payload) => {
       enqueueSnackbar(data.message, { variant: "success" });
       onClose();
-      await queryClient.invalidateQueries(GET_COURSES_API_KEY);
+      await queryClient.invalidateQueries(GET_INSTRUCTOR_COURSES_API_KEY);
+      await queryClient.invalidateQueries(GET_STUDENT_COURSES_API_KEY);
       await queryClient.invalidateQueries(
         `${GET_COURSE_DETAILS_API_KEY}/${payload.courseId}`
       );

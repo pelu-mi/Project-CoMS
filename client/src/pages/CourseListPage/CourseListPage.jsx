@@ -40,7 +40,7 @@ export const CourseListPage = () => {
   //   setPage(value);
   // };
 
-  const { courses, isFetching } = useCourseListQuery();
+  const { courses, isFetching } = useCourseListQuery(user.role);
 
   const renderTitle = () => {
     let title = "";
