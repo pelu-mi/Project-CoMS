@@ -61,7 +61,7 @@ export const CourseContentCard = ({ courseId, title, description, link }) => {
         open={openEditContentModal}
         onClose={() => setOpenEditContentModal(false)}
         defaultValues={{
-          course: courseId,
+          courseId,
           title,
           description,
           link,

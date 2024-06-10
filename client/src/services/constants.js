@@ -11,6 +11,7 @@ export const EDIT_COURSE_API_KEY = "/user/editcourse";
 export const GET_COURSE_DETAILS_API_KEY = "/user/coursedetails";
 export const GET_COURSE_CONTENT_API_KEY = "/user/allcoursecontent";
 export const ADD_COURSE_CONTENT_API_KEY = "/user/addcoursecontent";
+export const EDIT_COURSE_CONTENT_API_KEY = "/user/editcoursecontent";
 export const GET_STUDENTS_API_KEY = "/user/getallstudents";
 export const GET_REGISTERED_STUDENTS_API_KEY = "/user/registeredstudents";
 export const ADD_STUDENTS_API_KEY = "/user/addstudents";

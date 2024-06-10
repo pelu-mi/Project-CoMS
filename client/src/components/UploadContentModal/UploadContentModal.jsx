@@ -73,7 +73,6 @@ export const UploadContentModal = ({
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            {/* TODO: Connect endpoint */}
             <Button sx={{ height: "100%" }} fullWidth onClick={handleSubmit}>
               {defaultValues ? "Save Changes" : "Post"}
             </Button>
