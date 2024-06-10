@@ -155,6 +155,19 @@ async function getAllStudents(req, res) {
     });
   }
 }
+
+async function getStudentCourseList(req, res) {
+  try {
+    const response = await usersServices.getStudentCourseList(req.user);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get students course list",
+      status: "failure",
+    });
+  }
+}
+
 export default {
   createAccount,
   login,
@@ -169,4 +182,5 @@ export default {
   getAllUnregisteredStudents,
   getAllRegisteredStudents,
   getAllStudents,
+  getStudentCourseList,
 };

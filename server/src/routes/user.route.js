@@ -65,4 +65,11 @@ router.get(
   authMiddleware.authenticate,
   userControllers.getAllStudents
 );
+
+router.get(
+  "/studentcourselist",
+  authMiddleware.studentAuthenticate,
+  userControllers.getStudentCourseList
+);
+
 export default router;

@@ -13,7 +13,7 @@ const courseContentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  course: {
+  courseId: {
     type: mongoose.Types.ObjectId,
     ref :"Course",
     required: true,
