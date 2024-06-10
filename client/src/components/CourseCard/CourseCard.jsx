@@ -12,6 +12,7 @@ import { useUser } from "context";
 import { ROLES } from "constants/role";
 import { CourseModal } from "components/CourseModal";
 import { useState } from "react";
+import { getRandomImageUrl } from "utils/getRandomImageUrl";
 
 export const CourseCard = ({
   image = "",
@@ -33,7 +34,10 @@ export const CourseCard = ({
       <StyledCard elevation={0} {...{ onClick }}>
         <StyledCardActionArea disableRipple>
           <Box width="100%" position="relative">
-            <StyledCardMedia image={image} title={name} />
+            <StyledCardMedia
+              image={image || getRandomImageUrl(courseId, 320, 120)}
+              title={name}
+            />
 
             {user.role === ROLES.instructor && (
               <StyledIconWrapper variant="outlined" onClick={handleOnEdit}>

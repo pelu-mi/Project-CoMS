@@ -33,6 +33,7 @@ import { UploadContentModal } from "components/UploadContentModal";
 import { CourseModal } from "components/CourseModal";
 import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQuery";
 import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
+import { getRandomImageUrl } from "utils/getRandomImageUrl";
 
 export const CourseDetailPage = () => {
   const { user } = useUser();
@@ -108,7 +109,7 @@ export const CourseDetailPage = () => {
   return (
     <>
       <Box pb={4}>
-        <StyledBanner image="" />
+        <StyledBanner image={getRandomImageUrl(courseId, 1392, 200)} />
 
         <StyledTitleContainer>
           <StyledTypographyWrapper>
