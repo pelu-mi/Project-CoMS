@@ -9,7 +9,7 @@ import { object, string } from "yup";
 const validationSchema = object({
   title: string().required("Content title is required"),
   description: string().required("Content Description is required"),
-  link: string().required("Link is required"),
+  link: string().url("Link must be a valid URL").required("Link is required"),
 });
 
 export const useContentForm = ({ courseId, defaultValues, onClose }) => {
