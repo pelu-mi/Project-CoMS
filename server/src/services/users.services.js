@@ -136,14 +136,6 @@ async function getAllCourseContent(payload) {
 
 async function addCourseContent(payload) {
   const { title, description, link } = payload;
-  const foundContent = await courseContent.findOne({ title: title });
-  if (foundContent) {
-    return {
-      message: "content already exists",
-      statusCode: 404,
-      status: "failure",
-    };
-  }
   const newContent = await courseContent.create(payload);
   return {
     message: "Course Content Created Successfully",
