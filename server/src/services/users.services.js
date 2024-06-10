@@ -117,7 +117,7 @@ async function getCourseDetails(payload) {
 
 async function getAllCourseContent(payload) {
   const { courseId } = payload;
-  const foundContent = await courseContent.find({ course: courseId });
+  const foundContent = await courseContent.find({ courseId });
   if (!foundContent) {
     return {
       message: "Course not found",
