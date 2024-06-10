@@ -21,6 +21,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { GET_REGISTERED_STUDENTS_API_KEY } from "services/constants";
 import { useRegisteredStudentsQuery } from "services/api/courseDetail/useRegisteredStudentsQuery";
 import { useStudentsQuery } from "services/api/courseDetail/useStudentsQuery";
+import { sortByKey } from "utils/sortByKey";
 
 export const AddStudentModal = ({ onClose, ...rest }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -73,7 +74,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
         <Autocomplete
           multiple
           id="checkboxes-tags-demo"
-          options={students}
+          options={sortByKey(students, "firstName")}
           disableCloseOnSelect
           disableClearable
           fullWidth
@@ -116,9 +117,8 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
               `(${registeredStudentsState.length})`}
           </Typography>
           <StyledRegisteredList>
-            {registeredStudentsState
-              .sort((a, b) => ("" + a.firstName).localeCompare(b.firstName))
-              .map((student, index) => (
+            {sortByKey(registeredStudentsState, "firstName").map(
+              (student, index) => (
                 <StyledListItem key={index}>
                   <ListItemIcon value={student._id}>
                     <Avatar
@@ -141,7 +141,8 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
                     />
                   </IconButton>
                 </StyledListItem>
-              ))}
+              )
+            )}
           </StyledRegisteredList>
         </Grid>
         <Grid container spacing={2}>
