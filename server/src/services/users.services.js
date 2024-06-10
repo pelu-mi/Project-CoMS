@@ -146,22 +146,24 @@ async function addCourseContent(payload) {
 }
 
 async function addStudents(payload) {
+  // Replace the existing student IDs with the new ones
   await course.findByIdAndUpdate(
     payload.courseId,
-    { $addToSet: { "students.relatedIds": { $each: payload.studentIds } } },
+    { $set: { "students.relatedIds": payload.studentIds } },
     { new: true, useFindAndModify: false }
   );
-  const populatedCourse = await course
-    .findById(payload.courseId)
-    .populate("students.relatedIds");
+
+  // Populate the newly added students
+  const addedStudents = await users.find({ _id: { $in: payload.studentIds } });
 
   return {
-    message: "Students registered Successfully",
+    message: "Students registered successfully",
     statusCode: 200,
     status: "success",
-    data: populatedCourse,
+    data: addedStudents,
   };
 }
+
 async function editCourse(payload) {
   // Find the course by ID and update it with the provided payload
   const updatedCourse = await course.findByIdAndUpdate(
@@ -276,6 +278,20 @@ async function getAllStudents() {
   };
 }
 
+async function getStudentCourseList(user) {
+  const list = await course.find(
+    { "students.relatedIds": user._id },
+    { students: 0 } // Exclude the students field
+  );
+
+  return {
+    message: "Courses retrieved successfully",
+    statusCode: 200,
+    status: "success",
+    data: list,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -290,4 +306,5 @@ export default {
   getAllUnregisteredStudents,
   getAllRegisteredStudents,
   getAllStudents,
+  getStudentCourseList,
 };
