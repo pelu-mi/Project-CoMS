@@ -96,6 +96,18 @@ async function editCourse(req, res) {
   }
 }
 
+async function editCourseContent(req, res) {
+  try {
+    const response = await usersServices.editCourseContent(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to edit course content",
+      status: "failure",
+    });
+  }
+}
+
 async function getAllCourseContent(req, res) {
   try {
     const response = await usersServices.getAllCourseContent(req.params);
@@ -132,6 +144,17 @@ async function getAllRegisteredStudents(req, res) {
   }
 }
 
+async function getAllStudents(req, res) {
+  try {
+    const response = await usersServices.getAllStudents();
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get students",
+      status: "failure",
+    });
+  }
+}
 export default {
   createAccount,
   login,
@@ -141,7 +164,9 @@ export default {
   addCourseContent,
   addStudents,
   editCourse,
+  editCourseContent,
   getAllCourseContent,
   getAllUnregisteredStudents,
   getAllRegisteredStudents,
+  getAllStudents,
 };
