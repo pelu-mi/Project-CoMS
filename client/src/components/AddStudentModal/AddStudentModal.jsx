@@ -12,30 +12,62 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyledListItem, StyledRegisteredList } from "./AddStudentModal.styled";
+import { useAddStudentsMutation } from "services/api/courseDetail/useAddStudentsMutation";
+import { useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { useQueryClient } from "@tanstack/react-query";
+import { GET_REGISTERED_STUDENTS_API_KEY } from "services/constants";
+import { useRegisteredStudentsQuery } from "services/api/courseDetail/useRegisteredStudentsQuery";
+import { useStudentsQuery } from "services/api/courseDetail/useStudentsQuery";
 
 export const AddStudentModal = ({ onClose, ...rest }) => {
-  // TODO: Get all students for list
-  const [registerdStudents, setRegisterdStudents] = useState([
-    {
-      firstName: "George",
-      lastName: "Smith",
-      id: 6,
+  const { enqueueSnackbar } = useSnackbar();
+  const { courseId } = useParams();
+  const queryClient = useQueryClient();
+  const { students } = useStudentsQuery();
+  const { registeredStudents } = useRegisteredStudentsQuery(courseId);
+  const [registeredStudentsState, setRegisteredStudentsState] =
+    useState(registeredStudents);
+
+  const { mutateAsync: addStudents } = useAddStudentsMutation({
+    onSuccess: async (data) => {
+      enqueueSnackbar(data.message, { variant: "success" });
+      await queryClient.invalidateQueries(
+        `${GET_REGISTERED_STUDENTS_API_KEY}/${courseId}`
+      );
     },
-    {
-      firstName: "Fillip",
-      lastName: "Hahs",
-      id: 7,
+    onError: (error) => {
+      enqueueSnackbar(error.message, { variant: "error" });
     },
-  ]);
+  });
+  const handleSetStudents = async () => {
+    const studentIds = registeredStudentsState.map((student) => student._id);
+
+    const payload = {
+      courseId,
+      studentIds,
+    };
+
+    await addStudents(payload);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setRegisteredStudentsState(registeredStudents);
+  };
+
+  useEffect(() => {
+    setRegisteredStudentsState(registeredStudents);
+  }, [registeredStudents]);
 
   return (
     <Modal
       title="Students"
       aria-labelledby="add-student-form"
       aria-describedby="add-student-form"
-      {...{ ...rest, onClose }}
+      {...{ ...rest, onClose: () => handleClose() }}
     >
       <Grid container mt={4} gap={3}>
         <Autocomplete
@@ -47,7 +79,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
           fullWidth
           getOptionLabel={(option) => `${option.firstName} ${option.lastName}`}
           renderOption={(props, option) => (
-            <ListItem {...props} value={option.id} key={option.id}>
+            <ListItem {...props} value={option._id} key={option._id}>
               <Avatar
                 alt={`${option.firstName} ${option.lastName}src="/.jpg"`}
                 src="/.jpg"
@@ -64,9 +96,9 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
               placeholder="Search by Student Name"
             />
           )}
-          value={registerdStudents}
+          value={registeredStudentsState}
           onChange={(event, newValue) => {
-            setRegisterdStudents(newValue);
+            setRegisteredStudentsState(newValue);
           }}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
@@ -75,19 +107,20 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
             }
           }}
           renderTags={() => null}
-          isOptionEqualToValue={(option, value) => option.id === value.id}
+          isOptionEqualToValue={(option, value) => option._id === value._id}
         />
         <Grid item xs={12}>
           <Typography variant="body1" mb={1}>
             Students in this class{" "}
-            {registerdStudents.length > 0 && `(${registerdStudents.length})`}
+            {registeredStudentsState.length > 0 &&
+              `(${registeredStudentsState.length})`}
           </Typography>
           <StyledRegisteredList>
-            {registerdStudents
+            {registeredStudentsState
               .sort((a, b) => ("" + a.firstName).localeCompare(b.firstName))
               .map((student, index) => (
                 <StyledListItem key={index}>
-                  <ListItemIcon value={student.id}>
+                  <ListItemIcon value={student._id}>
                     <Avatar
                       alt={`${student.firstName} ${student.lastName}src="/.jpg"`}
                       src="/.jpg"
@@ -101,8 +134,8 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
                       sx={{ cursor: "pointer" }}
                       color="error"
                       onClick={() => {
-                        setRegisterdStudents((prev) =>
-                          prev.filter(({ id }) => id !== student.id)
+                        setRegisteredStudentsState((prev) =>
+                          prev.filter(({ _id }) => _id !== student._id)
                         );
                       }}
                     />
@@ -118,14 +151,17 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
               color="secondary"
               fullWidth
               disableRipple
-              onClick={onClose}
+              onClick={handleClose}
             >
               Cancel
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            {/* TODO: Connect add students endpoint */}
-            <Button sx={{ height: "100%" }} fullWidth onClick={() => {}}>
+            <Button
+              sx={{ height: "100%" }}
+              fullWidth
+              onClick={handleSetStudents}
+            >
               Save Students
             </Button>
           </Grid>
@@ -138,41 +174,3 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
 AddStudentModal.propTypes = {
   onClose: PropTypes.func,
 };
-
-const students = [
-  {
-    firstName: "John",
-    lastName: "Smith",
-    id: 1,
-  },
-  {
-    firstName: "James",
-    lastName: "Smith",
-    id: 2,
-  },
-  {
-    firstName: "James",
-    lastName: "Smith",
-    id: 3,
-  },
-  {
-    firstName: "James",
-    lastName: "Andrew",
-    id: 4,
-  },
-  {
-    firstName: "Joe",
-    lastName: "Smith",
-    id: 5,
-  },
-  {
-    firstName: "George",
-    lastName: "Smith",
-    id: 6,
-  },
-  {
-    firstName: "Fillip",
-    lastName: "Hahs",
-    id: 7,
-  },
-];
