@@ -11,7 +11,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { StyledActionContainer } from "pages/CourseListPage/CourseListPage.styled";
 import { ROLES } from "constants/role";
 import { useUser } from "context";
@@ -37,7 +37,6 @@ import { useCourseContentQuery } from "services/api/courseDetail/useCourseConten
 export const CourseDetailPage = () => {
   const { user } = useUser();
   const theme = useTheme();
-  const navigate = useNavigate();
   let { courseId } = useParams();
   const [openStudentModal, setOpenStudentModal] = useState();
   const [openUploadModal, setOpenUploadModal] = useState();
@@ -76,6 +75,7 @@ export const CourseDetailPage = () => {
           {contents.map((content, index) => (
             <Grid item key={`${index}-${content.title}`} xs={12} sm={4} md={3}>
               <CourseContentCard
+                courseId={content._id}
                 title={content.title}
                 description={content.description}
                 link={content.link}

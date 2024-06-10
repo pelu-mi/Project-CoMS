@@ -49,6 +49,7 @@ export const useContentForm = ({ courseId, defaultValues, onClose }) => {
 
     if (defaultValues) {
       // Call edit course endpoint
+      console.log("edit content payload", payload);
     } else {
       // Call create course endpoint
       await addContent(payload);
