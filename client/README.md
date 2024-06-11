@@ -1,8 +1,6 @@
-
 # Client
 
 The client of this project was built with React working in Vite with HMR and some ESLint rules.
-
 
 ## Folder structure
 
@@ -12,10 +10,9 @@ The following are the folders used to organize this part of the project and what
 
 `.env` contains the environment variables
 
-`public`  contains the project assets
+`public` contains the project assets
 
 `src` contains the main source code for this part of the project
-
 
 **_Here are subfolders within the `src` folder_**
 
@@ -35,25 +32,23 @@ The following are the folders used to organize this part of the project and what
 
 `utils` contains helper functions and general purpose modules
 
-
-
-
-
 ## How To Run
 
 To start the client, run these commands in the shell
+
 ```sh
 npm install
 ```
+
 ```sh
 npm run dev
 ```
 
-
 <!-- CONTACT -->
+
 ## Authors
 
-**James Kanin** - [@kaninnoothep](https://github.com/kaninnoothep) - email@example.com
+**James Kanin** - [@kaninnoothep](https://github.com/kaninnoothep) - [kaninnoothep@gmail.com](mailto:kaninnoothep@gmail.com)
 
 **Emmanuel Aimuel** - [@Daxtterr](https://github.com/Daxtterr) - [aimuelemmanuel@gmail.com](mailto:aimuelemmanuel@gmail.com)
 
