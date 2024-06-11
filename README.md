@@ -177,7 +177,7 @@ See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Authors
 
-**James Kanin** - [@kaninnoothep](https://github.com/kaninnoothep) - email@example.com
+**James Kanin** - [@kaninnoothep](https://github.com/kaninnoothep) - [kaninnoothep@gmail.com](mailto:kaninnoothep@gmail.com)
 
 **Emmanuel Aimuel** - [@Daxtterr](https://github.com/Daxtterr) - [aimuelemmanuel@gmail.com](mailto:aimuelemmanuel@gmail.com)
 

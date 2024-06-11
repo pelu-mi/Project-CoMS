@@ -1,5 +1,14 @@
+/**
+ * Import modules
+ */
 import usersServices from "../services/users.services.js";
 
+/**
+ * createAccount - create a new user account
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function createAccount(req, res) {
   try {
     const response = await usersServices.createAccount(req.body);
@@ -12,6 +21,13 @@ async function createAccount(req, res) {
   }
 }
 
+
+/**
+ * login - Login to existing account
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function login(req, res) {
   try {
     const response = await usersServices.login(req.body);
@@ -24,6 +40,13 @@ async function login(req, res) {
   }
 }
 
+
+/**
+ * createCourse - Create a course (restricted to instructors only)
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function createCourse(req, res) {
   try {
     const response = await usersServices.createCourse(req.user, req.body);
@@ -36,6 +59,15 @@ async function createCourse(req, res) {
   }
 }
 
+
+/**
+ * getInstructorCourseList - Get the list of course created by instructors 
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getInstructorCourseLIst(req, res) {
   try {
     const response = await usersServices.getInstructorCourseLIst(req.user);
@@ -48,6 +80,13 @@ async function getInstructorCourseLIst(req, res) {
   }
 }
 
+
+/**
+ * getCourseDetails - Get details for a course
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getCourseDetails(req, res) {
   try {
     const response = await usersServices.getCourseDetails(req.params);
@@ -60,6 +99,16 @@ async function getCourseDetails(req, res) {
   }
 }
 
+
+/**
+ * addCourseContent - Create a new coursecontent object and
+ *                    reference it in the course object
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function addCourseContent(req, res) {
   try {
     const response = await usersServices.addCourseContent(req.body);
@@ -72,6 +121,15 @@ async function addCourseContent(req, res) {
   }
 }
 
+
+/**
+ * addStudents - Register students in a course
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function addStudents(req, res) {
   try {
     const response = await usersServices.addStudents(req.body);
@@ -84,6 +142,15 @@ async function addStudents(req, res) {
   }
 }
 
+
+/**
+ * editCourse - Edit an existing course
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function editCourse(req, res) {
   try {
     const response = await usersServices.editCourse(req.body);
@@ -96,6 +163,15 @@ async function editCourse(req, res) {
   }
 }
 
+
+/**
+ * editCourseContent - Edit an existing Course content
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function editCourseContent(req, res) {
   try {
     const response = await usersServices.editCourseContent(req.body);
@@ -108,6 +184,13 @@ async function editCourseContent(req, res) {
   }
 }
 
+
+/**
+ * getAllCourseContent - Get all course content related to specific course
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getAllCourseContent(req, res) {
   try {
     const response = await usersServices.getAllCourseContent(req.params);
@@ -120,6 +203,15 @@ async function getAllCourseContent(req, res) {
   }
 }
 
+
+/**
+ * getAllUnregisteredStudents - Get all students not registered in a course
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getAllUnregisteredStudents(req, res) {
   try {
     const response = await usersServices.getAllUnregisteredStudents(req.params);
@@ -132,6 +224,15 @@ async function getAllUnregisteredStudents(req, res) {
   }
 }
 
+
+/**
+ * getAllRegisteredStudents - Get all students registered in a course
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getAllRegisteredStudents(req, res) {
   try {
     const response = await usersServices.getAllRegisteredStudents(req.params);
@@ -144,6 +245,15 @@ async function getAllRegisteredStudents(req, res) {
   }
 }
 
+
+/**
+ * getAllStudents - Get all students on the platform
+ * 
+ * Restricted to instructors only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getAllStudents(req, res) {
   try {
     const response = await usersServices.getAllStudents();
@@ -156,6 +266,14 @@ async function getAllStudents(req, res) {
   }
 }
 
+/**
+ * getStudentCourseList - Get all courses a student is registered in
+ * 
+ * Restricted to students only
+ * 
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getStudentCourseList(req, res) {
   try {
     const response = await usersServices.getStudentCourseList(req.user);
@@ -168,6 +286,10 @@ async function getStudentCourseList(req, res) {
   }
 }
 
+
+/**
+ * Export all fuctions
+ */
 export default {
   createAccount,
   login,
