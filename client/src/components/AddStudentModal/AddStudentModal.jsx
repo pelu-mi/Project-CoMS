@@ -36,6 +36,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
   const { mutateAsync: addStudents } = useAddStudentsMutation({
     onSuccess: async (data) => {
       enqueueSnackbar(data.message, { variant: "success" });
+      onClose();
       await queryClient.invalidateQueries(
         `${GET_REGISTERED_STUDENTS_API_KEY}/${courseId}`
       );
