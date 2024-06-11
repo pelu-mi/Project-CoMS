@@ -4,9 +4,18 @@
 import axios from "axios";
 import cookie from "js-cookie";
 import { ACCESS_TOKEN_COOKIE_KEY } from "constants/auth";
+import {
+  CREATE_ACCOUNT_API_KEY,
+  FORGOT_PASSWORD_API_KEY,
+  LOGIN_API_KEY,
+} from "./constants";
 
 // Endpoints to be excluded
-const EXCLUDED_ENDPOINTS = ["/user/login", "/user/createaccount"];
+const EXCLUDED_ENDPOINTS = [
+  LOGIN_API_KEY,
+  CREATE_ACCOUNT_API_KEY,
+  FORGOT_PASSWORD_API_KEY,
+];
 
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,

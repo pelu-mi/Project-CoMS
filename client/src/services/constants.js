@@ -1,6 +1,7 @@
 // User Routes
 export const CREATE_ACCOUNT_API_KEY = "/user/createaccount";
 export const LOGIN_API_KEY = "/user/login";
+export const FORGOT_PASSWORD_API_KEY = "/user/forgotpassword";
 
 // Course Routes
 export const GET_INSTRUCTOR_COURSES_API_KEY = "/user/instructorcourselist";
