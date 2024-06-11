@@ -90,6 +90,11 @@ router.get(
   userControllers.getStudentCourseList
 );
 
+router.post("/forgotpassword", userControllers.forgotPassword);
+
+router.post("/resetpassword", userControllers.resetPassword);
+
+
 /**
  * Export router object
  */

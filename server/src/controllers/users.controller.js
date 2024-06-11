@@ -286,6 +286,54 @@ async function getStudentCourseList(req, res) {
   }
 }
 
+async function forgotPassword(req, res) {
+  try {
+    const response = await usersServices.forgotPassword(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to send mail",
+      status: "failure",
+    });
+  }
+}
+
+async function resetPassword(req, res) {
+  try {
+    const response = await usersServices.resetPassword(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to reset password",
+      status: "failure",
+    });
+  }
+}
+
+async function forgotPassword(req, res) {
+  try {
+    const response = await usersServices.forgotPassword(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to send mail",
+      status: "failure",
+    });
+  }
+}
+
+async function resetPassword(req, res) {
+  try {
+    const response = await usersServices.resetPassword(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to reset password",
+      status: "failure",
+    });
+  }
+}
+
 
 /**
  * Export all fuctions
@@ -305,4 +353,6 @@ export default {
   getAllRegisteredStudents,
   getAllStudents,
   getStudentCourseList,
+  forgotPassword,
+  resetPassword,
 };

@@ -6,6 +6,8 @@ import course from "../models/course.model.js";
 import courseContent from "../models/courseContent.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import generateResetPin from "../../utils/generateResetPin.js";
+import sendMail from "../../utils/sendMail.js";
 
 
 /**
@@ -424,10 +426,68 @@ async function getStudentCourseList(user) {
   };
 }
 
+async function forgotPassword(payload) {
+  const { email } = payload;
+  const foundUser = await users.findOne({ email: email });
+  if (!foundUser) {
+    return {
+      message: "Email not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+  const resetPin = generateResetPin();
+  const updatedUser = await users.findByIdAndUpdate(
+    { _id: foundUser._id },
+    { resetPin, resetPin },
+    { new: true }
+  );
 
-/**
- * Export all functions
- */
+  const forgotPasswordPayload = {
+    to: updatedUser.email,
+    subject: "RESET PASSWORD",
+    pin: resetPin,
+  };
+
+  sendMail.sendForgotPasswordMail(forgotPasswordPayload);
+  return {
+    message: "Email sent succesfully",
+    statusCode: 200,
+    status: "success",
+  };
+}
+
+const resetPassword = async (payload) => {
+  const { email, resetPin } = payload;
+
+  const foundUserAndPin = await users.findOne({
+    email: email,
+    resetPin: resetPin,
+  });
+
+  if (!foundUserAndPin) {
+    return {
+      message: "Reset pin invalid",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  //hashing new password
+  const hashedPassword = await bcrypt.hash(payload.newPassword, 10);
+
+  const updatedUser = await users.findByIdAndUpdate(
+    { _id: foundUserAndPin._id },
+    { password: hashedPassword, resetPin: null },
+    { new: true }
+  );
+
+  return {
+    message: "Password succesfully changed",
+    statusCode: 200,
+    status: updatedUser,
+  };
+};
 export default {
   createAccount,
   login,
@@ -443,4 +503,6 @@ export default {
   getAllRegisteredStudents,
   getAllStudents,
   getStudentCourseList,
+  forgotPassword,
+  resetPassword,
 };
