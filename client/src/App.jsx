@@ -1,8 +1,26 @@
+import { Root } from "pages/Root";
+import { BrowserRouter } from "react-router-dom";
+
+import {
+  QueryClientProvider,
+  SnackbarProvider,
+  ThemeProvider,
+  UserProvider,
+} from "context";
+
 function App() {
   return (
-    <>
-      <h1>Course Management</h1>
-    </>
+    <BrowserRouter>
+      <QueryClientProvider>
+        <ThemeProvider>
+          <SnackbarProvider>
+            <UserProvider>
+              <Root />
+            </UserProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 }
 

@@ -4,18 +4,28 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#3851DD",
+      background: "#F5F6FF",
+      icon: "#C3CBF5",
+    },
+    secondary: {
+      main: "#313131",
     },
     error: {
-      main: "#F26A6A",
+      main: "#E95252",
+      background: "#FEF0F0",
     },
     success: {
       main: "#20C11D",
+      background: "#F4FCF4",
+    },
+    text: {
+      primary: "#313131",
     },
   },
   breakpoints: {
     values: {
       xs: 0,
-      sm: 768,
+      sm: 763,
       md: 1024,
       lg: 1440,
       xl: 1920,
@@ -33,11 +43,71 @@ const theme = createTheme({
       fontWeight: 500,
     },
     h4: {
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h5: {
-      fontWeight: 500,
+      fontWeight: 600,
     },
+    h6: {
+      fontWeight: 600,
+    },
+    button: {
+      textTransform: "none",
+      fontSize: "16px",
+      fontWeight: 600,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          padding: "12px 20px",
+        },
+        outlined: {
+          padding: "12px 20px",
+        },
+        outlinedSecondary: ({ theme }) => ({
+          borderColor: theme.palette.grey[400],
+        }),
+      },
+      defaultProps: {
+        disableElevation: true,
+        variant: "contained",
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontSize: "14px",
+          fontWeight: 500,
+          color: theme.palette.grey[400],
+        }),
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontWeight: 500,
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          minHeight: "64px",
+        },
+      },
+    },
+    MuiAvatar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          background: theme.palette.primary.main,
+        }),
+      },
+    },
+  },
+  customVariables: {
+    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",
   },
 });
 
