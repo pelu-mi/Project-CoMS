@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Divider,
   Grid,
@@ -8,7 +9,11 @@ import {
 } from "@mui/material";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
-import { CREATE_ACCOUNT_ROUTE, HOME_ROUTE } from "routes";
+import {
+  CREATE_ACCOUNT_ROUTE,
+  FORGET_PASSWORD_ROUTE,
+  HOME_ROUTE,
+} from "routes";
 import { PageLayout } from "components/PageLayout";
 import { useUser } from "context/UserProvider/UserProvider";
 import { useLoginForm } from "./hooks/useLoginForm";
@@ -41,15 +46,27 @@ export const LoginPage = () => {
                 {...register("email")}
               />
 
-              <TextField
-                label="Password"
-                type="password"
-                placeholder="Enter your password"
-                fullWidth
-                error={errors.password}
-                helperText={errors.password?.message}
-                {...register("password")}
-              />
+              <Box
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-end"
+                gap="8px"
+              >
+                <TextField
+                  label="Password"
+                  type="password"
+                  placeholder="Enter your password"
+                  fullWidth
+                  error={errors.password}
+                  helperText={errors.password?.message}
+                  {...register("password")}
+                />
+
+                <Link component={RouterLink} to={FORGET_PASSWORD_ROUTE}>
+                  Forget Password?
+                </Link>
+              </Box>
 
               <Button type="submit">Login</Button>
 
