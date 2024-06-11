@@ -14,18 +14,20 @@ import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
 import { stringAvatar } from "utils/stringAvatar";
+import { ProfileModal } from "components/ProfileModal";
 
 export const UserMenus = () => {
   const { user } = useUser();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const settings = [
     {
       title: "Profile",
       icon: <AccountCircleIcon color="primary" />,
-      action: () => {},
+      action: () => setShowProfileModal(true),
     },
     {
       title: "Logout",
@@ -96,6 +98,10 @@ export const UserMenus = () => {
       <ConfirmLogoutModal
         open={showConfirmLogoutModal}
         onClose={() => setShowConfirmLogoutModal(false)}
+      />
+      <ProfileModal
+        open={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
       />
     </>
   );
