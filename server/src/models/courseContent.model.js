@@ -1,5 +1,12 @@
+/**
+ * Import modules
+ */
 import mongoose from "mongoose";
 
+
+/**
+ * Define courseContent model for database
+ */
 const courseContentSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -20,4 +27,7 @@ const courseContentSchema = new mongoose.Schema({
   },
 });
 
+/**
+ * Export courseContent Model
+ */
 export default mongoose.model("CourseContent", courseContentSchema);

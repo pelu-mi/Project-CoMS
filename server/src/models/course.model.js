@@ -1,5 +1,12 @@
+/**
+ * Import modules
+ */
 import mongoose from "mongoose";
 
+
+/**
+ * Define course model for database
+ */
 const courseSchema = mongoose.Schema(
   {
     name: {
@@ -24,4 +31,7 @@ const courseSchema = mongoose.Schema(
   }
 );
 
+/**
+ * Export course model
+ */
 export default mongoose.model("Course", courseSchema);

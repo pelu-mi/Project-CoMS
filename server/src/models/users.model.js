@@ -1,5 +1,12 @@
+/**
+ * Import modules
+ */
 import mongoose from "mongoose";
 
+
+/**
+ * Define user model for database
+ */
 const userSchema = mongoose.Schema(
   {
     firstName: {
@@ -30,4 +37,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
+/**
+ * Export user model
+ */
 export default mongoose.model("User", userSchema);
