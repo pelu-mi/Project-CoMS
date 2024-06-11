@@ -1,12 +1,23 @@
+/**
+ * Import Modules
+ */
 import users from "../models/users.model.js";
 import course from "../models/course.model.js";
 import courseContent from "../models/courseContent.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
+/**
+ * createAccount - Create new user account
+ * 
+ * @param {Object} payload - Data to use for creating a new account
+ * @returns Success or failure status
+ */
 async function createAccount(payload) {
   const { firstName, lastName, email, role } = payload;
 
+  // Ensure all required fields exist
   if (!firstName || !lastName || !payload.password || !email || !role) {
     return {
       message: "Missing required fields",
@@ -15,6 +26,7 @@ async function createAccount(payload) {
     };
   }
 
+  // Check if email exists in database
   const foundEmail = await users.findOne({ email: email });
   if (foundEmail) {
     return {
@@ -24,9 +36,11 @@ async function createAccount(payload) {
     };
   }
 
+  // Save hashed password instead of raw password
   const hashedPassword = await bcrypt.hash(payload.password, 10);
   payload.password = hashedPassword;
 
+  // Create new user
   const newUser = await users.create(payload);
   return {
     message: "Account created successfully",
@@ -36,8 +50,16 @@ async function createAccount(payload) {
   };
 }
 
+
+/**
+ * login - Login to existing user account
+ * 
+ * @param {Object} payload - Data to use for login to an existing account
+ * @returns Success or failure status
+ */
 async function login(payload) {
   const { email, password } = payload;
+  // Check if account exists in db using the email
   const foundAccount = await users.findOne({ email: email }).lean();
   if (!foundAccount) {
     return {
@@ -47,6 +69,7 @@ async function login(payload) {
     };
   }
 
+  // Compare password entered against actual password
   const passwordMatch = await bcrypt.compare(password, foundAccount.password);
   if (!passwordMatch) {
     return {
@@ -55,6 +78,7 @@ async function login(payload) {
       status: "failure",
     };
   }
+  // Create JWT token
   const token = jwt.sign(
     {
       _id: foundAccount._id,
@@ -74,8 +98,19 @@ async function login(payload) {
   };
 }
 
+
+/**
+ * createCourse - Create a new course
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} user - User trying to create a new course
+ * @param {Object} payload - Data to use to create new course
+ * @returns Success or Failure status
+ */
 async function createCourse(user, payload) {
   const { name } = payload;
+  // Check if course exists in DB
   const foundCourse = await course.findOne({ name: name });
   if (foundCourse) {
     return {
@@ -84,6 +119,7 @@ async function createCourse(user, payload) {
       status: "failure",
     };
   }
+  // Create new course using the payload and instructor information
   payload.instructor = user._id;
   const newCourse = await course.create(payload);
   return {
@@ -94,6 +130,15 @@ async function createCourse(user, payload) {
   };
 }
 
+
+/**
+ * getInstructorCourseList - Get list of courses created by the instructor
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} user - instructor trying to get the course list
+ * @returns Success or Failure status
+ */
 async function getInstructorCourseLIst(user) {
   const foundCourses = await course.find({ instructor: user._id });
   return {
@@ -104,6 +149,13 @@ async function getInstructorCourseLIst(user) {
   };
 }
 
+
+/**
+ * getCourseDetails - Get details of course
+ * 
+ * @param {Object} payload - Details of course to be retrieved
+ * @returns Success or Failure status
+ */
 async function getCourseDetails(payload) {
   const { courseId } = payload;
   const foundCourse = await course.findOne({ _id: courseId });
@@ -115,6 +167,13 @@ async function getCourseDetails(payload) {
   };
 }
 
+
+/**
+ * getAllCourseContent - Get all course content of course
+ * 
+ * @param {Object} payload - Details of course whose content is to be retrieved
+ * @returns Success or Failure status
+ */
 async function getAllCourseContent(payload) {
   const { courseId } = payload;
   const foundContent = await courseContent.find({ courseId });
@@ -134,6 +193,15 @@ async function getAllCourseContent(payload) {
   };
 }
 
+
+/**
+ * addCourseContent - Add new course content to course
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} payload - Details of content to be added
+ * @returns Success or Failure status
+ */
 async function addCourseContent(payload) {
   const { title, description, link } = payload;
   const newContent = await courseContent.create(payload);
@@ -145,6 +213,15 @@ async function addCourseContent(payload) {
   };
 }
 
+
+/**
+ * addStudents - Register students to course
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} payload - Details of students to be added
+ * @returns Success or Failure status
+ */
 async function addStudents(payload) {
   // Replace the existing student IDs with the new ones
   await course.findByIdAndUpdate(
@@ -164,6 +241,15 @@ async function addStudents(payload) {
   };
 }
 
+
+/**
+ * editCourse - Edit existing course
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} payload - Details to be set
+ * @returns Success or Failure status
+ */
 async function editCourse(payload) {
   // Find the course by ID and update it with the provided payload
   const updatedCourse = await course.findByIdAndUpdate(
@@ -189,6 +275,15 @@ async function editCourse(payload) {
   };
 }
 
+
+/**
+ * editCourseContent - Edit existing course content
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} payload - Details of content to be set
+ * @returns Success or Failure status
+ */
 async function editCourseContent(payload) {
   // Find the course by ID and update it with the provided payload
   const updatedCourseContent = await courseContent.findByIdAndUpdate(
@@ -214,7 +309,17 @@ async function editCourseContent(payload) {
   };
 }
 
+
+/**
+ * getAllUnregisteredStudents - Get list of unregistered students in a course
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} payload - Details of course
+ * @returns Success or Failure status
+ */
 async function getAllUnregisteredStudents(payload) {
+  // Check if course exists
   const courseToAddStudents = await course.findOne({ _id: payload.courseId });
   if (!courseToAddStudents) {
     return {
@@ -240,8 +345,18 @@ async function getAllUnregisteredStudents(payload) {
   };
 }
 
+
+/**
+ * getAllRegisteredStudents - Get list of registered students in a course
+ * 
+ * Restricted to instructors
+ * 
+ * @param {Object} payload - Details of course
+ * @returns Success or Failure status
+ */
 async function getAllRegisteredStudents(payload) {
   const { courseId } = payload;
+  // Check if course exists
   const presentCourse = await course.findById(courseId);
   if (!course) {
     return {
@@ -267,6 +382,14 @@ async function getAllRegisteredStudents(payload) {
   };
 }
 
+
+/**
+ * getAllStudents - Get list of all students on the platform
+ * 
+ * Restricted to instructors
+ * 
+ * @returns Success or Failure status
+ */
 async function getAllStudents() {
   const students = await users.find({ role: "student" }).lean();
   const noOfStudents = students.length;
@@ -278,6 +401,15 @@ async function getAllStudents() {
   };
 }
 
+
+/**
+ * getStudentCourseList - Get list of courses the student is registered in
+ * 
+ * Restricted to students
+ * 
+ * @param {Object} use - Details of student
+ * @returns Success or Failure status
+ */
 async function getStudentCourseList(user) {
   const list = await course.find(
     { "students.relatedIds": user._id },
@@ -292,6 +424,10 @@ async function getStudentCourseList(user) {
   };
 }
 
+
+/**
+ * Export all functions
+ */
 export default {
   createAccount,
   login,
