@@ -1,7 +1,11 @@
+/**
+ * Import modules
+ */
 import axios from "axios";
 import cookie from "js-cookie";
 import { ACCESS_TOKEN_COOKIE_KEY } from "constants/auth";
 
+// Endpoints to be excluded
 const EXCLUDED_ENDPOINTS = ["/user/login", "/user/createaccount"];
 
 export const apiClient = axios.create({
