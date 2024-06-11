@@ -18,6 +18,7 @@ const sendForgotPasswordMail = (mailPayload) => {
           <span class="Unsubscribe--senderAddress">Please use this code to reset the password for your LMS account.</span>
         </p>
         <p>Here is your code : ${mailPayload.pin}</p>
+        <p>If you did not request this,please ignore this email and your password will remain unchanged<p>
       </div>
       <p> Thanks <br> The Course Management account team</p>
     </div>
