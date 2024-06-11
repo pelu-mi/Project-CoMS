@@ -34,6 +34,10 @@ export const StyledIconWrapper = styled(Button)({
   padding: "4px",
   minWidth: "34px",
   background: "white",
+
+  ":hover": {
+    background: "rgba(255, 255, 255,0.8)",
+  },
 });
 
 export const StyledTypography = styled(Typography)({
