@@ -11,7 +11,7 @@ import { Navigate, Link as RouterLink } from "react-router-dom";
 import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
 import {
   CREATE_ACCOUNT_ROUTE,
-  FORGET_PASSWORD_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
   HOME_ROUTE,
 } from "routes";
 import { PageLayout } from "components/PageLayout";
@@ -63,8 +63,8 @@ export const LoginPage = () => {
                   {...register("password")}
                 />
 
-                <Link component={RouterLink} to={FORGET_PASSWORD_ROUTE}>
-                  Forget Password?
+                <Link component={RouterLink} to={FORGOT_PASSWORD_ROUTE}>
+                  Forgot Password?
                 </Link>
               </Box>
 
