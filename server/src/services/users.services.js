@@ -6,8 +6,8 @@ import course from "../models/course.model.js";
 import courseContent from "../models/courseContent.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import generateResetPin from "../../utils/generateResetPin.js";
-import sendMail from "../../utils/sendMail.js";
+import generateResetPin from "../utils/generateResetPin.js";
+import sendMail from "../utils/sendMail.js";
 
 
 /**
