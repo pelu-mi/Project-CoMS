@@ -1,3 +1,6 @@
+/**
+ * Generate password reset code
+ */
 const generateResetPin = () => {
   const minm = 100000;
   const maxm = 999999;

@@ -1,8 +1,16 @@
+/**
+ * Import Modules
+ */
 import sgMail from "@sendgrid/mail";
 import dotenv from "dotenv";
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+/**
+ * sendForgotPasswordMail - Send Email to user containing Password reset code
+ * 
+ * @param {int} mailPayload - Password Reset Code
+ */
 const sendForgotPasswordMail = (mailPayload) => {
   const testEmail = `<html>
   <body>
