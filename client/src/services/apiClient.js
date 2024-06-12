@@ -17,10 +17,16 @@ const EXCLUDED_ENDPOINTS = [
   FORGOT_PASSWORD_API_KEY,
 ];
 
+/**
+ * Configure Axios instance
+ */
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
+/**
+ * Handle Endpoints by adding jwt token to appropriate URLs
+ */
 apiClient.interceptors.request.use((config) => {
   if (config.url && !EXCLUDED_ENDPOINTS.includes(config.url)) {
     const token = cookie.get(ACCESS_TOKEN_COOKIE_KEY);
