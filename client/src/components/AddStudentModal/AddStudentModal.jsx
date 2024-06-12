@@ -16,7 +16,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { StyledListItem, StyledRegisteredList } from "./AddStudentModal.styled";
+import {
+  StyledAlert,
+  StyledListItem,
+  StyledRegisteredList,
+} from "./AddStudentModal.styled";
 import { useAddStudentsMutation } from "services/api/courseDetail/useAddStudentsMutation";
 import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
@@ -26,6 +30,7 @@ import { useRegisteredStudentsQuery } from "services/api/courseDetail/useRegiste
 import { useStudentsQuery } from "services/api/courseDetail/useStudentsQuery";
 import { sortByKey } from "utils/sortByKey";
 import { stringAvatar } from "utils/stringAvatar";
+import { detectStudentChanges } from "utils/detectStudentChanges";
 
 /**
  * Add Student Modal
@@ -38,6 +43,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
   const { registeredStudents } = useRegisteredStudentsQuery(courseId);
   const [registeredStudentsState, setRegisteredStudentsState] =
     useState(registeredStudents);
+  const [studentChanges, setStudentChanges] = useState({});
 
   // Handle success and error when adding students
   const { mutateAsync: addStudents } = useAddStudentsMutation({
@@ -52,6 +58,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
       enqueueSnackbar(error.message, { variant: "error" });
     },
   });
+
   const handleSetStudents = async () => {
     const studentIds = registeredStudentsState.map((student) => student._id);
 
@@ -72,11 +79,19 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
     setRegisteredStudentsState(registeredStudents);
   }, [registeredStudents]);
 
+  useEffect(() => {
+    const detectChanges = detectStudentChanges(
+      registeredStudents,
+      registeredStudentsState
+    );
+    setStudentChanges(detectChanges);
+  }, [registeredStudents, registeredStudentsState]);
+
   return (
     <Modal
-      title="Students"
-      aria-labelledby="add-student-form"
-      aria-describedby="add-student-form"
+      title="Add/Remove Students"
+      aria-labelledby="set-student-form"
+      aria-describedby="set-student-form"
       {...{ ...rest, onClose: () => handleClose() }}
     >
       <Grid container mt={4} gap={3}>
@@ -155,6 +170,20 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
               )
             )}
           </StyledRegisteredList>
+
+          {studentChanges.added > 0 && (
+            <StyledAlert severity="info">
+              Adding <strong>{studentChanges.added}</strong> new student
+              {studentChanges.added !== 1 && "s"}
+            </StyledAlert>
+          )}
+          {studentChanges.removed > 0 && (
+            <StyledAlert severity="warning">
+              Removing <strong>{studentChanges.removed}</strong> previous
+              student
+              {studentChanges.removed !== 1 && "s"}
+            </StyledAlert>
+          )}
         </Grid>
         <Grid container spacing={2}>
           <Grid item sm={6} sx={{ display: { xs: "none", sm: "block" } }}>
@@ -164,8 +193,11 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
               fullWidth
               disableRipple
               onClick={handleClose}
+              sx={{ height: "100%" }}
             >
-              Cancel
+              {studentChanges.added > 0 || studentChanges.removed > 0
+                ? "Discard Changes"
+                : "Close"}
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>

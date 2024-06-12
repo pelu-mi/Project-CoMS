@@ -1,7 +1,7 @@
 /**
  * Import Modules
  */
-import {  ListItem, MenuList, styled } from "@mui/material";
+import { Alert, ListItem, MenuList, styled } from "@mui/material";
 
 // Styling for list of registered students
 export const StyledRegisteredList = styled(MenuList)(({ theme }) => ({
@@ -19,3 +19,7 @@ export const StyledListItem = styled(ListItem)(({ theme }) => ({
 
   ":hover": { background: theme.palette.primary.background },
 }));
+
+export const StyledAlert = styled(Alert)({
+  marginTop: "8px",
+});
