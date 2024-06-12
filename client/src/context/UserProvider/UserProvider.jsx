@@ -38,26 +38,26 @@ export const UserProvider = ({ children }) => {
     navigate(COURSE_LIST_ROUTE);
   };
 
-  // Handle success or error
+  // Create Account
   const { mutateAsync: createAccount, isPending: isCreateAccountPending } =
     useCreateAccountMutation({
-      onSuccess: async (response, requestPayload) => {
-        const { email, password } = requestPayload;
+      onSuccess: async (response) => {
         enqueueSnackbar(response.message, { variant: "success" });
-
-        await login({ email, password });
+        navigate(LOGIN_ROUTE);
       },
       onError: (error) => {
         enqueueSnackbar(error.message, { variant: "error" });
       },
     });
 
+  // Log in
   const { mutateAsync: login, isPending: isLoginPending } = useLoginMutation({
     onSuccess: async (response) => {
       handleUserResponse(response);
     },
   });
 
+  // Log out
   const logout = () => {
     localStorage.removeItem(ACCESS_USER_KEY);
     cookie.remove(ACCESS_TOKEN_COOKIE_KEY);
