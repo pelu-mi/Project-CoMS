@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { Route, Routes } from "react-router-dom";
 import { LoginPage } from "./LoginPage";
 import {
@@ -12,6 +15,9 @@ import { PrivateRoute } from "components/PrivateRoute";
 import { ForgotPasswordPage } from "./ForgotPasswordPage/ForgotPasswordPage";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 
+/**
+ * Setup application Routing
+ */
 export const Root = () => {
   return (
     <Routes>

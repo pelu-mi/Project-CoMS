@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { useTheme } from "@emotion/react";
 import {
   Box,
@@ -35,6 +38,9 @@ import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQ
 import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
 import { getRandomImageUrl } from "utils/getRandomImageUrl";
 
+/**
+ * Course Details Page
+ */
 export const CourseDetailPage = () => {
   const { user } = useUser();
   const theme = useTheme();

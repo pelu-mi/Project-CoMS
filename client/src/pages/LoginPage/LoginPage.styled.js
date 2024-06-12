@@ -1,6 +1,10 @@
+/**
+ * Import Modules
+ */
 import { styled } from "@mui/material";
 import { LogoIcon } from "components/Icon";
 
+// Styling for <div>
 export const StyledLayout = styled("div")({
   display: "flex",
   alignItems: "center",
@@ -9,6 +13,7 @@ export const StyledLayout = styled("div")({
   padding: "24px 0",
 });
 
+// Styling for <form>
 export const StyledForm = styled("form")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
@@ -24,6 +29,7 @@ export const StyledForm = styled("form")(({ theme }) => ({
   },
 }));
 
+// Styling for Logo
 export const StyledLogo = styled(LogoIcon)({
   width: 100,
   height: 100,

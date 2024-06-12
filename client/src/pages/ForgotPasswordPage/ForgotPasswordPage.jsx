@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Button,
   Divider,
@@ -17,6 +20,9 @@ import { HOME_ROUTE, LOGIN_ROUTE } from "routes";
 import { useUser } from "context";
 import { useForgotPasswordForm } from "./hooks/useForgotPasswordForm";
 
+/**
+ * Forgot Password Page
+ */
 export const ForgotPasswordPage = () => {
   const { user } = useUser();
 

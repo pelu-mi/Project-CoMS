@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Button,
   Divider,
@@ -14,6 +17,9 @@ import { useUser } from "context/UserProvider/UserProvider";
 import { ROLES } from "constants/role";
 import { useCreateAccountForm } from "./hooks/useCreateAccountForm";
 
+/**
+ * Create Account Page
+ */
 export const CreateAccountPage = () => {
   const { user } = useUser();
 

@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Button,
@@ -25,6 +28,9 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import { COURSE_LIST_ROUTE } from "routes";
 import { CourseModal } from "components/CourseModal";
 
+/**
+ * Course List Page
+ */
 export const CourseListPage = () => {
   const { user } = useUser();
 

@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { object, ref, string } from "yup";
 import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
@@ -5,6 +8,9 @@ import { useResetPasswordMutation } from "services/api/user/useResetPasswordMuta
 import { useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE } from "routes";
 
+/**
+ * Validation for reset password form
+ */
 const validationSchema = object({
   resetPin: string().required("OTP is required"),
   newPassword: string()
@@ -16,11 +22,17 @@ const validationSchema = object({
     .oneOf([ref("newPassword"), undefined], "Passwords must match"),
 });
 
+/**
+ * useResetPasswordForm - Custom hook to manage Reset password form
+ * 
+ * @param {string} email - Email address of user that wants to reset password
+ */
 export const useResetPasswordForm = (email) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const form = useForm({ validationSchema });
 
+  // Handle success and error
   const { mutateAsync: resetPassword } = useResetPasswordMutation({
     onSuccess: async (data) => {
       enqueueSnackbar(data.message, { variant: "success" });

@@ -1,8 +1,12 @@
+/**
+ * Import Modules
+ */
 import { ROLES } from "constants/role";
 import { useUser } from "context";
 import { useForm } from "hooks/useForm";
 import { object, ref, string } from "yup";
 
+// Validation for Create Account Form
 const validationSchema = object({
   role: string().required(),
   firstName: string().required("First Name is required"),
@@ -20,6 +24,9 @@ const validationSchema = object({
     .oneOf([ref("password"), undefined], "Passwords must match"),
 });
 
+/**
+ * useCreateAccountForm - Custom hook to manage Create Account form
+ */
 export const useCreateAccountForm = () => {
   const { createAccount } = useUser();
 

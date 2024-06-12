@@ -1,7 +1,11 @@
+/**
+ * Import Modules
+ */
 import { object, string } from "yup";
 import { useForm } from "hooks/useForm";
 import { useUser } from "context";
 
+// Validation for Login page form
 const validationSchema = object({
   email: string()
     .lowercase()
@@ -10,6 +14,9 @@ const validationSchema = object({
   password: string().required("Password is required"),
 });
 
+/**
+ * useLoginForm - Custom hook to manage Login form
+ */
 export const useLoginForm = () => {
   const { login } = useUser();
   const form = useForm({ validationSchema });

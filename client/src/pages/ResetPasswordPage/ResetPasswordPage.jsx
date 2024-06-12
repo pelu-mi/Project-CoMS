@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Button,
   Divider,
@@ -17,6 +20,9 @@ import { useLocation } from "react-router-dom";
 import { LOGIN_ROUTE } from "routes";
 import { useResetPasswordForm } from "./hooks/useResetPasswordForm";
 
+/**
+ * Reset Password Page
+ */
 export const ResetPasswordPage = () => {
   const location = useLocation();
   const email = location.state?.email;

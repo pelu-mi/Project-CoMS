@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Button,
@@ -18,6 +21,9 @@ import { PageLayout } from "components/PageLayout";
 import { useUser } from "context/UserProvider/UserProvider";
 import { useLoginForm } from "./hooks/useLoginForm";
 
+/**
+ * Login Page
+ */
 export const LoginPage = () => {
   const { user } = useUser();
 
