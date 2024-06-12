@@ -38,7 +38,7 @@ export const LoginPage = () => {
               <StyledLogo />
 
               <TextField
-                label="Email"
+                label="Email *"
                 placeholder="example@mail.com"
                 fullWidth
                 error={errors.email}
@@ -54,7 +54,7 @@ export const LoginPage = () => {
                 gap="8px"
               >
                 <TextField
-                  label="Password"
+                  label="Password *"
                   type="password"
                   placeholder="Enter your password"
                   fullWidth

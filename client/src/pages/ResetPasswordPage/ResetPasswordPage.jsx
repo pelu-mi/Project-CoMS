@@ -44,7 +44,7 @@ export const ResetPasswordPage = () => {
               </Typography>
 
               <TextField
-                label="OTP Code"
+                label="OTP Code *"
                 placeholder="Enter OTP code from your email"
                 fullWidth
                 error={errors.resetPin}
@@ -53,7 +53,7 @@ export const ResetPasswordPage = () => {
               />
 
               <TextField
-                label="New Password"
+                label="New Password *"
                 type="password"
                 placeholder="At least 8 characters"
                 fullWidth
@@ -63,7 +63,7 @@ export const ResetPasswordPage = () => {
               />
 
               <TextField
-                label="Confirm New Password"
+                label="Confirm New Password *"
                 type="password"
                 placeholder="Enter your confirm password"
                 fullWidth

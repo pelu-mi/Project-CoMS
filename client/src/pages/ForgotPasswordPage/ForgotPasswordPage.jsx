@@ -43,7 +43,7 @@ export const ForgotPasswordPage = () => {
               </Typography>
 
               <TextField
-                label="Email"
+                label="Email *"
                 placeholder="example@mail.com"
                 fullWidth
                 error={errors.email}
