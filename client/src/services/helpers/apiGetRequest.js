@@ -4,7 +4,7 @@
 import { apiRequest } from "./apiRequest";
 
 /**
- * apiGetRequest - Handle API GET requests
+ * apiGetRequest - API GET requests
  * 
  * @param {object} params - Parameters
  * @returns 
