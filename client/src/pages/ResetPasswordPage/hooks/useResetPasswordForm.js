@@ -12,7 +12,7 @@ import { LOGIN_ROUTE } from "routes";
  * Validation for reset password form
  */
 const validationSchema = object({
-  resetPin: string().required("OTP is required"),
+  resetPin: string().required("Reset code is required"),
   newPassword: string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
@@ -24,7 +24,7 @@ const validationSchema = object({
 
 /**
  * useResetPasswordForm - Custom hook to manage Reset password form
- * 
+ *
  * @param {string} email - Email address of user that wants to reset password
  */
 export const useResetPasswordForm = (email) => {

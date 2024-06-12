@@ -44,7 +44,7 @@ export const ForgotPasswordPage = () => {
 
               <Typography variant="h5">Forgot Password?</Typography>
               <Typography variant="body1" alignSelf="flex-start">
-                Enter your email address to receive an OTP to reset your
+                Enter your email address to receive a reset code to change your
                 password.
               </Typography>
 
@@ -57,7 +57,7 @@ export const ForgotPasswordPage = () => {
                 {...register("email")}
               />
 
-              <Button type="submit">Request OTP</Button>
+              <Button type="submit">Request Reset Code</Button>
 
               <Divider sx={{ width: "100%" }}>OR</Divider>
 

@@ -45,13 +45,13 @@ export const ResetPasswordPage = () => {
 
               <Typography variant="h5">Reset Password</Typography>
               <Typography variant="body1" alignSelf="flex-start">
-                Enter the OTP code you received in your email{" "}
+                Enter the reset code you received in your email{" "}
                 <strong>({email})</strong> and your new password.
               </Typography>
 
               <TextField
-                label="OTP Code *"
-                placeholder="Enter OTP code from your email"
+                label="Reset Code *"
+                placeholder="Enter reset code from your email"
                 fullWidth
                 error={errors.resetPin}
                 helperText={errors.resetPin?.message}
