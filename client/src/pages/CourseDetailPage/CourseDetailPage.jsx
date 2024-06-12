@@ -158,7 +158,8 @@ export const CourseDetailPage = () => {
           </Typography>
 
           <StyledActionContainer>
-            <TextField
+            {/* NOTE: Search for next phase */}
+            {/* <TextField
               placeholder="Search"
               sx={{ flexGrow: 1 }}
               InputProps={{
@@ -168,7 +169,7 @@ export const CourseDetailPage = () => {
                   </InputAdornment>
                 ),
               }}
-            />
+            /> */}
 
             {renderUploadContentButton()}
           </StyledActionContainer>

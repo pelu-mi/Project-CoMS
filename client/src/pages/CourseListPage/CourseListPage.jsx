@@ -142,7 +142,8 @@ export const CourseListPage = () => {
             </Typography>
 
             <StyledActionContainer>
-              <TextField
+              {/* NOTE: Search for next phase */}
+              {/* <TextField
                 placeholder="Search"
                 sx={{ flexGrow: 1 }}
                 InputProps={{
@@ -152,7 +153,7 @@ export const CourseListPage = () => {
                     </InputAdornment>
                   ),
                 }}
-              />
+              /> */}
 
               {renderCreateCourseButton()}
             </StyledActionContainer>
