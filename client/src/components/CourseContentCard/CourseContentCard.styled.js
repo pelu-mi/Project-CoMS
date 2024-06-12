@@ -9,16 +9,13 @@ import {
 } from "@mui/material";
 
 export const StyledCard = styled(Card)(({ theme }) => ({
+  height: "100%",
+  minHeight: "227px",
   borderRadius: "8px",
   border: `1px solid ${theme.palette.grey[300]}`,
+  display: "flex",
+  flexDirection: "column",
 }));
-
-// export const StyledCardActionArea = styled(CardActionArea)({
-//   height: "100%",
-//   display: "flex",
-//   flexDirection: "column",
-//   justifyContent: "flex-start",
-// });
 
 export const StyledCardMedia = styled(CardMedia)(({ theme, image }) => ({
   height: 120,
@@ -37,6 +34,7 @@ export const StyledIconWrapper = styled(Button)({
 
 export const StyledCardContent = styled(CardContent)({
   paddingBottom: "26px",
+  marginBottom: "auto"
 });
 
 export const StyledTypography = styled(Typography)({
