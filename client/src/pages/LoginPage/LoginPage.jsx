@@ -20,6 +20,7 @@ import {
 import { PageLayout } from "components/PageLayout";
 import { useUser } from "context/UserProvider/UserProvider";
 import { useLoginForm } from "./hooks/useLoginForm";
+import { PasswordTextField } from "components/PasswordTextField";
 
 /**
  * Login Page
@@ -59,9 +60,8 @@ export const LoginPage = () => {
                 alignItems="flex-end"
                 gap="8px"
               >
-                <TextField
+                <PasswordTextField
                   label="Password *"
-                  type="password"
                   placeholder="Enter your password"
                   fullWidth
                   error={errors.password}

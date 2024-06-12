@@ -16,6 +16,7 @@ import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
 import { useUser } from "context/UserProvider/UserProvider";
 import { ROLES } from "constants/role";
 import { useCreateAccountForm } from "./hooks/useCreateAccountForm";
+import { PasswordTextField } from "components/PasswordTextField";
 
 /**
  * Create Account Page
@@ -103,18 +104,16 @@ export const CreateAccountPage = () => {
                 helperText={errors.email?.message}
                 {...register("email")}
               />
-              <TextField
+              <PasswordTextField
                 label="Password *"
-                type="password"
                 placeholder="At least 8 characters"
                 fullWidth
                 error={errors.password}
                 helperText={errors.password?.message}
                 {...register("password")}
               />
-              <TextField
+              <PasswordTextField
                 label="Confirm Password *"
-                type="password"
                 placeholder="At least 8 characters"
                 fullWidth
                 error={errors.confirmPassword}

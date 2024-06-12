@@ -19,6 +19,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { LOGIN_ROUTE } from "routes";
 import { useResetPasswordForm } from "./hooks/useResetPasswordForm";
+import { PasswordTextField } from "components/PasswordTextField";
 
 /**
  * Reset Password Page
@@ -58,9 +59,8 @@ export const ResetPasswordPage = () => {
                 {...register("resetPin")}
               />
 
-              <TextField
+              <PasswordTextField
                 label="New Password *"
-                type="password"
                 placeholder="At least 8 characters"
                 fullWidth
                 error={errors.newPassword}
@@ -68,9 +68,8 @@ export const ResetPasswordPage = () => {
                 {...register("newPassword")}
               />
 
-              <TextField
+              <PasswordTextField
                 label="Confirm New Password *"
-                type="password"
                 placeholder="Enter your confirm password"
                 fullWidth
                 error={errors.confirmPassword}
