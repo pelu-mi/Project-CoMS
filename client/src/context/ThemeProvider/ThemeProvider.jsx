@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import {
   CssBaseline,
@@ -11,6 +14,9 @@ import "@fontsource/inter/400.css";
 import "@fontsource/inter/700.css";
 import theme from "./theme";
 
+/**
+ * Theme Provider
+ */
 export const ThemeProvider = ({ children }) => {
   return (
     <MuiThemeProvider theme={theme}>
@@ -33,6 +39,7 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
+// Specify types of props to be received by ThemeProvider
 ThemeProvider.propTypes = {
   children: PropTypes.node,
 };

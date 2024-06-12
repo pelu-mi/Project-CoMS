@@ -1,6 +1,10 @@
+/**
+ * Import Modules
+ */
 import { styled } from "@mui/material";
 import { MaterialDesignContent } from "notistack";
 
+// Styling for Material Design content
 export const StyledMaterialDesignContent = styled(MaterialDesignContent)(
   ({ theme }) => ({
     "&.notistack-MuiContent": {

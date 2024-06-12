@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { LOGIN_API_KEY } from "services/constants";
 import { apiRequest } from "services/helpers/apiRequest";
 
-// Create Login Request
+// Login Request
 const loginRequest = (payload) => apiRequest(LOGIN_API_KEY, "POST", payload);
 
 // Custom Hook to manage login request

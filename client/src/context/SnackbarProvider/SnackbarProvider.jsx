@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import {
   SnackbarProvider as BaseSnackbarProvider,
@@ -10,6 +13,9 @@ import { IconButton } from "@mui/material";
 import { StyledMaterialDesignContent } from "./SnackbarProvider.styled";
 import { useRef } from "react";
 
+/**
+ * Snackbar Provider
+ */
 export const SnackbarProvider = ({ children }) => {
   const ref = useRef();
   return (
@@ -37,6 +43,7 @@ export const SnackbarProvider = ({ children }) => {
   );
 };
 
+// Specify types of props to be received by SnackbarProvider
 SnackbarProvider.propTypes = {
   children: PropTypes.node,
 };
