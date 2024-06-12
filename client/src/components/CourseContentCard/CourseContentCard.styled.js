@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Button,
   Card,
@@ -8,6 +11,7 @@ import {
   styled,
 } from "@mui/material";
 
+// Styling for card
 export const StyledCard = styled(Card)(({ theme }) => ({
   height: "100%",
   minHeight: "227px",
@@ -17,12 +21,14 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   flexDirection: "column",
 }));
 
+// Styling for card media
 export const StyledCardMedia = styled(CardMedia)(({ theme, image }) => ({
   height: 120,
   width: "100%",
   background: !image ? theme.palette.primary.background : "none",
 }));
 
+// Styling for Icon wrapper
 export const StyledIconWrapper = styled(Button)({
   position: "absolute",
   top: "16px",
@@ -32,11 +38,13 @@ export const StyledIconWrapper = styled(Button)({
   background: "white",
 });
 
+// Styling for Card Content
 export const StyledCardContent = styled(CardContent)({
   paddingBottom: "26px",
   marginBottom: "auto"
 });
 
+// Styling for Typography
 export const StyledTypography = styled(Typography)({
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -45,6 +53,7 @@ export const StyledTypography = styled(Typography)({
   WebkitBoxOrient: "vertical",
 });
 
+// Styling for Link text
 export const StyledLinkText = styled(Link)(({ theme }) => ({
   textDecoration: "none",
   color: theme.palette.text.primary,
@@ -55,6 +64,7 @@ export const StyledLinkText = styled(Link)(({ theme }) => ({
   },
 }));
 
+// Styling for Button
 export const StyledButton = styled(Button)(({ theme }) => ({
   width: "100%",
   padding: "12px",

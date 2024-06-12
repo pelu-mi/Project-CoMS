@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Autocomplete,
   Avatar,
@@ -24,6 +27,9 @@ import { useStudentsQuery } from "services/api/courseDetail/useStudentsQuery";
 import { sortByKey } from "utils/sortByKey";
 import { stringAvatar } from "utils/stringAvatar";
 
+/**
+ * Add Student Modal
+ */
 export const AddStudentModal = ({ onClose, ...rest }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { courseId } = useParams();
@@ -33,6 +39,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
   const [registeredStudentsState, setRegisteredStudentsState] =
     useState(registeredStudents);
 
+  // Handle success and error when adding students
   const { mutateAsync: addStudents } = useAddStudentsMutation({
     onSuccess: async (data) => {
       enqueueSnackbar(data.message, { variant: "success" });
@@ -176,6 +183,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
   );
 };
 
+// Specify types of props to be received by AddStudentModal
 AddStudentModal.propTypes = {
   onClose: PropTypes.func,
 };

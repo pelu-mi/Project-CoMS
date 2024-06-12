@@ -1,9 +1,15 @@
+/**
+ * Import Modules
+ */
 import { Button, Grid, Typography } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 
 import { useUser } from "context";
 
+/**
+ * Profile Modal
+ */
 export const ProfileModal = ({ onClose, ...rest }) => {
   const { user } = useUser();
   const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
@@ -54,6 +60,7 @@ export const ProfileModal = ({ onClose, ...rest }) => {
   );
 };
 
+// Specify types of props to be received by ProfileModal
 ProfileModal.propTypes = {
   onClose: PropTypes.func,
 };

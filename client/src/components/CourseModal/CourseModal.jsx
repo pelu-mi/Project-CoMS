@@ -1,8 +1,14 @@
+/**
+ * Import Modules
+ */
 import { Button, Grid, TextField } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 import { useCourseForm } from "./hooks/useCourseForm";
 
+/**
+ * Course Modal
+ */
 export const CourseModal = ({ defaultValues, onClose, ...rest }) => {
   const {
     register,
@@ -63,6 +69,7 @@ export const CourseModal = ({ defaultValues, onClose, ...rest }) => {
   );
 };
 
+// Specify types of props to be received by CourseModal
 CourseModal.propTypes = {
   defaultValues: PropTypes.object,
   onClose: PropTypes.func,

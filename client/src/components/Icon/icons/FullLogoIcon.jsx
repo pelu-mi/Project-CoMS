@@ -1,5 +1,9 @@
+/**
+ * Import Modules
+ */
 import { SvgIcon } from "@mui/material";
 
+// Full Logo Icon
 export const FullLogoIcon = (props) => {
   return (
     <SvgIcon {...props}>

@@ -1,8 +1,14 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Modal } from "components/Modal";
 import { Button, Grid, Typography } from "@mui/material";
 import { useUser } from "context";
 
+/**
+ * Confirm Logout Modal
+ */
 export const ConfirmLogoutModal = ({ onClose, ...rest }) => {
   const { logout } = useUser();
   return (
@@ -41,6 +47,7 @@ export const ConfirmLogoutModal = ({ onClose, ...rest }) => {
   );
 };
 
+// Specify types of props to be received by ConfirmLogoutModal
 ConfirmLogoutModal.propTypes = {
   onClose: PropTypes.func,
 };

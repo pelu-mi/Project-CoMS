@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
 import {
@@ -15,6 +18,9 @@ import { ROLES } from "constants/role";
 import { UploadContentModal } from "components/UploadContentModal";
 import { useState } from "react";
 
+/**
+ * Course Content Card
+ */
 export const CourseContentCard = ({
   courseContentId,
   title,
@@ -76,6 +82,7 @@ export const CourseContentCard = ({
   );
 };
 
+// Specify types of props to be received by CourseContentCard
 CourseContentCard.propTypes = {
   courseContentId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

@@ -1,6 +1,10 @@
+/**
+ * Import Modules
+ */
 import { Box, styled } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
+// Styling for Content
 export const StyledContent = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "50%",
@@ -19,6 +23,7 @@ export const StyledContent = styled(Box)(({ theme }) => ({
   },
 }));
 
+// Styling for Closed Icons
 export const StyledClosedIcon = styled(CloseIcon)({
   cursor: "pointer",
   marginLeft: "auto",

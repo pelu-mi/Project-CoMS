@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { Box, Container, Toolbar } from "@mui/material";
 import { StyledAppBar, StyledNavButton, StyledNavLogo } from "./NavBar.styled";
 import { MobileMenus, UserMenus } from "./units";
@@ -6,6 +9,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { MENUS } from "constants/menus";
 import { HOME_ROUTE } from "routes";
 
+/**
+ * NavBar
+ */
 export const NavBar = () => {
   const { user } = useUser();
   const navigate = useNavigate();

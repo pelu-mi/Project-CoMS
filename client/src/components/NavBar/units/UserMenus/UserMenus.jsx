@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Avatar,
   Box,
@@ -16,6 +19,9 @@ import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
 import { stringAvatar } from "utils/stringAvatar";
 import { ProfileModal } from "components/ProfileModal";
 
+/**
+ * User Menus
+ */
 export const UserMenus = () => {
   const { user } = useUser();
 
