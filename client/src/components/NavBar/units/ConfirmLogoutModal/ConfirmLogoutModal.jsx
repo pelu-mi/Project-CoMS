@@ -6,7 +6,11 @@ import { useUser } from "context";
 export const ConfirmLogoutModal = ({ onClose, ...rest }) => {
   const { logout } = useUser();
   return (
-    <Modal {...rest} hideCloseIcon contentStyles={{ maxWidth: "400px" }}>
+    <Modal
+      {...{ ...rest, onClose }}
+      hideCloseIcon
+      contentStyles={{ maxWidth: "400px" }}
+    >
       <Typography variant="h6" mb={4}>
         Are you sure to log out?
       </Typography>
