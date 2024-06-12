@@ -1,7 +1,7 @@
 import { ROLES } from "constants/role";
 import { useUser } from "context";
 import { useForm } from "hooks/useForm";
-import { object, string } from "yup";
+import { object, ref, string } from "yup";
 
 const validationSchema = object({
   role: string().required(),
@@ -13,6 +13,10 @@ const validationSchema = object({
   password: string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
+  confirmPassword: string()
+    .required("Confirm password is required")
+    .min(8, "Password must be at least 8 characters")
+    .oneOf([ref("password"), undefined], "Passwords must match"),
 });
 
 export const useCreateAccountForm = () => {
@@ -26,11 +30,14 @@ export const useCreateAccountForm = () => {
       lastName: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const onSubmit = async (formValues) => {
-    await createAccount(formValues);
+  const onSubmit = async ({ role, firstName, lastName, email, password }) => {
+    const payload = { role, firstName, lastName, email, password };
+
+    await createAccount(payload);
   };
 
   return {

@@ -106,6 +106,15 @@ export const CreateAccountPage = () => {
                 helperText={errors.password?.message}
                 {...register("password")}
               />
+              <TextField
+                label="Confirm Password *"
+                type="password"
+                placeholder="At least 8 characters"
+                fullWidth
+                error={errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+                {...register("confirmPassword")}
+              />
 
               <Button type="submit">Create Account</Button>
 
