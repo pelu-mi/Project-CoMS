@@ -15,10 +15,17 @@ import {
 } from "pages/LoginPage/LoginPage.styled";
 import { useLocation } from "react-router-dom";
 import { LOGIN_ROUTE } from "routes";
+import { useResetPasswordForm } from "./hooks/useResetPasswordForm";
 
 export const ResetPasswordPage = () => {
   const location = useLocation();
   const email = location.state?.email;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useResetPasswordForm(email);
 
   if (!email) return <Navigate to={LOGIN_ROUTE} />;
 
@@ -27,7 +34,7 @@ export const ResetPasswordPage = () => {
       <StyledLayout>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={12} sm={7} md={5} lg={4}>
-            <StyledForm onSubmit={() => {}}>
+            <StyledForm onSubmit={handleSubmit}>
               <StyledLogo />
 
               <Typography variant="h5">Reset Password</Typography>
@@ -38,29 +45,31 @@ export const ResetPasswordPage = () => {
 
               <TextField
                 label="OTP Code"
-                placeholder="Enter your OTP code from your email"
+                placeholder="Enter OTP code from your email"
                 fullWidth
-                // error={errors.resetPin}
-                // helperText={errors.resetPin?.message}
-                // {...register("resetPin")}
+                error={errors.resetPin}
+                helperText={errors.resetPin?.message}
+                {...register("resetPin")}
               />
 
               <TextField
                 label="New Password"
-                placeholder="Enter your new password"
+                type="password"
+                placeholder="At least 8 characters"
                 fullWidth
-                // error={errors.newPassword}
-                // helperText={errors.newPassword?.message}
-                // {...register("newPassword")}
+                error={errors.newPassword}
+                helperText={errors.newPassword?.message}
+                {...register("newPassword")}
               />
 
               <TextField
                 label="Confirm New Password"
-                placeholder="Enter your confirmation password"
+                type="password"
+                placeholder="Enter your confirm password"
                 fullWidth
-                // error={errors.confirmPassword}
-                // helperText={errors.confirmPassword?.message}
-                // {...register("confirmPassword")}
+                error={errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+                {...register("confirmPassword")}
               />
 
               <Button type="submit">Change Password</Button>

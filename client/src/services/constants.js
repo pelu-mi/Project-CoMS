@@ -2,6 +2,7 @@
 export const CREATE_ACCOUNT_API_KEY = "/user/createaccount";
 export const LOGIN_API_KEY = "/user/login";
 export const FORGOT_PASSWORD_API_KEY = "/user/forgotpassword";
+export const RESET_PASSWORD_API_KEY = "/user/resetpassword";
 
 // Course Routes
 export const GET_INSTRUCTOR_COURSES_API_KEY = "/user/instructorcourselist";
