@@ -7,6 +7,7 @@ import { RESET_PASSWORD_ROUTE } from "routes";
 
 const validationSchema = object({
   email: string()
+    .lowercase()
     .email("Email must be a valid email address")
     .required("Email is required"),
 });

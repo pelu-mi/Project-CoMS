@@ -8,6 +8,7 @@ const validationSchema = object({
   firstName: string().required("First Name is required"),
   lastName: string().required("Last Name is required"),
   email: string()
+    .lowercase()
     .email("Email must be a valid email address")
     .required("Email is required"),
   password: string()
