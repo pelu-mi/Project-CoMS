@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
 import { useParams } from "react-router-dom";
@@ -129,7 +129,7 @@ export const CourseDetailPage = () => {
             <StyledTitleActionContainer>
               <Button
                 variant="outlined"
-                startIcon={<PersonAddIcon />}
+                startIcon={<GroupIcon />}
                 onClick={() => setOpenStudentModal(true)}
                 sx={{ flexGrow: "1" }}
               >
