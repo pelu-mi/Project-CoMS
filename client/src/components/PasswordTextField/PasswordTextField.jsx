@@ -1,7 +1,13 @@
+/**
+ * Import Modules
+ */
 import { forwardRef, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 
+/**
+ * Password Text Field Component
+ */
 export const PasswordTextField = forwardRef(function BasePasswordInput(props, ref) {
   const [showPassword, setShowPassword] = useState(false);
 
