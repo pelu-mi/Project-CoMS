@@ -1,5 +1,9 @@
-import {  ListItem, MenuList, styled } from "@mui/material";
+/**
+ * Import Modules
+ */
+import { Alert, ListItem, MenuList, styled } from "@mui/material";
 
+// Styling for list of registered students
 export const StyledRegisteredList = styled(MenuList)(({ theme }) => ({
   height: "40vh",
   borderRadius: "4px",
@@ -8,9 +12,15 @@ export const StyledRegisteredList = styled(MenuList)(({ theme }) => ({
   padding: "8px",
 }));
 
+// Styling for list items
 export const StyledListItem = styled(ListItem)(({ theme }) => ({
   display: "flex",
   borderRadius: "4px",
 
   ":hover": { background: theme.palette.primary.background },
 }));
+
+// Styling for alert info
+export const StyledAlert = styled(Alert)({
+  marginTop: "8px",
+});

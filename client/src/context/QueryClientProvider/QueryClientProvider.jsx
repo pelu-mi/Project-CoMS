@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import {
   QueryClient,
@@ -13,6 +16,9 @@ const queryClient = new QueryClient({
   },
 });
 
+/**
+ * Query Client Provider
+ */
 export const QueryClientProvider = ({ children }) => {
   const showDevTools =
     import.meta.env.VITE_SHOW_REACT_QUERY_DEVTOOLS === "true";
@@ -25,6 +31,7 @@ export const QueryClientProvider = ({ children }) => {
   );
 };
 
+// Specify types of props to be received by QueryClientProvider
 QueryClientProvider.propTypes = {
   children: PropTypes.node,
 };

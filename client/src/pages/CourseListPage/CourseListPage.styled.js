@@ -1,5 +1,9 @@
+/**
+ * Import Modules
+ */
 import { Box, styled } from "@mui/material";
 
+// Styling for Course Container
 export const StyledCourseContainer = styled(Box)(({ theme }) => ({
   border: `1px solid ${theme.palette.grey[200]}`,
   borderRadius: `8px`,
@@ -14,6 +18,7 @@ export const StyledCourseContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
+// Styling for Action Container
 export const StyledActionContainer = styled(Box)({
   display: "flex",
   gap: "16px",
@@ -21,6 +26,7 @@ export const StyledActionContainer = styled(Box)({
   flexWrap: "wrap-reverse",
 });
 
+// Styling for Empty Layout
 export const StyledEmptyLayout = styled(Box)({
   margin: "auto 0",
   alignSelf: "center",

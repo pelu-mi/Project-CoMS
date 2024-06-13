@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { Box, CardContent } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PropTypes from "prop-types";
@@ -14,6 +17,9 @@ import { CourseModal } from "components/CourseModal";
 import { useState } from "react";
 import { getRandomImageUrl } from "utils/getRandomImageUrl";
 
+/**
+ * Course Card
+ */
 export const CourseCard = ({
   image = "",
   courseId,
@@ -74,6 +80,7 @@ export const CourseCard = ({
   );
 };
 
+// Specify types of props to be received by CourseCard
 CourseCard.propTypes = {
   image: PropTypes.string,
   courseId: PropTypes.string,

@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
@@ -10,11 +13,15 @@ import {
 } from "services/constants";
 import { object, string } from "yup";
 
+// Validation to use for Creating Course
 const validationSchema = object({
   name: string().required("Course Name is required"),
   description: string(),
 });
 
+/**
+ * useCourseForm - Custom hook to manage Course forms
+ */
 export const useCourseForm = ({ defaultValues, onClose }) => {
   const { enqueueSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
@@ -28,6 +35,7 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
     },
   });
 
+  // Handle Success and error for Create Course
   const { mutateAsync: createCourse } = useCreateCourseMutation({
     onSuccess: async (data) => {
       enqueueSnackbar(data.message, { variant: "success" });
@@ -41,6 +49,7 @@ export const useCourseForm = ({ defaultValues, onClose }) => {
     },
   });
 
+  // Handle Success and error for Edit Course
   const { mutateAsync: editCourse } = useEditCourseMutation({
     onSuccess: async (data, payload) => {
       enqueueSnackbar(data.message, { variant: "success" });

@@ -1,4 +1,8 @@
+/**
+ * Import Modules
+ */
 import {
+  Box,
   Button,
   Divider,
   Grid,
@@ -8,11 +12,19 @@ import {
 } from "@mui/material";
 import { Navigate, Link as RouterLink } from "react-router-dom";
 import { StyledLayout, StyledForm, StyledLogo } from "./LoginPage.styled";
-import { CREATE_ACCOUNT_ROUTE, HOME_ROUTE } from "routes";
+import {
+  CREATE_ACCOUNT_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
+  HOME_ROUTE,
+} from "routes";
 import { PageLayout } from "components/PageLayout";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { useLoginForm } from "./hooks/useLoginForm";
+import { PasswordTextField } from "components/PasswordTextField";
 
+/**
+ * Login Page
+ */
 export const LoginPage = () => {
   const { user } = useUser();
 
@@ -33,7 +45,7 @@ export const LoginPage = () => {
               <StyledLogo />
 
               <TextField
-                label="Email"
+                label="Email *"
                 placeholder="example@mail.com"
                 fullWidth
                 error={errors.email}
@@ -41,15 +53,26 @@ export const LoginPage = () => {
                 {...register("email")}
               />
 
-              <TextField
-                label="Password"
-                type="password"
-                placeholder="Enter your password"
-                fullWidth
-                error={errors.password}
-                helperText={errors.password?.message}
-                {...register("password")}
-              />
+              <Box
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-end"
+                gap="8px"
+              >
+                <PasswordTextField
+                  label="Password *"
+                  placeholder="Enter your password"
+                  fullWidth
+                  error={errors.password}
+                  helperText={errors.password?.message}
+                  {...register("password")}
+                />
+
+                <Link component={RouterLink} to={FORGOT_PASSWORD_ROUTE}>
+                  Forgot Password?
+                </Link>
+              </Box>
 
               <Button type="submit">Login</Button>
 

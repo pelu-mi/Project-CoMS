@@ -1,12 +1,17 @@
+/**
+ * Import Modules
+ */
 import { AppBar, Button, styled } from "@mui/material";
 import { FullLogoIcon } from "components/Icon";
 
+// Styling for App bar
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
   borderBottom: `1px solid ${theme.palette.grey[300]}`,
   background: "white",
 }));
 
+// Styling for Navigation Logo
 export const StyledNavLogo = styled(FullLogoIcon)({
   marginRight: 24,
   cursor: "pointer",
@@ -14,6 +19,7 @@ export const StyledNavLogo = styled(FullLogoIcon)({
   width: "auto",
 });
 
+// Styling for Navigation button
 export const StyledNavButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== "active",
 })(({ theme, active = false }) => ({

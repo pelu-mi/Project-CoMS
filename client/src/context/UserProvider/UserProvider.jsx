@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 // src/contexts/UserContext.js
 import { createContext, useState, useContext } from "react";
 import PropTypes from "prop-types";
@@ -12,6 +15,9 @@ import { useLoginMutation } from "services/api/user/useLoginMutation";
 
 const UserContext = createContext();
 
+/**
+ * User Provider
+ */
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
     () => JSON.parse(localStorage.getItem(ACCESS_USER_KEY)) || null
@@ -19,6 +25,7 @@ export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+  // Handle User Response
   const handleUserResponse = (userResponse) => {
     const { firstName, lastName, email, role, accessToken } = userResponse.data;
     setUser({ firstName, lastName, email, role });
@@ -31,25 +38,26 @@ export const UserProvider = ({ children }) => {
     navigate(COURSE_LIST_ROUTE);
   };
 
+  // Create Account
   const { mutateAsync: createAccount, isPending: isCreateAccountPending } =
     useCreateAccountMutation({
-      onSuccess: async (response, requestPayload) => {
-        const { email, password } = requestPayload;
+      onSuccess: async (response) => {
         enqueueSnackbar(response.message, { variant: "success" });
-
-        await login({ email, password });
+        navigate(LOGIN_ROUTE);
       },
       onError: (error) => {
         enqueueSnackbar(error.message, { variant: "error" });
       },
     });
 
+  // Log in
   const { mutateAsync: login, isPending: isLoginPending } = useLoginMutation({
     onSuccess: async (response) => {
       handleUserResponse(response);
     },
   });
 
+  // Log out
   const logout = () => {
     localStorage.removeItem(ACCESS_USER_KEY);
     cookie.remove(ACCESS_TOKEN_COOKIE_KEY);
@@ -72,8 +80,12 @@ export const UserProvider = ({ children }) => {
   );
 };
 
+/**
+ * Export Function
+ */
 export const useUser = () => useContext(UserContext);
 
+// Specify types of props to be received by UserProvider
 UserProvider.propTypes = {
   children: PropTypes.node,
 };

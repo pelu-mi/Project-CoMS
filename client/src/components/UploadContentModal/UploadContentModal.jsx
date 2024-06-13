@@ -1,9 +1,15 @@
+/**
+ * Import Modules
+ */
 import { Button, Grid, TextField } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 import { useContentForm } from "./hooks/useContentForm";
 import { useParams } from "react-router-dom";
 
+/**
+ * Upload Content Modal
+ */
 export const UploadContentModal = ({ defaultValues, onClose, ...rest }) => {
   const {courseId} = useParams()
   const {
@@ -80,6 +86,7 @@ export const UploadContentModal = ({ defaultValues, onClose, ...rest }) => {
   );
 };
 
+// Specify types of props to be received by UploadContentModal
 UploadContentModal.propTypes = {
   defaultValues: PropTypes.object,
   onClose: PropTypes.func,

@@ -5,7 +5,7 @@ import usersServices from "../services/users.services.js";
 
 /**
  * createAccount - create a new user account
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -21,10 +21,9 @@ async function createAccount(req, res) {
   }
 }
 
-
 /**
  * login - Login to existing account
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -40,10 +39,9 @@ async function login(req, res) {
   }
 }
 
-
 /**
  * createCourse - Create a course (restricted to instructors only)
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -59,12 +57,11 @@ async function createCourse(req, res) {
   }
 }
 
-
 /**
- * getInstructorCourseList - Get the list of course created by instructors 
- * 
+ * getInstructorCourseList - Get the list of course created by instructors
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -80,10 +77,9 @@ async function getInstructorCourseLIst(req, res) {
   }
 }
 
-
 /**
  * getCourseDetails - Get details for a course
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -99,13 +95,12 @@ async function getCourseDetails(req, res) {
   }
 }
 
-
 /**
  * addCourseContent - Create a new coursecontent object and
  *                    reference it in the course object
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -121,12 +116,11 @@ async function addCourseContent(req, res) {
   }
 }
 
-
 /**
  * addStudents - Register students in a course
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -142,12 +136,11 @@ async function addStudents(req, res) {
   }
 }
 
-
 /**
  * editCourse - Edit an existing course
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -163,12 +156,11 @@ async function editCourse(req, res) {
   }
 }
 
-
 /**
  * editCourseContent - Edit an existing Course content
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -184,10 +176,9 @@ async function editCourseContent(req, res) {
   }
 }
 
-
 /**
  * getAllCourseContent - Get all course content related to specific course
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -203,12 +194,11 @@ async function getAllCourseContent(req, res) {
   }
 }
 
-
 /**
  * getAllUnregisteredStudents - Get all students not registered in a course
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -224,12 +214,11 @@ async function getAllUnregisteredStudents(req, res) {
   }
 }
 
-
 /**
  * getAllRegisteredStudents - Get all students registered in a course
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -245,12 +234,11 @@ async function getAllRegisteredStudents(req, res) {
   }
 }
 
-
 /**
  * getAllStudents - Get all students on the platform
- * 
+ *
  * Restricted to instructors only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -268,9 +256,9 @@ async function getAllStudents(req, res) {
 
 /**
  * getStudentCourseList - Get all courses a student is registered in
- * 
+ *
  * Restricted to students only
- * 
+ *
  * @param {object} req - Request Object
  * @param {object} res - Response Object
  */
@@ -286,6 +274,29 @@ async function getStudentCourseList(req, res) {
   }
 }
 
+async function forgotPassword(req, res) {
+  try {
+    const response = await usersServices.forgotPassword(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to send mail",
+      status: "failure",
+    });
+  }
+}
+
+async function resetPassword(req, res) {
+  try {
+    const response = await usersServices.resetPassword(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to reset password",
+      status: "failure",
+    });
+  }
+}
 
 /**
  * Export all fuctions
@@ -305,4 +316,6 @@ export default {
   getAllRegisteredStudents,
   getAllStudents,
   getStudentCourseList,
+  forgotPassword,
+  resetPassword,
 };

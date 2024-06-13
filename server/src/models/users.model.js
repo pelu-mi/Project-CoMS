@@ -30,6 +30,9 @@ const userSchema = mongoose.Schema(
       enum: ["student", "instructor"],
       required: true,
     },
+    resetPin: {
+      type: String,
+    },
   },
 
   {

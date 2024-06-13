@@ -1,5 +1,11 @@
+/**
+ * Import Modules
+ */
 import { createTheme, responsiveFontSizes } from "@mui/material";
 
+/**
+ * Theme 1
+ */
 const theme = createTheme({
   palette: {
     primary: {
