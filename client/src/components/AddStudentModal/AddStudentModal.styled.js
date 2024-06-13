@@ -20,6 +20,7 @@ export const StyledListItem = styled(ListItem)(({ theme }) => ({
   ":hover": { background: theme.palette.primary.background },
 }));
 
+// Styling for alert info
 export const StyledAlert = styled(Alert)({
   marginTop: "8px",
 });
