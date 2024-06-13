@@ -13,7 +13,7 @@ import { Navigate, Link as RouterLink } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes";
 import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { ROLES } from "constants/role";
 import { useCreateAccountForm } from "./hooks/useCreateAccountForm";
 import { PasswordTextField } from "components/PasswordTextField";

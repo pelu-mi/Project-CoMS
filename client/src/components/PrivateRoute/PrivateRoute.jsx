@@ -1,7 +1,7 @@
 /**
  * Import Modules
  */
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 

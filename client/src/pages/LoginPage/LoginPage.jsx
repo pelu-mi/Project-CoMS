@@ -18,7 +18,7 @@ import {
   HOME_ROUTE,
 } from "routes";
 import { PageLayout } from "components/PageLayout";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { useLoginForm } from "./hooks/useLoginForm";
 import { PasswordTextField } from "components/PasswordTextField";
 

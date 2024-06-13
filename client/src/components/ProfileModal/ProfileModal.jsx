@@ -4,7 +4,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
-
 import { useUser } from "context";
 
 /**

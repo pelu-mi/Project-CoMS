@@ -5,19 +5,19 @@ import {
   Box,
   Button,
   Grid,
-  InputAdornment,
-  TextField,
+  // InputAdornment,
+  // TextField,
   Typography,
   useTheme,
 } from "@mui/material";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import {
   StyledActionContainer,
   StyledCourseContainer,
   StyledEmptyLayout,
 } from "./CourseListPage.styled";
 import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { CourseCard } from "components/CourseCard";
 import { useNavigate } from "react-router-dom";

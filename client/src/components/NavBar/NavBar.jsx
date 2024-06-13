@@ -4,7 +4,7 @@
 import { Box, Container, Toolbar } from "@mui/material";
 import { StyledAppBar, StyledNavButton, StyledNavLogo } from "./NavBar.styled";
 import { MobileMenus, UserMenus } from "./units";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MENUS } from "constants/menus";
 import { HOME_ROUTE } from "routes";

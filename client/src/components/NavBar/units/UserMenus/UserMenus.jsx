@@ -12,7 +12,7 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
