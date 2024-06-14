@@ -28,7 +28,7 @@ export const StyledActionContainer = styled(Box)({
 
 // Styling for Empty Layout
 export const StyledEmptyLayout = styled(Box)({
-  margin: "auto 0",
+  margin: "auto",
   alignSelf: "center",
   display: "flex",
   flexDirection: "column",

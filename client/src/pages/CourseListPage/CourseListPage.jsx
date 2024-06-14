@@ -27,6 +27,20 @@ import { Loader } from "components/Loader";
 import InboxIcon from "@mui/icons-material/Inbox";
 import { COURSE_LIST_ROUTE } from "routes";
 import { CourseModal } from "components/CourseModal";
+import ReactJoyride, { STATUS } from "react-joyride";
+
+const steps = [
+  {
+    target: ".create-course-step",
+    content: "You can create course over here.",
+    disableBeacon: true,
+  },
+  {
+    target: ".course-list-step",
+    content: "Find your course list here.",
+    disableBeacon: true,
+  },
+];
 
 /**
  * Course List Page
@@ -38,6 +52,9 @@ export const CourseListPage = () => {
   const theme = useTheme();
 
   const [openCreateCourseModal, setOpenCreateCourseModal] = useState(false);
+  const [tutorialPassed, setTutorialPassed] = useState(() => {
+    return localStorage.getItem("courseListTutorialPassed");
+  });
 
   // NOTE: Pagination for next phase
   // const [page, setPage] = useState(1);
@@ -68,6 +85,7 @@ export const CourseListPage = () => {
     if (user.role === ROLES.instructor)
       return (
         <Button
+          className="create-course-step"
           startIcon={<AddIcon />}
           sx={{ minHeight: 56, flexGrow: 1 }}
           onClick={() => setOpenCreateCourseModal(true)}
@@ -88,7 +106,7 @@ export const CourseListPage = () => {
 
     if (courses.length) {
       return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} height="fit-content">
           {courses.map((course, index) => (
             <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
               <CourseCard
@@ -124,6 +142,28 @@ export const CourseListPage = () => {
 
   return (
     <>
+      {/* {!tutorialPassed && ( */}
+        <ReactJoyride
+          callback={({ status }) => {
+            if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+              // Call api to set the completion flag
+              window.localStorage.setItem("courseListTutorialPassed", true);
+              setTutorialPassed(true);
+            }
+          }}
+          showProgress
+          showSkipButton
+          // spotlightClicks
+          continuous
+          styles={{
+            options: {
+              zIndex: 1100,
+            },
+          }}
+          steps={steps}
+        />
+      {/* )} */}
+
       <Box pb={4}>
         <Typography variant="h4" marginY={4}>
           Hello{" "}
@@ -165,7 +205,9 @@ export const CourseListPage = () => {
             </StyledActionContainer>
           </Box>
 
-          {renderCourses()}
+          <Box display="flex" flexGrow={1} className="course-list-step">
+            {renderCourses()}
+          </Box>
 
           {/* NOTE: Pagination for next phase */}
           {/* <Box display="flex" justifyContent="flex-end" mt={2}>
