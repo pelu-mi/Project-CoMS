@@ -5,8 +5,8 @@ import {
   Box,
   Button,
   Grid,
-  // InputAdornment,
-  // TextField,
+  InputAdornment,
+  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -17,7 +17,7 @@ import {
   StyledEmptyLayout,
 } from "./CourseListPage.styled";
 import AddIcon from "@mui/icons-material/Add";
-// import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { CourseCard } from "components/CourseCard";
 import { useNavigate } from "react-router-dom";
@@ -148,8 +148,7 @@ export const CourseListPage = () => {
             </Typography>
 
             <StyledActionContainer>
-              {/* NOTE: Search for next phase */}
-              {/* <TextField
+              <TextField
                 placeholder="Search"
                 sx={{ flexGrow: 1 }}
                 InputProps={{
@@ -159,7 +158,8 @@ export const CourseListPage = () => {
                     </InputAdornment>
                   ),
                 }}
-              /> */}
+                disabled={courses.length === 0}
+              />
 
               {renderCreateCourseButton()}
             </StyledActionContainer>

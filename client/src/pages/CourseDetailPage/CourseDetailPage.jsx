@@ -6,14 +6,14 @@ import {
   Box,
   Button,
   Grid,
-  // InputAdornment,
-  // TextField,
+  InputAdornment,
+  TextField,
   Typography,
 } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
-// import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "@mui/icons-material/Search";
 import { useParams } from "react-router-dom";
 import { StyledActionContainer } from "pages/CourseListPage/CourseListPage.styled";
 import { ROLES } from "constants/role";
@@ -164,8 +164,7 @@ export const CourseDetailPage = () => {
           </Typography>
 
           <StyledActionContainer>
-            {/* NOTE: Search for next phase */}
-            {/* <TextField
+            <TextField
               placeholder="Search"
               sx={{ flexGrow: 1 }}
               InputProps={{
@@ -175,7 +174,8 @@ export const CourseDetailPage = () => {
                   </InputAdornment>
                 ),
               }}
-            /> */}
+              disabled={contents.length === 0}
+            />
 
             {renderUploadContentButton()}
           </StyledActionContainer>

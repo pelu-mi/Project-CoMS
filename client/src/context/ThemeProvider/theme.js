@@ -64,6 +64,15 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "& .Mui-disabled": {
+            background: theme.palette.grey[100],
+          },
+        }),
+      },
+    },
     MuiButton: {
       styleOverrides: {
         contained: {
