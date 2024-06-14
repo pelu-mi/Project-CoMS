@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useUser } from "context";
@@ -34,6 +35,11 @@ export const UserMenus = () => {
       title: "Profile",
       icon: <AccountCircleIcon color="primary" />,
       action: () => setShowProfileModal(true),
+    },
+    {
+      title: "Contact Support",
+      icon: <HelpIcon color="info" />,
+      action: () => window.open("mailto:pelumifadolapo7@gmail.com"),
     },
     {
       title: "Logout",
