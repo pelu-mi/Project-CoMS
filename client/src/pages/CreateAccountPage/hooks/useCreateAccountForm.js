@@ -1,20 +1,32 @@
+/**
+ * Import Modules
+ */
 import { ROLES } from "constants/role";
 import { useUser } from "context";
 import { useForm } from "hooks/useForm";
-import { object, string } from "yup";
+import { object, ref, string } from "yup";
 
+// Validation for Create Account Form
 const validationSchema = object({
   role: string().required(),
   firstName: string().required("First Name is required"),
   lastName: string().required("Last Name is required"),
   email: string()
+    .lowercase()
     .email("Email must be a valid email address")
     .required("Email is required"),
   password: string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
+  confirmPassword: string()
+    .required("Confirm password is required")
+    .min(8, "Password must be at least 8 characters")
+    .oneOf([ref("password"), undefined], "Passwords must match"),
 });
 
+/**
+ * useCreateAccountForm - Custom hook to manage Create Account form
+ */
 export const useCreateAccountForm = () => {
   const { createAccount } = useUser();
 
@@ -26,11 +38,14 @@ export const useCreateAccountForm = () => {
       lastName: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const onSubmit = async (formValues) => {
-    await createAccount(formValues);
+  const onSubmit = async ({ role, firstName, lastName, email, password }) => {
+    const payload = { role, firstName, lastName, email, password };
+
+    await createAccount(payload);
   };
 
   return {

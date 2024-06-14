@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Avatar,
   Box,
@@ -9,23 +12,28 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
 import { stringAvatar } from "utils/stringAvatar";
+import { ProfileModal } from "components/ProfileModal";
 
+/**
+ * User Menus
+ */
 export const UserMenus = () => {
   const { user } = useUser();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const settings = [
     {
       title: "Profile",
       icon: <AccountCircleIcon color="primary" />,
-      action: () => {},
+      action: () => setShowProfileModal(true),
     },
     {
       title: "Logout",
@@ -96,6 +104,10 @@ export const UserMenus = () => {
       <ConfirmLogoutModal
         open={showConfirmLogoutModal}
         onClose={() => setShowConfirmLogoutModal(false)}
+      />
+      <ProfileModal
+        open={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
       />
     </>
   );

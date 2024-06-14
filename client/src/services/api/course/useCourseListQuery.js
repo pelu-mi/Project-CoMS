@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { useQuery } from "@tanstack/react-query";
 import { ROLES } from "constants/role";
 import {
@@ -6,6 +9,13 @@ import {
 } from "services/constants";
 import { apiGetRequest } from "services/helpers/apiGetRequest";
 
+/**
+ * useCourseListQuery - Custom Hook to fetch a course list based on user type
+ *                      and manage the state
+ * 
+ * @param {Object} options - Additional config options
+ * @param {Object} role - Role of the user 
+ */
 export const useCourseListQuery = (role, options) => {
   const apiKey =
     role === ROLES.instructor

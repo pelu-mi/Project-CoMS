@@ -1,5 +1,9 @@
+/**
+ * Import Modules
+ */
 import { Box, CardMedia, Typography, styled } from "@mui/material";
 
+// Styling for Banner
 export const StyledBanner = styled(CardMedia)(({ theme, image }) => ({
   margin: "16px 0",
   width: "100%",
@@ -8,6 +12,7 @@ export const StyledBanner = styled(CardMedia)(({ theme, image }) => ({
   background: !image ? theme.palette.primary.background : "none",
 }));
 
+// Styling for Title Container
 export const StyledTitleContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
@@ -17,11 +22,13 @@ export const StyledTitleContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
+// Styling for Typography Wrapper
 export const StyledTypographyWrapper = styled(Box)({
   flexBasis: "60%",
   flexGrow: "100",
 });
 
+// Styling for Typography
 export const StyledTypography = styled(Typography)({
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -32,6 +39,7 @@ export const StyledTypography = styled(Typography)({
   wordBreak: "break-word",
 });
 
+// Styling for Title Action container
 export const StyledTitleActionContainer = styled(Box)({
   display: "flex",
   flexWrap: "wrap-reverse",
@@ -40,6 +48,7 @@ export const StyledTitleActionContainer = styled(Box)({
   gap: "16px",
 });
 
+// Styling for Empty Layout
 export const StyledEmptyLayout = styled(Box)({
   margin: "auto 0",
   alignSelf: "center",
@@ -49,6 +58,7 @@ export const StyledEmptyLayout = styled(Box)({
   gap: "16px",
 });
 
+// Styling for Content Container
 export const StyledContentContainer = styled(Box)({
   minHeight: "40vh",
   display: "flex",

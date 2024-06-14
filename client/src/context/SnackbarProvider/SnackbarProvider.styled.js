@@ -1,6 +1,10 @@
+/**
+ * Import Modules
+ */
 import { styled } from "@mui/material";
 import { MaterialDesignContent } from "notistack";
 
+// Styling for Material Design content
 export const StyledMaterialDesignContent = styled(MaterialDesignContent)(
   ({ theme }) => ({
     "&.notistack-MuiContent": {
@@ -8,6 +12,7 @@ export const StyledMaterialDesignContent = styled(MaterialDesignContent)(
       fontWeight: 500,
       boxShadow: theme.customVariables.boxShadow,
       borderRadius: "8px",
+      flexWrap: "nowrap",
     },
     "&.notistack-MuiContent-success": {
       background: theme.palette.success.background,

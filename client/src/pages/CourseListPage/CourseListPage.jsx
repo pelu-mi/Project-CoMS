@@ -1,20 +1,23 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Button,
   Grid,
-  InputAdornment,
-  TextField,
+  // InputAdornment,
+  // TextField,
   Typography,
   useTheme,
 } from "@mui/material";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import {
   StyledActionContainer,
   StyledCourseContainer,
   StyledEmptyLayout,
 } from "./CourseListPage.styled";
 import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import { CourseCard } from "components/CourseCard";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +28,9 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import { COURSE_LIST_ROUTE } from "routes";
 import { CourseModal } from "components/CourseModal";
 
+/**
+ * Course List Page
+ */
 export const CourseListPage = () => {
   const { user } = useUser();
 
@@ -142,7 +148,8 @@ export const CourseListPage = () => {
             </Typography>
 
             <StyledActionContainer>
-              <TextField
+              {/* NOTE: Search for next phase */}
+              {/* <TextField
                 placeholder="Search"
                 sx={{ flexGrow: 1 }}
                 InputProps={{
@@ -152,7 +159,7 @@ export const CourseListPage = () => {
                     </InputAdornment>
                   ),
                 }}
-              />
+              /> */}
 
               {renderCreateCourseButton()}
             </StyledActionContainer>

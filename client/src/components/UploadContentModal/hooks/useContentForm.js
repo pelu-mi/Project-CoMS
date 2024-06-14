@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
@@ -7,12 +10,16 @@ import { useEditCourseContentMutation } from "services/api/courseDetail/useEditC
 import { GET_COURSE_CONTENT_API_KEY } from "services/constants";
 import { object, string } from "yup";
 
+// Validation for Upload course content form
 const validationSchema = object({
   title: string().required("Content title is required"),
   description: string().required("Content Description is required"),
   link: string().url("Link must be a valid URL").required("Link is required"),
 });
 
+/**
+ * useContentForm - Custom hook to manage Course Content forms
+ */
 export const useContentForm = ({ courseId, defaultValues, onClose }) => {
   const { enqueueSnackbar } = useSnackbar();
   const queryClient = useQueryClient();
@@ -27,6 +34,7 @@ export const useContentForm = ({ courseId, defaultValues, onClose }) => {
     },
   });
 
+  // Handle success and errors for add course content
   const { mutateAsync: addContent } = useAddCourseContentMutation({
     onSuccess: async (data, { course: courseId }) => {
       enqueueSnackbar(data.message, { variant: "success" });
@@ -41,6 +49,7 @@ export const useContentForm = ({ courseId, defaultValues, onClose }) => {
     },
   });
 
+  // Handle success and errors for edit course content
   const { mutateAsync: editContent } = useEditCourseContentMutation({
     onSuccess: async (data, { courseId }) => {
       enqueueSnackbar(data.message, { variant: "success" });

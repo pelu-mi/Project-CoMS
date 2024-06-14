@@ -1,6 +1,12 @@
+/**
+ * Import Modules
+ */
 import { Box, CircularProgress, LinearProgress } from "@mui/material";
 import PropTypes from "prop-types";
 
+/**
+ * Loader
+ */
 export const Loader = ({ type = "circular", sx }) => (
   <Box
     sx={{
@@ -20,6 +26,7 @@ export const Loader = ({ type = "circular", sx }) => (
   </Box>
 );
 
+// Specify types of props to be received by the Loader
 Loader.propTypes = {
   type: PropTypes.string,
   sx: PropTypes.object,

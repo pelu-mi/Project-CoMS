@@ -1,16 +1,19 @@
+/**
+ * Import Modules
+ */
 import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
   Grid,
-  InputAdornment,
-  TextField,
+  // InputAdornment,
+  // TextField,
   Typography,
 } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import { useParams } from "react-router-dom";
 import { StyledActionContainer } from "pages/CourseListPage/CourseListPage.styled";
 import { ROLES } from "constants/role";
@@ -35,6 +38,9 @@ import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQ
 import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
 import { getRandomImageUrl } from "utils/getRandomImageUrl";
 
+/**
+ * Course Details Page
+ */
 export const CourseDetailPage = () => {
   const { user } = useUser();
   const theme = useTheme();
@@ -123,7 +129,7 @@ export const CourseDetailPage = () => {
             <StyledTitleActionContainer>
               <Button
                 variant="outlined"
-                startIcon={<PersonAddIcon />}
+                startIcon={<GroupIcon />}
                 onClick={() => setOpenStudentModal(true)}
                 sx={{ flexGrow: "1" }}
               >
@@ -158,7 +164,8 @@ export const CourseDetailPage = () => {
           </Typography>
 
           <StyledActionContainer>
-            <TextField
+            {/* NOTE: Search for next phase */}
+            {/* <TextField
               placeholder="Search"
               sx={{ flexGrow: 1 }}
               InputProps={{
@@ -168,7 +175,7 @@ export const CourseDetailPage = () => {
                   </InputAdornment>
                 ),
               }}
-            />
+            /> */}
 
             {renderUploadContentButton()}
           </StyledActionContainer>

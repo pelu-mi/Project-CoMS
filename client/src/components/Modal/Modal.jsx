@@ -1,8 +1,14 @@
+/**
+ * Import Modules
+ */
 import { Box, Modal as MuiModal, Typography } from "@mui/material";
 
 import { StyledClosedIcon, StyledContent } from "./Modal.styled";
 import PropTypes from "prop-types";
 
+/**
+ * Modal definition
+ */
 export const Modal = ({
   children,
   title,
@@ -33,6 +39,7 @@ export const Modal = ({
   );
 };
 
+// Specify types of props to be received by the Modal
 Modal.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,

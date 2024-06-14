@@ -1,8 +1,14 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 
 import { NavBar } from "components/NavBar";
 import { Container } from "@mui/material";
 
+/**
+ * Page Layout
+ */
 export const PageLayout = ({ children }) => {
   return (
     <>
@@ -14,6 +20,7 @@ export const PageLayout = ({ children }) => {
   );
 };
 
+// Specify types of props to be received by PageLayout
 PageLayout.propTypes = {
   children: PropTypes.node,
 };

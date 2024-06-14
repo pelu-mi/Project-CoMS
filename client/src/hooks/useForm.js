@@ -1,7 +1,11 @@
+/**
+ * Import Modules
+ */
 import { useForm as useBaseForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { omit } from "ramda";
 
+// Custom hook to serve as wrapper over UseBaseForm
 export const useForm = (options) => {
   return useBaseForm({
     mode: "onTouched",

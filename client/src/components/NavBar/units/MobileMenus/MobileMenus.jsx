@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Drawer,
@@ -14,6 +17,9 @@ import { MENUS } from "constants/menus";
 import { HOME_ROUTE } from "routes";
 import { StyledIconButton, StyledListItemButton } from "./MobileMenus.styled";
 
+/**
+ * Mobile Menus
+ */
 export const MobileMenus = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();

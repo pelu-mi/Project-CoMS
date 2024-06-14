@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Button,
   Divider,
@@ -10,10 +13,14 @@ import { Navigate, Link as RouterLink } from "react-router-dom";
 import { PageLayout } from "components/PageLayout";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes";
 import { StyledLayout, StyledForm } from "pages/LoginPage/LoginPage.styled";
-import { useUser } from "context/UserProvider/UserProvider";
+import { useUser } from "context";
 import { ROLES } from "constants/role";
 import { useCreateAccountForm } from "./hooks/useCreateAccountForm";
+import { PasswordTextField } from "components/PasswordTextField";
 
+/**
+ * Create Account Page
+ */
 export const CreateAccountPage = () => {
   const { user } = useUser();
 
@@ -97,14 +104,21 @@ export const CreateAccountPage = () => {
                 helperText={errors.email?.message}
                 {...register("email")}
               />
-              <TextField
+              <PasswordTextField
                 label="Password *"
-                type="password"
                 placeholder="At least 8 characters"
                 fullWidth
                 error={errors.password}
                 helperText={errors.password?.message}
                 {...register("password")}
+              />
+              <PasswordTextField
+                label="Confirm Password *"
+                placeholder="At least 8 characters"
+                fullWidth
+                error={errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+                {...register("confirmPassword")}
               />
 
               <Button type="submit">Create Account</Button>

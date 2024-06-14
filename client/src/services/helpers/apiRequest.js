@@ -1,7 +1,19 @@
+/**
+ * Import Modules
+ */
 import axios from "axios";
 import { apiClient } from "services/apiClient";
 import { handleApiError } from "./handleApiError";
 
+/**
+ * apiRequest - Create an API request
+ * 
+ * @param {string} url - URL
+ * @param {string} method - Http method
+ * @param {Object} data - Request Payload
+ * @param {Object} options - Additional config options
+ * @returns 
+ */
 export const apiRequest = async (
   url,
   method = "GET",
