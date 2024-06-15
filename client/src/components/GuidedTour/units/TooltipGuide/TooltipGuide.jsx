@@ -21,7 +21,6 @@ export const TooltipGuide = ({
   skipProps,
   tooltipProps,
 }) => {
-  console.log("step", step);
   return (
     <StyledPaper {...tooltipProps}>
       {step.showProgress && (
