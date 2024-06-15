@@ -5,39 +5,46 @@ import { GuidedTour } from "components/GuidedTour";
 import { GuidedButton } from "components/GuidedButton";
 import { ROLES } from "constants/role";
 
-export const CourseListTour = (props) => {
+export const CourseDetailTour = (props) => {
   const { user } = useUser();
   const [showTutorial, setShowTutorial] = useState(false);
   const instructorSteps = [
     {
-      target: ".create-course-step",
+      target: ".manage-student-step",
       title: (
         <>
-          Welcome {user.firstName}! 👋
-          <br /> Let&apos;s create a new course.
+          Hello {user.firstName}! 😃
+          <br /> Let&apos;s see your student list.
         </>
       ),
       content:
-        "You can create your courses by clicking the 'Create Course' button and filling out the form over here.",
+        "You can register and unregister your students to the course here.",
       disableBeacon: true,
     },
     {
-      target: ".course-list-step",
-      title: `Finding your created courses!`,
-      content: "You can check all your courses after you create one here.",
+      target: ".upload-content-step",
+      title: `Posting a new contents!`,
+      content: "You can upload your contents for your students over here.",
+      disableBeacon: true,
+    },
+    {
+      target: ".content-list-step",
+      title: `Finding your posted contents!`,
+      content: "You can see all your course contents here.",
       disableBeacon: true,
     },
   ];
   const studentSteps = [
     {
-      target: ".course-list-step",
+      target: ".content-list-step",
       title: (
         <>
-          Welcome {user.firstName}! 👋
-          <br /> Let&apos;s find your enrolled courses.
+          Hello {user.firstName}! 😃
+          <br /> Let&apos;s see your course contents.
         </>
       ),
-      content: "You can see all your enrolled courses over here.",
+      content:
+        "You can find all your course materials that are posted by the instructor here.",
       disableBeacon: true,
     },
   ];
@@ -53,7 +60,7 @@ export const CourseListTour = (props) => {
           }
         }}
         steps={user.role === ROLES.instructor ? instructorSteps : studentSteps}
-        run={showTutorial}
+        run={user.isCompleteCourseDetailsTour || showTutorial}
       />
 
       <GuidedButton onClick={() => setShowTutorial(true)} />

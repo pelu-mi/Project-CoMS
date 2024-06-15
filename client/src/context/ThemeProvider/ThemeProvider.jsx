@@ -25,7 +25,7 @@ export const ThemeProvider = ({ children }) => {
           html,
           body,
           #root {
-            height: 100%;
+            min-height: 100%;
           }
 
           body {

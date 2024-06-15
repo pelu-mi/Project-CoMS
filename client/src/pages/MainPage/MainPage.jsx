@@ -13,7 +13,7 @@ import { COURSE_LIST_ROUTE } from "routes";
  */
 export const MainPage = () => {
   return (
-    <PageLayout>
+    <PageLayout disableFullHeight>
       <Routes>
         <Route path="/*" element={<CourseListPage />} />
         <Route

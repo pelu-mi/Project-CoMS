@@ -9,6 +9,7 @@ export const GuidedTour = (props) => {
       spotlightClicks
       continuous
       disableOverlayClose
+      locale={{ last: "Done" }}
       styles={{
         options: {
           zIndex: 1100,

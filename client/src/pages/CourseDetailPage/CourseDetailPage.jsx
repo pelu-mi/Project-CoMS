@@ -37,6 +37,7 @@ import { CourseModal } from "components/CourseModal";
 import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQuery";
 import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
 import { getRandomImageUrl } from "utils/getRandomImageUrl";
+import { CourseDetailTour } from "./components/CourseDetailTour";
 
 /**
  * Course Details Page
@@ -58,6 +59,7 @@ export const CourseDetailPage = () => {
     if (user.role === ROLES.instructor)
       return (
         <Button
+          className="upload-content-step"
           startIcon={<FileUploadIcon />}
           sx={{ minHeight: 56, flexGrow: 1 }}
           onClick={() => setOpenUploadModal(true)}
@@ -128,6 +130,7 @@ export const CourseDetailPage = () => {
           {user.role === ROLES.instructor && (
             <StyledTitleActionContainer>
               <Button
+                className="manage-student-step"
                 variant="outlined"
                 startIcon={<GroupIcon />}
                 onClick={() => setOpenStudentModal(true)}
@@ -181,7 +184,9 @@ export const CourseDetailPage = () => {
           </StyledActionContainer>
         </Box>
 
-        <StyledContentContainer>{renderContents()}</StyledContentContainer>
+        <StyledContentContainer className="content-list-step">
+          {renderContents()}
+        </StyledContentContainer>
       </Box>
 
       <AddStudentModal
@@ -203,6 +208,8 @@ export const CourseDetailPage = () => {
           }}
         />
       )}
+
+      <CourseDetailTour />
     </>
   );
 };

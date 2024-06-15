@@ -73,7 +73,7 @@ export const TooltipGuide = ({
               {...primaryProps}
               endIcon={isLastStep ? <DoneIcon /> : <ArrowForwardIcon />}
             >
-              {isLastStep ? "Done" : step.locale.next}
+              {isLastStep ? step.locale.last : step.locale.next}
             </Button>
           )}
           {!continuous && (
