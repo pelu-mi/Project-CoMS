@@ -3,7 +3,6 @@
  */
 import mongoose from "mongoose";
 
-
 /**
  * Define user model for database
  */
@@ -32,6 +31,16 @@ const userSchema = mongoose.Schema(
     },
     resetPin: {
       type: String,
+    },
+    isCompleteCourseListTour: {
+      type: String,
+      enum: ["true", "false"],
+      default: "true",
+    },
+    isCompleteCourseDetailsTour: {
+      type: String,
+      enum: ["true", "false"],
+      default: "true",
     },
   },
 

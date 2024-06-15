@@ -8,11 +8,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import generateResetPin from "../utils/generateResetPin.js";
 import sendMail from "../utils/sendMail.js";
-
+import usersModel from "../models/users.model.js";
 
 /**
  * createAccount - Create new user account
- * 
+ *
  * @param {Object} payload - Data to use for creating a new account
  * @returns Success or failure status
  */
@@ -52,10 +52,9 @@ async function createAccount(payload) {
   };
 }
 
-
 /**
  * login - Login to existing user account
- * 
+ *
  * @param {Object} payload - Data to use for login to an existing account
  * @returns Success or failure status
  */
@@ -100,12 +99,11 @@ async function login(payload) {
   };
 }
 
-
 /**
  * createCourse - Create a new course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} user - User trying to create a new course
  * @param {Object} payload - Data to use to create new course
  * @returns Success or Failure status
@@ -132,12 +130,11 @@ async function createCourse(user, payload) {
   };
 }
 
-
 /**
  * getInstructorCourseList - Get list of courses created by the instructor
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} user - instructor trying to get the course list
  * @returns Success or Failure status
  */
@@ -151,10 +148,9 @@ async function getInstructorCourseLIst(user) {
   };
 }
 
-
 /**
  * getCourseDetails - Get details of course
- * 
+ *
  * @param {Object} payload - Details of course to be retrieved
  * @returns Success or Failure status
  */
@@ -169,10 +165,9 @@ async function getCourseDetails(payload) {
   };
 }
 
-
 /**
  * getAllCourseContent - Get all course content of course
- * 
+ *
  * @param {Object} payload - Details of course whose content is to be retrieved
  * @returns Success or Failure status
  */
@@ -195,12 +190,11 @@ async function getAllCourseContent(payload) {
   };
 }
 
-
 /**
  * addCourseContent - Add new course content to course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of content to be added
  * @returns Success or Failure status
  */
@@ -215,12 +209,11 @@ async function addCourseContent(payload) {
   };
 }
 
-
 /**
  * addStudents - Register students to course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of students to be added
  * @returns Success or Failure status
  */
@@ -243,12 +236,11 @@ async function addStudents(payload) {
   };
 }
 
-
 /**
  * editCourse - Edit existing course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details to be set
  * @returns Success or Failure status
  */
@@ -277,12 +269,11 @@ async function editCourse(payload) {
   };
 }
 
-
 /**
  * editCourseContent - Edit existing course content
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of content to be set
  * @returns Success or Failure status
  */
@@ -311,12 +302,11 @@ async function editCourseContent(payload) {
   };
 }
 
-
 /**
  * getAllUnregisteredStudents - Get list of unregistered students in a course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of course
  * @returns Success or Failure status
  */
@@ -347,12 +337,11 @@ async function getAllUnregisteredStudents(payload) {
   };
 }
 
-
 /**
  * getAllRegisteredStudents - Get list of registered students in a course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of course
  * @returns Success or Failure status
  */
@@ -384,12 +373,11 @@ async function getAllRegisteredStudents(payload) {
   };
 }
 
-
 /**
  * getAllStudents - Get list of all students on the platform
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @returns Success or Failure status
  */
 async function getAllStudents() {
@@ -403,12 +391,11 @@ async function getAllStudents() {
   };
 }
 
-
 /**
  * getStudentCourseList - Get list of courses the student is registered in
- * 
+ *
  * Restricted to students
- * 
+ *
  * @param {Object} use - Details of student
  * @returns Success or Failure status
  */
@@ -488,6 +475,31 @@ const resetPassword = async (payload) => {
     status: updatedUser,
   };
 };
+
+async function updateUser(payload) {
+  const updatedUser = await users.findByIdAndUpdate(
+    payload._id,
+    { $set: payload }, // Update the fields provided in the payload
+    { new: true, useFindAndModify: false }
+  );
+
+  // Check if the course was found and updated
+  if (!updatedUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "User updated successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedUser,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -505,4 +517,5 @@ export default {
   getStudentCourseList,
   forgotPassword,
   resetPassword,
+  updateUser,
 };

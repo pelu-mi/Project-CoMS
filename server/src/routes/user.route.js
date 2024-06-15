@@ -94,6 +94,7 @@ router.post("/forgotpassword", userControllers.forgotPassword);
 
 router.post("/resetpassword", userControllers.resetPassword);
 
+router.post("/updateuser", userControllers.updateUser);
 
 /**
  * Export router object

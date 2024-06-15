@@ -298,6 +298,19 @@ async function resetPassword(req, res) {
   }
 }
 
+
+async function updateUser(req, res) {
+  try {
+    const response = await usersServices.updateUser(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to update user",
+      status: "failure",
+    });
+  }
+}
+
 /**
  * Export all fuctions
  */
@@ -318,4 +331,5 @@ export default {
   getStudentCourseList,
   forgotPassword,
   resetPassword,
+  updateUser
 };
