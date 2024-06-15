@@ -84,6 +84,10 @@ const theme = createTheme({
         outlinedSecondary: ({ theme }) => ({
           borderColor: theme.palette.grey[400],
         }),
+        sizeSmall: {
+          padding: "8px 16px",
+          fontSize: "16px",
+        },
       },
       defaultProps: {
         disableElevation: true,
