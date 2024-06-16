@@ -3,7 +3,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 export const COLOR_MODE_LOCAL_STORAGE_KEY = "colorMode";
 
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
+const ColorModeContext = createContext();
 
 export const ColorModeProvider = ({ children }) => {
   const [colorMode, setColorMode] = useState(() => {
