@@ -102,7 +102,9 @@ export const CourseDetailPage = () => {
             sx={{
               width: "140px",
               height: "140px",
-              color: theme.palette.primary.icon,
+              path: {
+                fill: theme.palette.primary.icon,
+              },
             }}
           />
           <Typography variant="h6" color="text.secondary" fontWeight={500}>

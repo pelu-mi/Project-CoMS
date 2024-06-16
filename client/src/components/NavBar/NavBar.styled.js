@@ -7,8 +7,8 @@ import { FullLogoIcon } from "components/Icon";
 // Styling for App bar
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
-  borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  background: "white",
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  background: theme.palette.background.default,
 }));
 
 // Styling for Navigation Logo

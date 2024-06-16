@@ -13,7 +13,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useUser } from "context";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useColorMode, useUser } from "context";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
@@ -25,6 +27,7 @@ import { ProfileModal } from "components/ProfileModal";
  */
 export const UserMenus = () => {
   const { user } = useUser();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
@@ -40,6 +43,11 @@ export const UserMenus = () => {
       title: "Contact Support",
       icon: <HelpIcon color="info" />,
       action: () => window.open("mailto:pelumifadolapo7@gmail.com"),
+    },
+    {
+      title: colorMode === "dark" ? "Light Theme" : "Dark Theme",
+      icon: colorMode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />,
+      action: () => toggleColorMode(),
     },
     {
       title: "Logout",
@@ -100,7 +108,7 @@ export const UserMenus = () => {
               }}
             >
               {icon}
-              <Typography textAlign="center" onClick={action} ml="12px">
+              <Typography textAlign="center" ml="12px">
                 {title}
               </Typography>
             </MenuItem>

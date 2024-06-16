@@ -5,13 +5,14 @@ import { Box, styled } from "@mui/material";
 
 // Styling for Course Container
 export const StyledCourseContainer = styled(Box)(({ theme }) => ({
-  border: `1px solid ${theme.palette.grey[200]}`,
+  border: `1px solid ${theme.palette.divider}`,
   borderRadius: `8px`,
   padding: "24px",
   boxShadow: theme.customVariables.boxShadow,
   minHeight: "72vh",
   display: "flex",
   flexDirection: "column",
+  background: theme.palette.background.default,
 
   [theme.breakpoints.down("sm")]: {
     padding: "16px",
