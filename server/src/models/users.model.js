@@ -35,12 +35,11 @@ const userSchema = mongoose.Schema(
     isCompleteCourseListTour: {
       type: String,
       enum: ["true", "false"],
-      default: "true",
+      default: "false",
     },
     isCompleteCourseDetailsTour: {
-      type: String,
-      enum: ["true", "false"],
-      default: "true",
+      type: Boolean,
+      default: "false",
     },
   },
 
