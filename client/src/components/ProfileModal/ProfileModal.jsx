@@ -29,7 +29,10 @@ export const ProfileModal = ({ onClose, ...rest }) => {
       {!isEditing ? (
         <ProfileInfo onEdit={() => setIsEditing(true)} />
       ) : (
-        <EditProfile onCancel={() => setIsEditing(false)} />
+        <EditProfile
+          onClose={() => handleClose()}
+          onCancel={() => setIsEditing(false)}
+        />
       )}
     </Modal>
   );

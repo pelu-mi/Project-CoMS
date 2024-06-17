@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import { Button, Grid, TextField } from "@mui/material";
 import { useEditProfileForm } from "components/ProfileModal/hooks/useEditProfileForm";
 
-export const EditProfile = ({ onCancel }) => {
+export const EditProfile = ({ onClose, onCancel }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useEditProfileForm();
+  } = useEditProfileForm({ onClose });
 
   return (
     <Grid
@@ -53,5 +53,6 @@ export const EditProfile = ({ onCancel }) => {
 };
 
 EditProfile.propTypes = {
+  onClose: PropTypes.func,
   onCancel: PropTypes.func.isRequired,
 };

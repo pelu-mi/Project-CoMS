@@ -4,6 +4,8 @@
 import { object, string } from "yup";
 import { useForm } from "hooks/useForm";
 import { useUser } from "context";
+import { useUpdateUserMutation } from "services/api/user/useUpdateUserMutation";
+import { useSnackbar } from "notistack";
 
 // Validation for edit profile form
 const validationSchema = object({
@@ -14,8 +16,9 @@ const validationSchema = object({
 /**
  * useEditProfileForm - Custom hook to manage edit profile form
  */
-export const useEditProfileForm = () => {
-  const { user } = useUser();
+export const useEditProfileForm = ({ onClose }) => {
+  const { user, handleSetUser } = useUser();
+  const { enqueueSnackbar } = useSnackbar();
   const form = useForm({
     validationSchema,
     defaultValues: {
@@ -24,9 +27,20 @@ export const useEditProfileForm = () => {
     },
   });
 
-  const onSubmit = async (formValues) => {
-    // TODO: connect edit profile endpoint
-    console.log(formValues);
+  const { mutateAsync: updateUser } = useUpdateUserMutation({
+    onSuccess: async (data) => {
+      enqueueSnackbar(data.message, { variant: "success" });
+      handleSetUser(data);
+      onClose();
+    },
+    onError: (error) => {
+      enqueueSnackbar(error.message, { variant: "error" });
+    },
+  });
+
+  const onSubmit = async ({ firstName, lastName }) => {
+    const payload = { _id: user._id, firstName, lastName };
+    await updateUser(payload);
   };
 
   return {
