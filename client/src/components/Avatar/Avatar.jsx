@@ -4,12 +4,18 @@ import { stringAvatar } from "utils/stringAvatar";
 
 export const Avatar = ({ name, sx, ...rest }) => {
   const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
+
+  const { sx: sxBgColor, children } = stringAvatar(
+    name,
+    theme.palette.background.default,
+    isDarkMode
+  );
 
   return (
     <MuiAvatar
-      {...stringAvatar(name, theme.palette.background.default)}
-      {...rest}
-      sx={{ ...sx, textTransform: "uppercase" }}
+      {...{ ...rest, children }}
+      sx={{ ...sx, ...sxBgColor, textTransform: "uppercase" }}
     />
   );
 };
