@@ -25,9 +25,9 @@ export const lightPalette = {
 
 export const darkPalette = {
   primary: {
-    main: "#3851DD",
-    background: "#5B62A8",
-    icon: "#6371B8",
+    main: "#75B8FF",
+    background: "#9DB7D3",
+    icon: "#A2BEDC",
   },
   secondary: {
     main: "#EEEEEE",
