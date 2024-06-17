@@ -32,7 +32,7 @@ export const CourseDetailTour = (props) => {
     },
     {
       target: ".upload-content-step",
-      title: `Posting a new contents!`,
+      title: `Posting a new content!`,
       content: "You can upload your contents for your students over here.",
       disableBeacon: true,
     },
