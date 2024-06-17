@@ -36,7 +36,7 @@ export const ProfileInfo = ({ onEdit }) => {
         </Grid>
       </Grid>
 
-      <Button variant="outlined" onClick={onEdit}>
+      <Button variant="outlined" sx={{ marginTop: "8px" }} onClick={onEdit}>
         Edit Profile
       </Button>
     </Grid>
