@@ -70,7 +70,17 @@ export const UserMenus = () => {
             disableRipple
             onClick={handleOpenUserMenu}
           >
-            {user.firstName}
+            <Typography
+              variant="button"
+              sx={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                maxWidth: "148px",
+              }}
+            >
+              {user.firstName}
+            </Typography>
           </StyledButton>
         </Tooltip>
         <Menu
