@@ -142,6 +142,7 @@ export const CourseDetailPage = () => {
               </Button>
 
               <Button
+                className="edit-course-step"
                 variant="outlined"
                 startIcon={<EditIcon />}
                 onClick={() => setOpenEditCourseModal(true)}

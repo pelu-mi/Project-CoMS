@@ -25,14 +25,37 @@ export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+  // Handle Set User
+  const handleSetUser = (userResponse) => {
+    const {
+      _id,
+      firstName,
+      lastName,
+      email,
+      role,
+      isCompleteCourseListTour,
+      isCompleteCourseDetailsTour,
+    } = userResponse.data;
+
+    const userObject = {
+      _id,
+      firstName,
+      lastName,
+      email,
+      role,
+      isCompleteCourseListTour,
+      isCompleteCourseDetailsTour,
+    };
+
+    setUser(userObject);
+    localStorage.setItem(ACCESS_USER_KEY, JSON.stringify(userObject));
+  };
+
   // Handle User Response
   const handleUserResponse = (userResponse) => {
-    const { firstName, lastName, email, role, accessToken } = userResponse.data;
-    setUser({ firstName, lastName, email, role });
-    localStorage.setItem(
-      ACCESS_USER_KEY,
-      JSON.stringify({ firstName, lastName, email, role })
-    );
+    const { accessToken } = userResponse.data;
+
+    handleSetUser(userResponse);
 
     cookie.set(ACCESS_TOKEN_COOKIE_KEY, accessToken);
     navigate(COURSE_LIST_ROUTE);
@@ -73,6 +96,7 @@ export const UserProvider = ({ children }) => {
         login,
         logout,
         loading: isCreateAccountPending || isLoginPending,
+        handleSetUser,
       }}
     >
       {children}

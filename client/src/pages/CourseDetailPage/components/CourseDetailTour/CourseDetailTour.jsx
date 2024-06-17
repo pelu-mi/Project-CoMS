@@ -4,9 +4,10 @@ import { STATUS } from "react-joyride";
 import { GuidedTour } from "components/GuidedTour";
 import { GuidedButton } from "components/GuidedButton";
 import { ROLES } from "constants/role";
+import { useUpdateUserMutation } from "services/api/user/useUpdateUserMutation";
 
 export const CourseDetailTour = (props) => {
-  const { user } = useUser();
+  const { user, handleSetUser } = useUser();
   const [showTutorial, setShowTutorial] = useState(false);
   const instructorSteps = [
     {
@@ -19,6 +20,12 @@ export const CourseDetailTour = (props) => {
       ),
       content:
         "You can register and unregister your students to the course here.",
+      disableBeacon: true,
+    },
+    {
+      target: ".edit-course-step",
+      title: `Editing your course info!`,
+      content: "You can change your course name and description here.",
       disableBeacon: true,
     },
     {
@@ -49,18 +56,30 @@ export const CourseDetailTour = (props) => {
     },
   ];
 
+  const { mutateAsync: updateUser } = useUpdateUserMutation({
+    onSuccess: async (data) => {
+      handleSetUser(data);
+    },
+  });
+
   return (
     <>
       <GuidedTour
         {...props}
-        callback={({ status }) => {
+        callback={async ({ status }) => {
           if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
             // Call api to set the completion flag
+            if (!user.isCompleteCourseDetailsTour) {
+              await updateUser({
+                _id: user._id,
+                isCompleteCourseDetailsTour: true,
+              });
+            }
             setShowTutorial(false);
           }
         }}
         steps={user.role === ROLES.instructor ? instructorSteps : studentSteps}
-        run={user.isCompleteCourseDetailsTour || showTutorial}
+        run={!user.isCompleteCourseDetailsTour || showTutorial}
       />
 
       <GuidedButton onClick={() => setShowTutorial(true)} />

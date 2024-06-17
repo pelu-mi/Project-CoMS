@@ -4,9 +4,10 @@ import { STATUS } from "react-joyride";
 import { GuidedTour } from "components/GuidedTour";
 import { GuidedButton } from "components/GuidedButton";
 import { ROLES } from "constants/role";
+import { useUpdateUserMutation } from "services/api/user/useUpdateUserMutation";
 
 export const CourseListTour = (props) => {
-  const { user } = useUser();
+  const { user, handleSetUser } = useUser();
   const [showTutorial, setShowTutorial] = useState(false);
   const instructorSteps = [
     {
@@ -42,18 +43,30 @@ export const CourseListTour = (props) => {
     },
   ];
 
+  const { mutateAsync: updateUser } = useUpdateUserMutation({
+    onSuccess: async (data) => {
+      handleSetUser(data);
+    },
+  });
+
   return (
     <>
       <GuidedTour
         {...props}
-        callback={({ status }) => {
+        callback={async ({ status }) => {
           if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
             // Call api to set the completion flag
+            if (!user.isCompleteCourseListTour) {
+              await updateUser({
+                _id: user._id,
+                isCompleteCourseListTour: true,
+              });
+            }
             setShowTutorial(false);
           }
         }}
         steps={user.role === ROLES.instructor ? instructorSteps : studentSteps}
-        run={showTutorial}
+        run={!user.isCompleteCourseListTour || showTutorial}
       />
 
       <GuidedButton onClick={() => setShowTutorial(true)} />
