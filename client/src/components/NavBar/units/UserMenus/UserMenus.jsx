@@ -1,14 +1,7 @@
 /**
  * Import Modules
  */
-import {
-  Avatar,
-  Box,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -19,8 +12,8 @@ import { useColorMode, useUser } from "context";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
-import { stringAvatar } from "utils/stringAvatar";
 import { ProfileModal } from "components/ProfileModal";
+import { Avatar } from "components/Avatar";
 
 /**
  * User Menus
@@ -70,10 +63,7 @@ export const UserMenus = () => {
         <Tooltip title="Open settings">
           <StyledButton
             startIcon={
-              <Avatar
-                src="/.jpg"
-                {...stringAvatar(`${user.firstName} ${user.lastName}`)}
-              />
+              <Avatar src="/.jpg" name={`${user.firstName} ${user.lastName}`} />
             }
             endIcon={<ExpandMoreIcon />}
             variant="outlined"

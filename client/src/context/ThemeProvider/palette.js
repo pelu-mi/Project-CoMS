@@ -33,12 +33,12 @@ export const darkPalette = {
     main: "#EEEEEE",
   },
   error: {
-    main: "#E95252",
-    background: "#231414",
+    main: "#FF8080",
+    background: "#1D1010",
   },
   success: {
-    main: "#20C11D",
-    background: "#0F1F0F",
+    main: "#6CDC6A",
+    background: "#0E180E",
   },
   text: {
     primary: "#EEEEEE",
