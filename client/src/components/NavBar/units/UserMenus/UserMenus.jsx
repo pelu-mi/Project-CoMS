@@ -77,6 +77,7 @@ export const UserMenus = () => {
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
                 maxWidth: "148px",
+                textTransform: "capitalize",
               }}
             >
               {user.firstName}

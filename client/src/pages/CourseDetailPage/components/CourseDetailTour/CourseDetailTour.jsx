@@ -14,7 +14,9 @@ export const CourseDetailTour = (props) => {
       target: ".manage-student-step",
       title: (
         <>
-          Hello {user.firstName}! 😃
+          Hello{" "}
+          <span style={{ textTransform: "capitalize" }}>{user.firstName}</span>!
+          😃
           <br /> Let&apos;s see your student list.
         </>
       ),
@@ -46,7 +48,9 @@ export const CourseDetailTour = (props) => {
       target: ".content-list-step",
       title: (
         <>
-          Hello {user.firstName}! 😃
+          Hello{" "}
+          <span style={{ textTransform: "capitalize" }}>{user.firstName}</span>!
+          😃
           <br /> Let&apos;s see your course contents.
         </>
       ),

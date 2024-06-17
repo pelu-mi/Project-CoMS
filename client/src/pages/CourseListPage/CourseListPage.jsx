@@ -127,7 +127,14 @@ export const CourseListPage = () => {
   return (
     <>
       <Box pb={4}>
-        <Typography variant="h4" sx={{ wordWrap: "break-word", marginY: 4 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            wordWrap: "break-word",
+            marginY: 4,
+            textTransform: "capitalize",
+          }}
+        >
           Hello{" "}
           <Typography variant="h4" component="span" color="primary">
             {user.firstName}!

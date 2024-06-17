@@ -28,7 +28,12 @@ export const ProfileModal = ({ onClose, ...rest }) => {
         isEditing ? (
           "Edit Profile"
         ) : (
-          <Box display="flex" alignItems="center" gap="12px">
+          <Box
+            display="flex"
+            alignItems="center"
+            gap="12px"
+            textTransform="capitalize"
+          >
             <Avatar name={`${user.firstName} ${user.lastName}`} />
             {user.firstName} {user.lastName}
           </Box>

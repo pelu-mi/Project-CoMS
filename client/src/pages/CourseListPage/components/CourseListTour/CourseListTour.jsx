@@ -14,7 +14,9 @@ export const CourseListTour = (props) => {
       target: ".create-course-step",
       title: (
         <>
-          Welcome {user.firstName}! 👋
+          Welcome{" "}
+          <span style={{ textTransform: "capitalize" }}>{user.firstName}</span>!
+          👋
           <br /> Let&apos;s create a new course.
         </>
       ),
@@ -34,7 +36,9 @@ export const CourseListTour = (props) => {
       target: ".course-list-step",
       title: (
         <>
-          Welcome {user.firstName}! 👋
+          Welcome{" "}
+          <span style={{ textTransform: "capitalize" }}>{user.firstName}</span>!
+          👋
           <br /> Let&apos;s find your enrolled courses.
         </>
       ),
