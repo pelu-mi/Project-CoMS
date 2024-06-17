@@ -31,7 +31,13 @@ export const StyledForm = styled("form")(({ theme }) => ({
 }));
 
 // Styling for Logo
-export const StyledLogo = styled(LogoIcon)({
+export const StyledLogo = styled(LogoIcon)(({ theme }) => ({
   width: 100,
   height: 100,
-});
+  rect: {
+    fill: theme.palette.primary.main,
+  },
+  path: {
+    fill: theme.palette.background.paper,
+  },
+}));
