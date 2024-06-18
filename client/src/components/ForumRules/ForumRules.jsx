@@ -17,31 +17,10 @@ const rules = [
     ],
   },
   {
-    title: "Collaboration and Assistance",
-    points: [
-      "Encourage collaboration and helping each other in solving programming problems posted by the instructor",
-      "Provide constructive feedback and explanations when assisting peers",
-    ],
-  },
-  {
     title: "Originality and Integrity",
     points: [
       "Refrain from sharing solutions to graded assignments or exam questions",
       "Promote independent thinking and problem-solving skills rather than simply providing solutions",
-    ],
-  },
-  {
-    title: "Practice Only",
-    points: [
-      "Understand that the forum is designed solely for practice purposes",
-      "No marks or grades will be awarded for participation in this forum",
-    ],
-  },
-  {
-    title: "Prioritization of Assignments and Exams",
-    points: [
-      "Acknowledge that the forum discussions are supplementary to graded assignments and exams",
-      "Do NOT prioritize forum questions over completing graded assignments or preparing for exams",
     ],
   },
   {
