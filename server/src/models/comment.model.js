@@ -33,6 +33,10 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    delete: {
+      type: Boolean,
+      default: "false",
+    },
   },
   {
     timestamps: true,

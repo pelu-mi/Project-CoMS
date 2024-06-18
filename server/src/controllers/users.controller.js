@@ -358,6 +358,30 @@ async function getDiscussionComments(req, res) {
   }
 }
 
+async function deleteDiscussion(req, res) {
+  try {
+    const response = await usersServices.deleteDiscussion(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to delete discussion",
+      status: "failure",
+    });
+  }
+}
+
+async function deleteComment(req, res) {
+  try {
+    const response = await usersServices.deleteComment(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to delete comment",
+      status: "failure",
+    });
+  }
+}
+
 /**
  * Export all fuctions
  */
@@ -383,4 +407,6 @@ export default {
   createComment,
   getForumDiscussions,
   getDiscussionComments,
+  deleteDiscussion,
+  deleteComment,
 };

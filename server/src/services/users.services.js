@@ -541,7 +541,10 @@ async function getForumDiscussions(payload) {
       status: "failure",
     };
   }
-  const discussions = await discussion.find({ course: courseId });
+  const discussions = await discussion.find({
+    course: courseId,
+    delete: false,
+  });
   if (!discussions) {
     return {
       message: "No discussions found",
@@ -571,7 +574,10 @@ async function getDiscussionComments(payload) {
       status: "failure",
     };
   }
-  const comments = await comment.find({ discussion: discussionId });
+  const comments = await comment.find({
+    discussion: discussionId,
+    delete: false,
+  });
   if (!comments) {
     return {
       message: "No comments found",
@@ -586,6 +592,58 @@ async function getDiscussionComments(payload) {
     status: "success",
     name: discussionName.title,
     data: comments,
+  };
+}
+
+async function deleteDiscussion(payload) {
+  const { discussionId } = payload;
+
+  // Find the discussion by id and update the 'delete' field to true
+  const updatedDiscussion = await discussion.findByIdAndUpdate(
+    discussionId,
+    { $set: { delete: true } },
+    { new: true }
+  );
+
+  if (!updatedDiscussion) {
+    return {
+      message: "Discussion not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Discussion deleted successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedDiscussion,
+  };
+}
+
+async function deleteComment(payload) {
+  const { commentId } = payload;
+
+  // Find the discussion by id and update the 'delete' field to true
+  const updatedComment = await comment.findByIdAndUpdate(
+    commentId,
+    { $set: { delete: true } },
+    { new: true }
+  );
+
+  if (!updatedComment) {
+    return {
+      message: "Comment not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Comment deleted successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedComment,
   };
 }
 
@@ -611,4 +669,6 @@ export default {
   createComment,
   getForumDiscussions,
   getDiscussionComments,
+  deleteComment,
+  deleteDiscussion,
 };

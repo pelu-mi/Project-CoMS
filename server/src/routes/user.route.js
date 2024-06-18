@@ -118,6 +118,13 @@ router.get(
   userControllers.getDiscussionComments
 );
 
+router.post("/courses/forum/deletecomment", userControllers.deleteComment);
+
+router.post(
+  "/courses/forum/deletediscussion",
+  userControllers.deleteDiscussion
+);
+
 /**
  * Export router object
  */

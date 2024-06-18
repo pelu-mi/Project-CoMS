@@ -30,6 +30,10 @@ const discussionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    delete: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
