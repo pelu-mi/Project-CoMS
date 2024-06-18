@@ -17,14 +17,14 @@ router.post("/login", userControllers.login);
 // POST request to /createcourse
 router.post(
   "/createcourse",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.createCourse
 );
 
 // GET request to /instructorcourselist
 router.get(
   "/instructorcourselist",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.getInstructorCourseLIst
 );
 
@@ -34,14 +34,14 @@ router.get("/coursedetails/:courseId", userControllers.getCourseDetails);
 // POST request to /addcoursecontent
 router.post(
   "/addcoursecontent",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.addCourseContent
 );
 
 // POST request to /addstudents
 router.post(
   "/addstudents",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.addStudents
 );
 
@@ -51,35 +51,35 @@ router.get("/allcoursecontent/:courseId", userControllers.getAllCourseContent);
 // GET request to /getunregisteredstudents/:courseId
 router.get(
   "/getunregisteredstudents/:courseId",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.getAllUnregisteredStudents
 );
 
 // GET request to /registeredstudents/:courseId
 router.get(
   "/registeredstudents/:courseId",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.getAllRegisteredStudents
 );
 
 // POST request to /editcourse
 router.post(
   "/editcourse",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.editCourse
 );
 
 // POST request to /editcoursecontent
 router.post(
   "/editcoursecontent",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.editCourseContent
 );
 
 // GET request to /getallstudents
 router.get(
   "/getallstudents",
-  authMiddleware.authenticate,
+  authMiddleware.instructorAuthenticate,
   userControllers.getAllStudents
 );
 
@@ -95,6 +95,30 @@ router.post("/forgotpassword", userControllers.forgotPassword);
 router.post("/resetpassword", userControllers.resetPassword);
 
 router.post("/updateuser", userControllers.updateUser);
+
+router.get("/courses/allforums", userControllers.getAllForums);
+
+router.post(
+  "/courses/forum/creatediscussion",
+  authMiddleware.authenticate,
+  userControllers.createDiscussion
+);
+
+router.post(
+  "/courses/forum/createcomment",
+  authMiddleware.authenticate,
+  userControllers.createComment
+);
+
+router.get(
+  "/courses/forum/discussions/:courseId",
+  userControllers.getForumDiscussions
+);
+
+router.get(
+  "/courses/forum/discussions/comments/:discussionId",
+  userControllers.getDiscussionComments
+);
 
 /**
  * Export router object

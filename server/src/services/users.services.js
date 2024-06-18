@@ -8,8 +8,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import generateResetPin from "../utils/generateResetPin.js";
 import sendMail from "../utils/sendMail.js";
-import usersModel from "../models/users.model.js";
-
+import discussion from "../models/discussion.model.js";
+import comment from "../models/comment.model.js";
 /**
  * createAccount - Create new user account
  *
@@ -500,6 +500,93 @@ async function updateUser(payload) {
   };
 }
 
+async function getAllForums() {
+  // Fetch all documents and only the forum field
+  const foundForum = await course.find({}, { forum: 1, _id: 0 });
+
+  if (!foundForum || foundForum.length === 0) {
+    return {
+      message: "No forum found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  // Extract only the forum field values
+  const forumNames = foundForum.map((doc) => doc.forum);
+
+  return {
+    message: "Forums displayed below",
+    statusCode: 200,
+    status: "success",
+    data: forumNames,
+  };
+}
+
+async function createDiscussion(user, payload) {
+  payload.creator = user._id;
+
+  const newDiscussion = await discussion.create(payload);
+  return {
+    message: "Discussion created successfully",
+    statusCode: 201,
+    status: "success",
+    data: newDiscussion,
+  };
+}
+
+async function createComment(user, payload) {
+  payload.creator = user._id;
+  payload.firstName = user.firstName;
+  payload.lastName = user.lastName;
+
+  const newComment = await comment.create(payload);
+  return {
+    message: "Comment created successfully",
+    statusCode: 201,
+    status: "success",
+    data: newComment,
+  };
+}
+
+async function getForumDiscussions(payload) {
+  const { courseId } = payload;
+  const discussions = await discussion.find({ course: courseId });
+  if (!discussions) {
+    return {
+      message: "No discussions found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Discussions listed below",
+    statusCode: 201,
+    status: "success",
+    data: discussions,
+  };
+}
+
+async function getDiscussionComments(payload) {
+  const { discussionId } = payload;
+  const comments = await comment.find({ discussion: discussionId });
+  if (!comments) {
+    return {
+      message: "No comments found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Comments listed below",
+    statusCode: 201,
+    status: "success",
+    data: comments,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -518,4 +605,9 @@ export default {
   forgotPassword,
   resetPassword,
   updateUser,
+  getAllForums,
+  createDiscussion,
+  createComment,
+  getForumDiscussions,
+  getDiscussionComments,
 };
