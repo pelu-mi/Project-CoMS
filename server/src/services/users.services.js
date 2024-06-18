@@ -8,8 +8,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import generateResetPin from "../utils/generateResetPin.js";
 import sendMail from "../utils/sendMail.js";
-import usersModel from "../models/users.model.js";
-
+import discussion from "../models/discussion.model.js";
+import comment from "../models/comment.model.js";
 /**
  * createAccount - Create new user account
  *
@@ -139,12 +139,16 @@ async function createCourse(user, payload) {
  * @returns Success or Failure status
  */
 async function getInstructorCourseLIst(user) {
-  const foundCourses = await course.find({ instructor: user._id });
+  const courses = await course
+    .find({ instructor: user._id })
+    .populate("discussionCount")
+    .exec();
+
   return {
     message: "Courses displayed below",
     statusCode: 200,
     status: "success",
-    data: foundCourses,
+    data: courses,
   };
 }
 
@@ -400,16 +404,16 @@ async function getAllStudents() {
  * @returns Success or Failure status
  */
 async function getStudentCourseList(user) {
-  const list = await course.find(
-    { "students.relatedIds": user._id },
-    { students: 0 } // Exclude the students field
-  );
-
+  const courses = await course
+    .find({ "students.relatedIds": user._id })
+    .select("-students") // Exclude the students field
+    .populate("discussionCount")
+    .exec();
   return {
     message: "Courses retrieved successfully",
     statusCode: 200,
     status: "success",
-    data: list,
+    data: courses,
   };
 }
 
@@ -500,6 +504,149 @@ async function updateUser(payload) {
   };
 }
 
+async function createDiscussion(user, payload) {
+  payload.creator = user._id;
+  payload.firstName = user.firstName;
+  payload.lastName = user.lastName;
+  const newDiscussion = await discussion.create(payload);
+  return {
+    message: "Discussion created successfully",
+    statusCode: 201,
+    status: "success",
+    data: newDiscussion,
+  };
+}
+
+async function createComment(user, payload) {
+  payload.creator = user._id;
+  payload.firstName = user.firstName;
+  payload.lastName = user.lastName;
+
+  const newComment = await comment.create(payload);
+  return {
+    message: "Comment created successfully",
+    statusCode: 201,
+    status: "success",
+    data: newComment,
+  };
+}
+
+async function getForumDiscussions(payload) {
+  const { courseId } = payload;
+  const courseName = await course.findById(courseId).select("name");
+  if (!courseName) {
+    return {
+      message: "Course not found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+  const discussions = await discussion.find({
+    course: courseId,
+    delete: false,
+  });
+  if (!discussions) {
+    return {
+      message: "No discussions found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Discussions listed below",
+    statusCode: 201,
+    status: "success",
+    name: courseName.name,
+    data: discussions,
+  };
+}
+
+async function getDiscussionComments(payload) {
+  const { discussionId } = payload;
+  const discussionName = await discussion
+    .findById(discussionId)
+    .select("title");
+  if (!discussionName) {
+    return {
+      message: "discussion not found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+  const comments = await comment.find({
+    discussion: discussionId,
+    delete: false,
+  });
+  if (!comments) {
+    return {
+      message: "No comments found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Comments listed below",
+    statusCode: 201,
+    status: "success",
+    name: discussionName.title,
+    data: comments,
+  };
+}
+
+async function deleteDiscussion(payload) {
+  const { discussionId } = payload;
+
+  // Find the discussion by id and update the 'delete' field to true
+  const updatedDiscussion = await discussion.findByIdAndUpdate(
+    discussionId,
+    { $set: { delete: true } },
+    { new: true }
+  );
+
+  if (!updatedDiscussion) {
+    return {
+      message: "Discussion not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Discussion deleted successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedDiscussion,
+  };
+}
+
+async function deleteComment(payload) {
+  const { commentId } = payload;
+
+  // Find the discussion by id and update the 'delete' field to true
+  const updatedComment = await comment.findByIdAndUpdate(
+    commentId,
+    { $set: { delete: true } },
+    { new: true }
+  );
+
+  if (!updatedComment) {
+    return {
+      message: "Comment not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Comment deleted successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedComment,
+  };
+}
+
 export default {
   createAccount,
   login,
@@ -518,4 +665,10 @@ export default {
   forgotPassword,
   resetPassword,
   updateUser,
+  createDiscussion,
+  createComment,
+  getForumDiscussions,
+  getDiscussionComments,
+  deleteComment,
+  deleteDiscussion,
 };

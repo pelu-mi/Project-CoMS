@@ -298,7 +298,6 @@ async function resetPassword(req, res) {
   }
 }
 
-
 async function updateUser(req, res) {
   try {
     const response = await usersServices.updateUser(req.body);
@@ -306,6 +305,78 @@ async function updateUser(req, res) {
   } catch (error) {
     res.status(500).json({
       message: "Unable to update user",
+      status: "failure",
+    });
+  }
+}
+
+async function createDiscussion(req, res) {
+  try {
+    const response = await usersServices.createDiscussion(req.user, req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to create discussion",
+      status: "failure",
+    });
+  }
+}
+
+async function createComment(req, res) {
+  try {
+    const response = await usersServices.createComment(req.user, req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to create comment",
+      status: "failure",
+    });
+  }
+}
+
+async function getForumDiscussions(req, res) {
+  try {
+    const response = await usersServices.getForumDiscussions(req.params);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get discussions",
+      status: "failure",
+    });
+  }
+}
+
+async function getDiscussionComments(req, res) {
+  try {
+    const response = await usersServices.getDiscussionComments(req.params);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to get comments",
+      status: "failure",
+    });
+  }
+}
+
+async function deleteDiscussion(req, res) {
+  try {
+    const response = await usersServices.deleteDiscussion(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to delete discussion",
+      status: "failure",
+    });
+  }
+}
+
+async function deleteComment(req, res) {
+  try {
+    const response = await usersServices.deleteComment(req.body);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to delete comment",
       status: "failure",
     });
   }
@@ -331,5 +402,11 @@ export default {
   getStudentCourseList,
   forgotPassword,
   resetPassword,
-  updateUser
+  updateUser,
+  createDiscussion,
+  createComment,
+  getForumDiscussions,
+  getDiscussionComments,
+  deleteDiscussion,
+  deleteComment,
 };
