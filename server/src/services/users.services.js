@@ -525,7 +525,8 @@ async function getAllForums() {
 
 async function createDiscussion(user, payload) {
   payload.creator = user._id;
-
+  payload.firstName = user.firstName;
+  payload.lastName = user.lastName;
   const newDiscussion = await discussion.create(payload);
   return {
     message: "Discussion created successfully",

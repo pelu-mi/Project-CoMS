@@ -22,6 +22,14 @@ const discussionSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
