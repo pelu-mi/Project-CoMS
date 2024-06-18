@@ -117,7 +117,6 @@ export const DiscussionDetailPage = () => {
           color="inherit"
           component={RouterLink}
           to={`${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}`}
-          state={{ courseName }}
         >
           Forum
         </Link>

@@ -6,6 +6,7 @@ import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 import { useCreateDiscussionMutation } from "services/api/forum/useCreateDiscussionMutation";
+import { GET_DISCUSSIONS_API_KEY } from "services/constants";
 
 import { object, string } from "yup";
 
@@ -17,7 +18,7 @@ const validationSchema = object({
 export const useDiscussionForm = ({ onClose }) => {
   const { courseId } = useParams();
   const { enqueueSnackbar } = useSnackbar();
-  //   const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const form = useForm({
     validationSchema,
@@ -29,7 +30,9 @@ export const useDiscussionForm = ({ onClose }) => {
       enqueueSnackbar(data.message, { variant: "success" });
       onClose();
       form.reset();
-      //   await queryClient.invalidateQueries(GET_INSTRUCTOR_COURSES_API_KEY);
+      await queryClient.invalidateQueries(
+        `${GET_DISCUSSIONS_API_KEY}/${courseId}`
+      );
     },
     onError: (error) => {
       enqueueSnackbar(error.message, { variant: "error" });

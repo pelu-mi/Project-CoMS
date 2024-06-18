@@ -14,44 +14,23 @@ import {
   StyledDiscussionContainer,
   StyledEmptyLayout,
 } from "./DiscussionListPage.styled";
-import { useUser } from "context";
-import { ROLES } from "constants/role";
 import { DiscussionCard } from "components/DisucssionCard";
-import {
-  useNavigate,
-  useParams,
-  Link as RouterLink,
-  useLocation,
-} from "react-router-dom";
+import { useNavigate, useParams, Link as RouterLink } from "react-router-dom";
 import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
 import { ForumRules } from "components/ForumRules";
 import { useState } from "react";
 import { DiscussionModal } from "components/DiscussionModal";
-// import { Loader } from "components/Loader";
-
-const discussions = [
-  {
-    title: "Module 1: Introduction to matematics",
-    author: { _id: "123", firstName: "John", lastName: "Sam" },
-    creationDate: "today",
-    forumId: "123",
-  },
-  {
-    title: "Module 2: Introduction to matematics",
-    author: { _id: "123", firstName: "Ellen", lastName: "Krich" },
-    creationDate: "today",
-    forumId: "123",
-  },
-];
+import { useDiscussionListQuery } from "services/api/forum/useDiscussionListQuery";
+import { Loader } from "components/Loader";
 
 export const DiscussionListPage = () => {
-  const { user } = useUser();
   const { courseId } = useParams();
   const theme = useTheme();
   const navigate = useNavigate();
-  const location = useLocation();
-  const courseName = location.state?.courseName;
   const [openDiscussionModal, setOpenDiscussionModal] = useState(false);
+
+  const { courseName, discussions, isFetching } =
+    useDiscussionListQuery(courseId);
 
   const renderAddDiscussionButton = () => {
     return (
@@ -67,13 +46,13 @@ export const DiscussionListPage = () => {
   };
 
   const renderDiscussions = () => {
-    // if (isDiscussionFetching) {
-    //   return (
-    //     <StyledEmptyLayout>
-    //       <Loader />
-    //     </StyledEmptyLayout>
-    //   );
-    // }
+    if (isFetching) {
+      return (
+        <StyledEmptyLayout>
+          <Loader />
+        </StyledEmptyLayout>
+      );
+    }
 
     if (discussions.length) {
       return (
@@ -82,8 +61,12 @@ export const DiscussionListPage = () => {
             <Grid item xs={12} key={`${index}-${discussion.title}`}>
               <DiscussionCard
                 title={discussion.title}
-                author={discussion.author}
-                date={discussion.creationDate}
+                author={{
+                  authorId: discussion.creator,
+                  firstName: discussion.firstName,
+                  lastName: discussion.lastName,
+                }}
+                date={discussion.createdAt}
                 onClick={() =>
                   navigate(
                     `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}/${discussion.forumId}`,
@@ -138,7 +121,7 @@ export const DiscussionListPage = () => {
         <ForumRules />
 
         <Typography variant="h4" mt={4}>
-          CS700 Forum
+          {courseName} Forum
         </Typography>
 
         <Box
