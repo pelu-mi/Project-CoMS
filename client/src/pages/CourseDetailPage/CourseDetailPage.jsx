@@ -141,7 +141,8 @@ export const CourseDetailPage = () => {
                 fullWidth
                 onClick={() =>
                   navigate(
-                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}`
+                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}`,
+                    { state: { courseName: course.name } }
                   )
                 }
               >
