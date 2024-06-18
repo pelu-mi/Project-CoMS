@@ -25,6 +25,8 @@ import {
 } from "react-router-dom";
 import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
 import { ForumRules } from "components/ForumRules";
+import { useState } from "react";
+import { DiscussionModal } from "components/DiscussionModal";
 // import { Loader } from "components/Loader";
 
 const discussions = [
@@ -49,19 +51,19 @@ export const DiscussionListPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const courseName = location.state?.courseName;
+  const [openDiscussionModal, setOpenDiscussionModal] = useState(false);
 
   const renderAddDiscussionButton = () => {
-    if (user.role === ROLES.instructor)
-      return (
-        <Button
-          className="add-discussion-step"
-          startIcon={<AddIcon />}
-          sx={{ minHeight: 56, flexGrow: 1 }}
-          //   onClick={() => setOpenDiscussionModal(true)}
-        >
-          Add Discussion
-        </Button>
-      );
+    return (
+      <Button
+        className="add-discussion-step"
+        startIcon={<AddIcon />}
+        sx={{ minHeight: 56, flexGrow: 1 }}
+        onClick={() => setOpenDiscussionModal(true)}
+      >
+        Add Discussion
+      </Button>
+    );
   };
 
   const renderDiscussions = () => {
@@ -117,44 +119,45 @@ export const DiscussionListPage = () => {
   };
 
   return (
-    <Box pb={6}>
-      <Breadcrumbs aria-label="breadcrumb" py={3}>
-        <Link
-          underline="hover"
-          color="inherit"
-          component={RouterLink}
-          to={`${COURSE_LIST_ROUTE}/${courseId}`}
-        >
-          {courseName}
-        </Link>
-        <Typography color="text.primary" fontWeight={500}>
-          Forum
-        </Typography>
-      </Breadcrumbs>
+    <>
+      <Box pb={6}>
+        <Breadcrumbs aria-label="breadcrumb" py={3}>
+          <Link
+            underline="hover"
+            color="inherit"
+            component={RouterLink}
+            to={`${COURSE_LIST_ROUTE}/${courseId}`}
+          >
+            {courseName}
+          </Link>
+          <Typography color="text.primary" fontWeight={500}>
+            Forum
+          </Typography>
+        </Breadcrumbs>
 
-      <ForumRules />
+        <ForumRules />
 
-      <Typography variant="h4" mt={4}>
-        CS700 Forum
-      </Typography>
-
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        flexWrap="wrap"
-        mt={5}
-        mb={3}
-      >
-        <Typography
-          variant="h5"
-          sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
-        >
-          {discussions.length} Discussion{discussions.length > 1 && "s"}
+        <Typography variant="h4" mt={4}>
+          CS700 Forum
         </Typography>
 
-        <StyledActionContainer>
-          {/* <TextField
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          flexWrap="wrap"
+          mt={5}
+          mb={3}
+        >
+          <Typography
+            variant="h5"
+            sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
+          >
+            {discussions.length} Discussion{discussions.length > 1 && "s"}
+          </Typography>
+
+          <StyledActionContainer>
+            {/* <TextField
             placeholder="Search"
             sx={{ flexGrow: 1 }}
             InputProps={{
@@ -165,13 +168,19 @@ export const DiscussionListPage = () => {
               ),
             }}
           /> */}
-          {renderAddDiscussionButton()}
-        </StyledActionContainer>
+            {renderAddDiscussionButton()}
+          </StyledActionContainer>
+        </Box>
+
+        <StyledDiscussionContainer className="discussion-list-step">
+          {renderDiscussions()}
+        </StyledDiscussionContainer>
       </Box>
 
-      <StyledDiscussionContainer className="discussion-list-step">
-        {renderDiscussions()}
-      </StyledDiscussionContainer>
-    </Box>
+      <DiscussionModal
+        open={openDiscussionModal}
+        onClose={() => setOpenDiscussionModal(false)}
+      />
+    </>
   );
 };
