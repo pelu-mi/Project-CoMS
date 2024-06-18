@@ -10,11 +10,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import ForumIcon from "@mui/icons-material/Forum";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import GroupIcon from "@mui/icons-material/Group";
 import EditIcon from "@mui/icons-material/Edit";
 import SearchIcon from "@mui/icons-material/Search";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { StyledActionContainer } from "pages/CourseListPage/CourseListPage.styled";
 import { ROLES } from "constants/role";
 import { useUser } from "context";
@@ -38,12 +39,14 @@ import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQ
 import { useCourseContentQuery } from "services/api/courseDetail/useCourseContentQuery";
 import { getRandomImageUrl } from "utils/getRandomImageUrl";
 import { CourseDetailTour } from "./components/CourseDetailTour";
+import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
 
 /**
  * Course Details Page
  */
 export const CourseDetailPage = () => {
   const { user } = useUser();
+  const navigate = useNavigate();
   const theme = useTheme();
   let { courseId } = useParams();
   const [openStudentModal, setOpenStudentModal] = useState();
@@ -129,29 +132,50 @@ export const CourseDetailPage = () => {
             </StyledTypography>
           </StyledTypographyWrapper>
 
-          {user.role === ROLES.instructor && (
-            <StyledTitleActionContainer>
+          <StyledTitleActionContainer container spacing={2}>
+            <Grid item xs={12} sm={4}>
               <Button
                 className="manage-student-step"
                 variant="outlined"
-                startIcon={<GroupIcon />}
-                onClick={() => setOpenStudentModal(true)}
-                sx={{ flexGrow: "1" }}
+                startIcon={<ForumIcon />}
+                fullWidth
+                onClick={() =>
+                  navigate(
+                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}`
+                  )
+                }
               >
-                Students
+                Forum
               </Button>
+            </Grid>
+            {user.role === ROLES.instructor && (
+              <>
+                <Grid item xs={12} sm={4}>
+                  <Button
+                    className="manage-student-step"
+                    variant="outlined"
+                    startIcon={<GroupIcon />}
+                    fullWidth
+                    onClick={() => setOpenStudentModal(true)}
+                  >
+                    Students
+                  </Button>
+                </Grid>
 
-              <Button
-                className="edit-course-step"
-                variant="outlined"
-                startIcon={<EditIcon />}
-                onClick={() => setOpenEditCourseModal(true)}
-                sx={{ flexGrow: "1" }}
-              >
-                <nobr>Edit Course</nobr>
-              </Button>
-            </StyledTitleActionContainer>
-          )}
+                <Grid item xs={12} sm={4}>
+                  <Button
+                    className="edit-course-step"
+                    variant="outlined"
+                    startIcon={<EditIcon />}
+                    fullWidth
+                    onClick={() => setOpenEditCourseModal(true)}
+                  >
+                    <nobr>Edit Course</nobr>
+                  </Button>
+                </Grid>
+              </>
+            )}
+          </StyledTitleActionContainer>
         </StyledTitleContainer>
 
         <Box
