@@ -4,19 +4,15 @@ import {
   Button,
   Grid,
   Link,
-  List,
-  ListItem,
   Typography,
   useTheme,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
-
 import {
   StyledActionContainer,
   StyledDiscussionContainer,
   StyledEmptyLayout,
-  StyledRuleContainer,
 } from "./DiscussionListPage.styled";
 import { useUser } from "context";
 import { ROLES } from "constants/role";
@@ -28,6 +24,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
+import { ForumRules } from "components/ForumRules";
 // import { Loader } from "components/Loader";
 
 const discussions = [
@@ -84,10 +81,11 @@ export const DiscussionListPage = () => {
               <DiscussionCard
                 title={discussion.title}
                 author={discussion.author}
-                creationDate={discussion.creationDate}
+                date={discussion.creationDate}
                 onClick={() =>
                   navigate(
-                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}/${discussion.forumId}`
+                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}/${discussion.forumId}`,
+                    { state: { courseName: courseName } }
                   )
                 }
               />
@@ -134,21 +132,7 @@ export const DiscussionListPage = () => {
         </Typography>
       </Breadcrumbs>
 
-      <StyledRuleContainer>
-        <Typography variant="h5">Rules</Typography>
-        <List sx={{ listStyleType: "disc", paddingLeft: "24px" }}>
-          <ListItem sx={{ display: "list-item", padding: "8px" }}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s
-          </ListItem>
-          <ListItem sx={{ display: "list-item", padding: "8px" }}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industrys standard dummy text
-            ever since the 1500s
-          </ListItem>
-        </List>
-      </StyledRuleContainer>
+      <ForumRules />
 
       <Typography variant="h4" mt={4}>
         CS700 Forum
@@ -166,7 +150,7 @@ export const DiscussionListPage = () => {
           variant="h5"
           sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
         >
-          {discussions.length} Discussion{discussions.length !== 1 && "s"}
+          {discussions.length} Discussion{discussions.length > 1 && "s"}
         </Typography>
 
         <StyledActionContainer>

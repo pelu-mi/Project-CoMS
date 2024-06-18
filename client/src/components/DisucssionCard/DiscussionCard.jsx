@@ -13,7 +13,7 @@ import {
 import { useUser } from "context";
 import { ROLES } from "constants/role";
 
-export const DiscussionCard = ({ title, author, creationDate, onClick }) => {
+export const DiscussionCard = ({ title, author, date, onClick }) => {
   const { user } = useUser();
 
   const handleOnDelete = (event) => {
@@ -57,7 +57,7 @@ export const DiscussionCard = ({ title, author, creationDate, onClick }) => {
               </StyledTypography>
             </StyledAuthorContainer>
             <Typography variant="body2" color="text.secondary">
-              {creationDate}
+              {date}
             </Typography>
           </Box>
         </StyledCardContent>
@@ -69,6 +69,6 @@ export const DiscussionCard = ({ title, author, creationDate, onClick }) => {
 DiscussionCard.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.object.isRequired,
-  creationDate: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };

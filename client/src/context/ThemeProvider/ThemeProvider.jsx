@@ -31,6 +31,7 @@ export const ThemeProvider = ({ children }) => {
           body,
           #root {
             min-height: 100%;
+            scroll-behavior: smooth;
           }
 
           body {
