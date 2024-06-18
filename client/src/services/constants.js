@@ -19,3 +19,6 @@ export const EDIT_COURSE_CONTENT_API_KEY = "/user/editcoursecontent";
 export const GET_STUDENTS_API_KEY = "/user/getallstudents";
 export const GET_REGISTERED_STUDENTS_API_KEY = "/user/registeredstudents";
 export const ADD_STUDENTS_API_KEY = "/user/addstudents";
+
+// Forum Routes
+export const CREATE_DISCUSSION_API_KEY = "/user/courses/forum/creatediscussion";
