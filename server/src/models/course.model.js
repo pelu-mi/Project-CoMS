@@ -23,9 +23,6 @@ const courseSchema = mongoose.Schema(
     students: {
       relatedIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     },
-    forum: {
-      type: String,
-    },
   },
 
   {
@@ -33,13 +30,17 @@ const courseSchema = mongoose.Schema(
   }
 );
 
-// Pre-save middleware to set the forum field to the name value if it's not provided
-courseSchema.pre("save", function (next) {
-  if (!this.forum) {
-    this.forum = this.name;
-  }
-  next();
+// Virtual field to count the number of discussions
+courseSchema.virtual("discussionCount", {
+  ref: "discussion",
+  localField: "_id",
+  foreignField: "course",
+  count: true,
 });
+
+// Ensure virtual fields are included when converting to JSON or Object
+courseSchema.set("toObject", { virtuals: true });
+courseSchema.set("toJSON", { virtuals: true });
 
 /**
  * Export course model

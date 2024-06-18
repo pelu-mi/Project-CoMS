@@ -96,8 +96,6 @@ router.post("/resetpassword", userControllers.resetPassword);
 
 router.post("/updateuser", userControllers.updateUser);
 
-router.get("/courses/allforums", userControllers.getAllForums);
-
 router.post(
   "/courses/forum/creatediscussion",
   authMiddleware.authenticate,

@@ -310,18 +310,6 @@ async function updateUser(req, res) {
   }
 }
 
-async function getAllForums(req, res) {
-  try {
-    const response = await usersServices.getAllForums(req.body);
-    res.status(response.statusCode).json(response);
-  } catch (error) {
-    res.status(500).json({
-      message: "Unable to get forums",
-      status: "failure",
-    });
-  }
-}
-
 async function createDiscussion(req, res) {
   try {
     const response = await usersServices.createDiscussion(req.user, req.body);
@@ -358,7 +346,6 @@ async function getForumDiscussions(req, res) {
   }
 }
 
-
 async function getDiscussionComments(req, res) {
   try {
     const response = await usersServices.getDiscussionComments(req.params);
@@ -370,9 +357,6 @@ async function getDiscussionComments(req, res) {
     });
   }
 }
-
-
-
 
 /**
  * Export all fuctions
@@ -395,9 +379,8 @@ export default {
   forgotPassword,
   resetPassword,
   updateUser,
-  getAllForums,
   createDiscussion,
   createComment,
   getForumDiscussions,
-  getDiscussionComments
+  getDiscussionComments,
 };
