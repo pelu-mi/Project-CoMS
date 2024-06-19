@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useCourseListQuery } from "services/api/course/useCourseListQuery";
 import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
+import { ForumListTour } from "./components/ForumListTour";
 
 export const ForumListPage = () => {
   const { user } = useUser();
@@ -88,41 +89,45 @@ export const ForumListPage = () => {
   };
 
   return (
-    <Box pb={4}>
-      <Typography
-        variant="h4"
-        sx={{
-          wordWrap: "break-word",
-          marginY: 4,
-          textTransform: "capitalize",
-        }}
-      >
-        Hello{" "}
-        <Typography variant="h4" component="span" color="primary">
-          {user.firstName}!
-        </Typography>
-      </Typography>
-
-      <StyledCourseContainer>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          flexWrap="wrap"
-          mb={3}
+    <>
+      <Box pb={4}>
+        <Typography
+          variant="h4"
+          sx={{
+            wordWrap: "break-word",
+            marginY: 4,
+            textTransform: "capitalize",
+          }}
         >
-          <Typography
-            variant="h5"
-            sx={{ my: { xs: "16px", sm: "14px" }, pr: "16px", flexGrow: 20 }}
-          >
-            {renderTitle()}
+          Hello{" "}
+          <Typography variant="h4" component="span" color="primary">
+            {user.firstName}!
           </Typography>
-        </Box>
+        </Typography>
 
-        <Box display="flex" flexGrow={1} className="course-list-step">
-          {renderCourses()}
-        </Box>
-      </StyledCourseContainer>
-    </Box>
+        <StyledCourseContainer>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            flexWrap="wrap"
+            mb={3}
+          >
+            <Typography
+              variant="h5"
+              sx={{ my: { xs: "16px", sm: "14px" }, pr: "16px", flexGrow: 20 }}
+            >
+              {renderTitle()}
+            </Typography>
+          </Box>
+
+          <Box display="flex" flexGrow={1} className="forum-list-step">
+            {renderCourses()}
+          </Box>
+        </StyledCourseContainer>
+      </Box>
+
+      <ForumListTour />
+    </>
   );
 };
