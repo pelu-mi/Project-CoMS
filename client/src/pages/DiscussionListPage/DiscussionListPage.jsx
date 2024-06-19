@@ -103,8 +103,10 @@ export const DiscussionListPage = () => {
 
   return (
     <>
-      <Box pb={6}>
-        <Breadcrumbs aria-label="breadcrumb" py={3}>
+      <Box pb={6} pt={3}>
+        <ForumRules />
+
+        <Breadcrumbs aria-label="breadcrumb" pt={5}>
           <Link
             underline="hover"
             color="inherit"
@@ -117,8 +119,6 @@ export const DiscussionListPage = () => {
             Forum
           </Typography>
         </Breadcrumbs>
-
-        <ForumRules />
 
         <Typography variant="h4" mt={4}>
           {courseName} Forum
