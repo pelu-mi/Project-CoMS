@@ -5,6 +5,7 @@ import {
   Grid,
   Link,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -18,6 +19,7 @@ import {
   StyledAvatar,
   StyledCommentContainer,
   StyledCommentForm,
+  StyledTypography,
 } from "./DiscussionDetailPage.styled";
 import { StyledEmptyLayout } from "pages/DiscussionListPage/DiscussionListPage.styled";
 import { CommentCard } from "components/CommentCard";
@@ -139,24 +141,32 @@ export const DiscussionDetailPage = () => {
           {discussionDetails.title}
         </Typography>
 
-        <Box display="flex" alignItems="center" gap={1}>
-          <Typography variant="body1" fontWeight={500}>
-            By
-          </Typography>
+        <Box display="flex" flexWrap="wrap" alignItems="center" gap={1}>
+          <Box display="flex" alignItems="center" gap={1}>
+            <Typography variant="body1" fontWeight={500}>
+              By
+            </Typography>
 
-          <StyledAvatar
-            name={`${discussionDetails.firstName} ${discussionDetails.lastName}`}
-          />
+            <StyledAvatar
+              name={`${discussionDetails.firstName} ${discussionDetails.lastName}`}
+            />
 
-          <Typography variant="body1" fontWeight={500}>
-            {discussionDetails.firstName} {discussionDetails.lastName}
-          </Typography>
+            <Tooltip
+              title={`${discussionDetails.firstName} ${discussionDetails.lastName}`}
+            >
+              <StyledTypography variant="body1" fontWeight={500}>
+                {discussionDetails.firstName} {discussionDetails.lastName}
+              </StyledTypography>
+            </Tooltip>
+          </Box>
 
-          <CircleIcon sx={{ width: "4px", color: "text.secondary" }} />
+          <Box display="flex" alignItems="center" gap={1}>
+            <CircleIcon sx={{ width: "4px", color: "text.secondary" }} />
 
-          <Typography variant="body2" color="text.secondary">
-            {moment(discussionDetails.createdAt).fromNow()}
-          </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {moment(discussionDetails.createdAt).fromNow()}
+            </Typography>
+          </Box>
         </Box>
 
         <Box

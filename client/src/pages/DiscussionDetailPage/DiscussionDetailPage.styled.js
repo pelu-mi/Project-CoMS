@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Avatar } from "components/Avatar";
 
 export const StyledAvatar = styled(Avatar)(({ theme }) => ({
@@ -8,6 +8,16 @@ export const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: "32px",
   height: "32px",
 }));
+
+// Styling for Typography
+export const StyledTypography = styled(Typography)({
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  display: "-webkit-box",
+  WebkitLineClamp: "1",
+  WebkitBoxOrient: "vertical",
+  wordBreak: "break-word",
+});
 
 export const StyledCommentContainer = styled(Box)({
   minHeight: "40vh",
