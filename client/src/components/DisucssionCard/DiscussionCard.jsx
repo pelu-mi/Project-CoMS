@@ -41,7 +41,8 @@ export const DiscussionCard = ({
                 {title}
               </StyledTypography>
 
-              {(user.role === ROLES.instructor || user._id === author._id) && (
+              {(user.role === ROLES.instructor ||
+                user._id === author.authorId) && (
                 <StyledIconWrapper
                   variant="outlined"
                   onClick={handleOnDelete}
