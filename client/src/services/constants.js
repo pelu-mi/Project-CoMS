@@ -26,3 +26,4 @@ export const GET_DISCUSSIONS_API_KEY = "/user/courses/forum/discussions";
 export const DELETE_DISCUSSION_API_KEY = "/user/courses/forum/deletediscussion";
 export const GET_COMMENTS_API_KEY = "/user/courses/forum/discussions/comments";
 export const CREATE_COMMENT_API_KEY = "/user/courses/forum/createcomment";
+export const DELETE_COMMENT_API_KEY = "/user/courses/forum/deletecomment";

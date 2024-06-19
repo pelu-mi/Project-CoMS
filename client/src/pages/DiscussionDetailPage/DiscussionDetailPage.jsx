@@ -70,13 +70,15 @@ export const DiscussionDetailPage = () => {
           {comments.map((comment, index) => (
             <Grid item xs={12} key={index}>
               <CommentCard
-                comment={comment.content}
+                commentId={comment._id}
+                content={comment.content}
                 author={{
                   _id: comment.creator,
                   firstName: comment.firstName,
                   lastName: comment.lastName,
                 }}
                 date={comment.createdAt}
+                setComments={setComments}
               />
             </Grid>
           ))}

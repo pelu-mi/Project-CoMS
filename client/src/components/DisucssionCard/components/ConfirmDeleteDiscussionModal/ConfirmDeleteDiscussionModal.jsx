@@ -5,6 +5,10 @@ import { useSnackbar } from "notistack";
 import { GET_DISCUSSIONS_API_KEY } from "services/constants";
 import { useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import {
+  StyledContent,
+  StyledTypography,
+} from "components/CommentCard/components/ConfirmDeleteCommentModal/ConfirmDeleteCommentModal.styled";
 
 export const ConfirmDeleteDiscussionModal = ({
   discussionId,
@@ -35,7 +39,14 @@ export const ConfirmDeleteDiscussionModal = ({
 
   return (
     <ConfirmModal
-      promptString={`Are you sure to delete the discussion: ${discussionTitle}?`}
+      promptString={`Are you sure to delete discussion?`}
+      description={
+        <StyledContent>
+          <StyledTypography variant="body1" color="text.secondary">
+            &quot;{discussionTitle}&quot;
+          </StyledTypography>
+        </StyledContent>
+      }
       confirmLabel="Delete"
       confirmColor="error"
       onClose={onClose}

@@ -7,6 +7,7 @@ import { Button, Grid, Typography } from "@mui/material";
 
 export const ConfirmModal = ({
   promptString,
+  description,
   closeLabel = "Cancel",
   confirmLabel = "Confirm",
   confirmColor = "primary",
@@ -20,10 +21,15 @@ export const ConfirmModal = ({
       hideCloseIcon
       contentStyles={{ maxWidth: "400px" }}
     >
-      <Typography variant="h6" mb={4}>
-        {promptString}
-      </Typography>
-      <Grid container spacing={2}>
+      <Typography variant="h6">{promptString}</Typography>
+
+      {description !== "" && (
+        <Typography variant="body1" mt={3}>
+          {description}
+        </Typography>
+      )}
+
+      <Grid container spacing={2} mt={2}>
         <Grid item xs={6}>
           <Button
             variant="outlined"
@@ -53,6 +59,7 @@ export const ConfirmModal = ({
 // Specify types of props to be received by ConfirmModal
 ConfirmModal.propTypes = {
   promptString: PropTypes.string.isRequired,
+  description: PropTypes.string,
   closeLabel: PropTypes.string,
   confirmLabel: PropTypes.string,
   confirmColor: PropTypes.string,

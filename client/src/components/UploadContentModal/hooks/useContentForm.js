@@ -4,7 +4,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "hooks/useForm";
 import { useSnackbar } from "notistack";
-import { useParams } from "react-router-dom";
 import { useAddCourseContentMutation } from "services/api/courseDetail/useAddCourseContentMutation";
 import { useEditCourseContentMutation } from "services/api/courseDetail/useEditCourseContentMutation";
 import { GET_COURSE_CONTENT_API_KEY } from "services/constants";
