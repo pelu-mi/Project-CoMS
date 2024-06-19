@@ -382,6 +382,30 @@ async function deleteComment(req, res) {
   }
 }
 
+async function switchOffGuidetour(req, res) {
+  try {
+    const response = await usersServices.switchOffGuidetour(req.user);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to switch off tour",
+      status: "failure",
+    });
+  }
+}
+
+async function switchOnGuidetour(req, res) {
+  try {
+    const response = await usersServices.switchOnGuidetour(req.user);
+    res.status(response.statusCode).json(response);
+  } catch (error) {
+    res.status(500).json({
+      message: "Unable to switch on tour",
+      status: "failure",
+    });
+  }
+}
+
 /**
  * Export all fuctions
  */
@@ -409,4 +433,6 @@ export default {
   getDiscussionComments,
   deleteDiscussion,
   deleteComment,
+  switchOffGuidetour,
+  switchOnGuidetour,
 };

@@ -36,6 +36,7 @@ courseSchema.virtual("discussionCount", {
   localField: "_id",
   foreignField: "course",
   count: true,
+  match: { delete: false },
 });
 
 // Ensure virtual fields are included when converting to JSON or Object

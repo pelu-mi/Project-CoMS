@@ -481,6 +481,15 @@ const resetPassword = async (payload) => {
 };
 
 async function updateUser(payload) {
+  const currentUser = await users.findById(payload._id);
+  if (!currentUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
   const updatedUser = await users.findByIdAndUpdate(
     payload._id,
     { $set: payload }, // Update the fields provided in the payload
@@ -495,6 +504,26 @@ async function updateUser(payload) {
       status: "failure",
     };
   }
+
+  await comment.updateMany(
+    { creator: payload._id },
+    {
+      $set: {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      },
+    }
+  );
+
+  await discussion.updateMany(
+    { creator: payload._id }, // Match discussions by creator
+    {
+      $set: {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      },
+    }
+  );
 
   return {
     message: "User updated successfully",
@@ -564,7 +593,10 @@ async function getForumDiscussions(payload) {
 
 async function getDiscussionComments(payload) {
   const { discussionId } = payload;
-  const discussionName = await discussion.findById(discussionId);
+  const discussionName = await discussion.findOne({
+    _id: discussionId,
+    delete: false,
+  });
   if (!discussionName) {
     return {
       message: "discussion not found",
@@ -645,6 +677,71 @@ async function deleteComment(payload) {
   };
 }
 
+async function switchOffGuidetour(user) {
+  const tourUser = await users.findOne({ _id: user._id });
+  if (!tourUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  // Update the fields to switch off the guide tour
+  const updatedUser = await users.findByIdAndUpdate(
+    user._id,
+    {
+      $set: {
+        isCompleteCourseListTour: true,
+        isCompleteCourseDetailsTour: true,
+        isCompleteForumListTour: true,
+        isCompleteCourseForumTour: true,
+        isCompleteDiscussionTour: true,
+      },
+    },
+    { new: true, useFindAndModify: false }
+  );
+
+  return {
+    message: "Guide tour switched off successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedUser,
+  };
+}
+
+async function switchOnGuidetour(user) {
+  const tourUser = await users.findOne({ _id: user._id });
+  if (!tourUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  // Update the fields to switch on the guide tour
+  const updatedUser = await users.findByIdAndUpdate(
+    user._id,
+    {
+      $set: {
+        isCompleteCourseListTour: false,
+        isCompleteCourseDetailsTour: false,
+        isCompleteForumListTour: false,
+        isCompleteCourseForumTour: false,
+        isCompleteDiscussionTour: false,
+      },
+    },
+    { new: true, useFindAndModify: false }
+  );
+
+  return {
+    message: "Guide tour switched on successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedUser,
+  };
+}
 export default {
   createAccount,
   login,
@@ -669,4 +766,6 @@ export default {
   getDiscussionComments,
   deleteComment,
   deleteDiscussion,
+  switchOffGuidetour,
+  switchOnGuidetour,
 };

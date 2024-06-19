@@ -4,6 +4,7 @@
 import express from "express";
 import userControllers from "../controllers/users.controller.js";
 import authMiddleware from "../middlewares/auth.js";
+import auth from "../middlewares/auth.js";
 
 // Define Router object for all /user routes
 const router = express.Router();
@@ -125,6 +126,17 @@ router.post(
   userControllers.deleteDiscussion
 );
 
+router.post(
+  "/offtour",
+  authMiddleware.authenticate,
+  userControllers.switchOffGuidetour
+);
+
+router.post(
+  "/ontour",
+  authMiddleware.authenticate,
+  userControllers.switchOnGuidetour
+);
 /**
  * Export router object
  */
