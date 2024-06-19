@@ -62,7 +62,7 @@ export const DiscussionDetailPage = () => {
   const renderComments = () => {
     if (isFetching) {
       return (
-        <StyledEmptyLayout>
+        <StyledEmptyLayout sx={{ minHeight: "40vh" }}>
           <Loader />
         </StyledEmptyLayout>
       );
@@ -91,7 +91,7 @@ export const DiscussionDetailPage = () => {
     }
 
     return (
-      <StyledEmptyLayout>
+      <StyledEmptyLayout sx={{ minHeight: "40vh" }}>
         <Box textAlign="center">
           <AnnouncementIcon
             sx={{

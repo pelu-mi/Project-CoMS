@@ -20,6 +20,7 @@ export const StyledEmptyLayout = styled(Box)({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  justifyContent: "center",
   gap: "16px",
   paddingBottom: "16px",
 });
