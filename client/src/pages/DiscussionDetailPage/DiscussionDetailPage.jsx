@@ -28,6 +28,7 @@ import { Loader } from "components/Loader";
 import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQuery";
 import { useCommentForm } from "./hooks/useCommentForm";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 export const DiscussionDetailPage = () => {
   const { user } = useUser();
@@ -152,7 +153,7 @@ export const DiscussionDetailPage = () => {
         <CircleIcon sx={{ width: "4px", color: "text.secondary" }} />
 
         <Typography variant="body2" color="text.secondary">
-          {discussionDetails.createdAt}
+          {moment(discussionDetails.createdAt).fromNow()}
         </Typography>
       </Box>
 

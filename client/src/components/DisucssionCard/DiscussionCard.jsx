@@ -14,6 +14,7 @@ import { useUser } from "context";
 import { ROLES } from "constants/role";
 import { useState } from "react";
 import { ConfirmDeleteDiscussionModal } from "./components/ConfirmDeleteDiscussionModal";
+import moment from "moment";
 
 export const DiscussionCard = ({
   discussionId,
@@ -67,7 +68,7 @@ export const DiscussionCard = ({
                 </StyledTypography>
               </StyledAuthorContainer>
               <Typography variant="body2" color="text.secondary">
-                {date}
+                {moment(date).fromNow()}
               </Typography>
             </Box>
           </StyledCardContent>

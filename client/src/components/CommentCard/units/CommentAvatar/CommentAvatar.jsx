@@ -5,6 +5,7 @@ import {
   StyledAvatar,
   StyledTypography,
 } from "components/CommentCard/CommentCard.styled";
+import moment from "moment";
 
 export const CommentAvatar = ({ author, date }) => {
   return (
@@ -17,9 +18,9 @@ export const CommentAvatar = ({ author, date }) => {
           </StyledTypography>
         </Tooltip>
 
-        {date !== "" && (
+        {date && (
           <Typography variant="body2" color="text.secondary">
-            {date}
+            {moment(date).fromNow()}
           </Typography>
         )}
       </Box>
