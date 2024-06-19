@@ -11,15 +11,22 @@ export const CourseDetailTour = (props) => {
   const [showTutorial, setShowTutorial] = useState(false);
   const instructorSteps = [
     {
-      target: ".manage-student-step",
+      target: ".forum-step",
       title: (
         <>
           Hello{" "}
           <span style={{ textTransform: "capitalize" }}>{user.firstName}</span>!
           😃
-          <br /> Let&apos;s see your student list.
+          <br /> Finding your course forum.
         </>
       ),
+      content:
+        "You can create and read course discussions under the course forum.",
+      disableBeacon: true,
+    },
+    {
+      target: ".manage-student-step",
+      title: "Let's see your student list!",
       content:
         "You can register and unregister your students to the course here.",
       disableBeacon: true,
@@ -45,15 +52,22 @@ export const CourseDetailTour = (props) => {
   ];
   const studentSteps = [
     {
-      target: ".content-list-step",
+      target: ".forum-step",
       title: (
         <>
           Hello{" "}
           <span style={{ textTransform: "capitalize" }}>{user.firstName}</span>!
           😃
-          <br /> Let&apos;s see your course contents.
+          <br /> Finding your course forum.
         </>
       ),
+      content:
+        "You can create and read course discussions under the course forum.",
+      disableBeacon: true,
+    },
+    {
+      target: ".content-list-step",
+      title: "Let's see your course contents!",
       content:
         "You can find all your course materials that are posted by the instructor here.",
       disableBeacon: true,

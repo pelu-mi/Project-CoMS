@@ -135,7 +135,7 @@ export const CourseDetailPage = () => {
           <StyledTitleActionContainer container spacing={2}>
             <Grid item xs={12} sm={4}>
               <Button
-                className="manage-student-step"
+                className="forum-step"
                 variant="outlined"
                 startIcon={<ForumIcon />}
                 fullWidth
