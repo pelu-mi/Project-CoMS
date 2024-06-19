@@ -60,6 +60,7 @@ export const DiscussionListPage = () => {
           {discussions.map((discussion, index) => (
             <Grid item xs={12} key={`${index}-${discussion.title}`}>
               <DiscussionCard
+                discussionId={discussion._id}
                 title={discussion.title}
                 author={{
                   authorId: discussion.creator,

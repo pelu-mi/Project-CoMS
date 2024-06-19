@@ -23,3 +23,4 @@ export const ADD_STUDENTS_API_KEY = "/user/addstudents";
 // Forum Routes
 export const CREATE_DISCUSSION_API_KEY = "/user/courses/forum/creatediscussion";
 export const GET_DISCUSSIONS_API_KEY = "/user/courses/forum/discussions";
+export const DELETE_DISCUSSION_API_KEY = "/user/courses/forum/deletediscussion";
