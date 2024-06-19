@@ -35,6 +35,9 @@ export const UserProvider = ({ children }) => {
       role,
       isCompleteCourseListTour,
       isCompleteCourseDetailsTour,
+      isCompleteForumListTour,
+      isCompleteDiscussionTour,
+      isCompleteCourseForumTour,
     } = userResponse.data;
 
     const userObject = {
@@ -45,6 +48,9 @@ export const UserProvider = ({ children }) => {
       role,
       isCompleteCourseListTour,
       isCompleteCourseDetailsTour,
+      isCompleteForumListTour,
+      isCompleteDiscussionTour,
+      isCompleteCourseForumTour,
     };
 
     setUser(userObject);

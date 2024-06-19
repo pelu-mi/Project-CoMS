@@ -22,6 +22,7 @@ import { useState } from "react";
 import { DiscussionModal } from "components/DiscussionModal";
 import { useDiscussionListQuery } from "services/api/forum/useDiscussionListQuery";
 import { Loader } from "components/Loader";
+import { DiscussionListTour } from "./components/DiscussionListTour";
 
 export const DiscussionListPage = () => {
   const { courseId } = useParams();
@@ -159,6 +160,8 @@ export const DiscussionListPage = () => {
           {renderDiscussions()}
         </StyledDiscussionContainer>
       </Box>
+
+      <DiscussionListTour />
 
       <DiscussionModal
         open={openDiscussionModal}
