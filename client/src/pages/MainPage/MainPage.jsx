@@ -25,7 +25,7 @@ export const MainPage = () => {
           <Route index element={<CourseDetailPage />} />
           <Route path={forumRelativePath} element={<DiscussionListPage />} />
           <Route
-            path={`${forumRelativePath}/:forumId`}
+            path={`${forumRelativePath}/:discussionId`}
             element={<DiscussionDetailPage />}
           />
         </Route>

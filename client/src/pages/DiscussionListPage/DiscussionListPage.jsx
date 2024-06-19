@@ -70,8 +70,7 @@ export const DiscussionListPage = () => {
                 date={discussion.createdAt}
                 onClick={() =>
                   navigate(
-                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}/${discussion.forumId}`,
-                    { state: { courseName: courseName } }
+                    `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}/${discussion._id}`
                   )
                 }
               />
