@@ -32,7 +32,7 @@ export const ForumListPage = () => {
   const renderCardDescription = (discussionCount) => {
     let description = `${discussionCount} Discussion`;
 
-    if (discussionCount > 0) {
+    if (discussionCount > 1) {
       description += "s";
     }
 
