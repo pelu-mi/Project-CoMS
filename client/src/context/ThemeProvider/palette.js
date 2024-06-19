@@ -21,6 +21,12 @@ export const lightPalette = {
   background: {
     arrow: "#FFF",
   },
+  forum: {
+    main: "#D31C53",
+  },
+  student: {
+    main: "#9124D0",
+  },
 };
 
 export const darkPalette = {
@@ -47,5 +53,11 @@ export const darkPalette = {
     paper: "#222222",
     default: "#1C1C1C",
     arrow: "#292929",
+  },
+  forum: {
+    main: "#F889AA",
+  },
+  student: {
+    main: "#C995E7",
   },
 };

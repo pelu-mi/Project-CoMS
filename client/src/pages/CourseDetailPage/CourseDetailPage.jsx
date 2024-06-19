@@ -1,7 +1,7 @@
 /**
  * Import Modules
  */
-import { useTheme } from "@emotion/react";
+
 import {
   Box,
   Button,
@@ -9,6 +9,7 @@ import {
   // InputAdornment,
   // TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import ForumIcon from "@mui/icons-material/Forum";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -139,6 +140,7 @@ export const CourseDetailPage = () => {
                 variant="outlined"
                 startIcon={<ForumIcon />}
                 fullWidth
+                color="forum"
                 onClick={() =>
                   navigate(
                     `${COURSE_LIST_ROUTE}/${courseId}${FORUM_LIST_ROUTE}`
@@ -156,6 +158,7 @@ export const CourseDetailPage = () => {
                     variant="outlined"
                     startIcon={<GroupIcon />}
                     fullWidth
+                    color="student"
                     onClick={() => setOpenStudentModal(true)}
                   >
                     Students
