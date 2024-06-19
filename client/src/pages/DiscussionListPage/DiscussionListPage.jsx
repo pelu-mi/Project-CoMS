@@ -104,7 +104,7 @@ export const DiscussionListPage = () => {
 
   return (
     <>
-      <Box pb={6} pt={3}>
+      <Box pb={8} pt={3}>
         <ForumRules />
 
         <Breadcrumbs aria-label="breadcrumb" pt={5}>
