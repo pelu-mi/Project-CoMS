@@ -201,7 +201,7 @@ export const DiscussionDetailPage = () => {
             <Button
               type="submit"
               endIcon={<SendIcon />}
-              sx={{ width: "fit-content", marginLeft: "auto" }}
+              sx={{ width: "fit-content" }}
             >
               Submit
             </Button>
