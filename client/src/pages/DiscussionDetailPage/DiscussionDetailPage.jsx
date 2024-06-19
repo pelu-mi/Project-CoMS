@@ -26,30 +26,8 @@ import { CommentAvatar } from "components/CommentCard/units/CommentAvatar";
 import { useCommentListQuery } from "services/api/forum/useCommentListQuery";
 import { Loader } from "components/Loader";
 import { useCourseDetailQuery } from "services/api/courseDetail/useCourseDetailQuery";
-
-// const comments = [
-//   {
-//     _id: "123",
-//     author: {
-//       _id: "1",
-//       firstName: "Ellen",
-//       lastName: "Sam",
-//     },
-//     comment:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-//   },
-
-//   {
-//     _id: "123",
-//     author: {
-//       _id: "1",
-//       firstName: "Ellen",
-//       lastName: "Sam",
-//     },
-//     comment:
-//       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-//   },
-// ];
+import { useCommentForm } from "./hooks/useCommentForm";
+import { useEffect, useState } from "react";
 
 export const DiscussionDetailPage = () => {
   const { user } = useUser();
@@ -57,8 +35,25 @@ export const DiscussionDetailPage = () => {
   const theme = useTheme();
 
   const { course } = useCourseDetailQuery(courseId);
-  const { discussionDetails, comments, isFetching } =
-    useCommentListQuery(discussionId);
+  const {
+    discussionDetails,
+    comments: initialComments,
+    isFetching,
+  } = useCommentListQuery(discussionId);
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    if (initialComments) {
+      setComments(initialComments);
+    }
+  }, [initialComments]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useCommentForm({ setComments });
 
   const renderComments = () => {
     if (isFetching) {
@@ -75,9 +70,13 @@ export const DiscussionDetailPage = () => {
           {comments.map((comment, index) => (
             <Grid item xs={12} key={index}>
               <CommentCard
-                comment={comment.comment}
-                author={comment.author}
-                date="10 mins ago"
+                comment={comment.content}
+                author={{
+                  _id: comment.creator,
+                  firstName: comment.firstName,
+                  lastName: comment.lastName,
+                }}
+                date={comment.createdAt}
               />
             </Grid>
           ))}
@@ -173,31 +172,36 @@ export const DiscussionDetailPage = () => {
 
       <StyledCommentContainer className="comment-list-step">
         {renderComments()}
-      </StyledCommentContainer>
 
-      <StyledCommentForm className="add-comment-step" id="add-comment">
-        <CommentAvatar
-          author={{ firstName: user.firstName, lastName: user.lastName }}
-        />
-
-        <TextField
-          label="Your Comment"
-          placeholder="Enter your comment"
-          multiline
-          rows={3}
-          fullWidth
-          // {...register("comment")}
-        />
-
-        <Button
-          type="submit"
-          endIcon={<SendIcon />}
-          sx={{ width: "fit-content", marginLeft: "auto" }}
-          //   onClick={() => setOpenDiscussionModal(true)}
+        <StyledCommentForm
+          className="add-comment-step"
+          id="add-comment"
+          onSubmit={handleSubmit}
         >
-          Submit
-        </Button>
-      </StyledCommentForm>
+          <CommentAvatar
+            author={{ firstName: user.firstName, lastName: user.lastName }}
+          />
+
+          <TextField
+            label="Your Comment"
+            placeholder="Enter your comment"
+            multiline
+            rows={3}
+            fullWidth
+            error={errors.content}
+            helperText={errors.content?.message}
+            {...register("content")}
+          />
+
+          <Button
+            type="submit"
+            endIcon={<SendIcon />}
+            sx={{ width: "fit-content", marginLeft: "auto" }}
+          >
+            Submit
+          </Button>
+        </StyledCommentForm>
+      </StyledCommentContainer>
     </Box>
   );
 };
