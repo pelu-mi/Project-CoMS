@@ -8,12 +8,16 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import ToggleOffIcon from "@mui/icons-material/ToggleOff";
+import ToggleOnIcon from "@mui/icons-material/ToggleOn";
+import InfoIcon from "@mui/icons-material/Info";
 import { useColorMode, useUser } from "context";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
 import { ProfileModal } from "components/ProfileModal";
 import { Avatar } from "components/Avatar";
+import { useGuide } from "hooks/useGuide";
 
 /**
  * User Menus
@@ -21,6 +25,7 @@ import { Avatar } from "components/Avatar";
 export const UserMenus = () => {
   const { user } = useUser();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { isActiveGuides, handleToggleGuides } = useGuide();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
@@ -29,18 +34,23 @@ export const UserMenus = () => {
   const settings = [
     {
       title: "Profile",
-      icon: <AccountCircleIcon color="primary" />,
+      icon: <AccountCircleIcon color="student" />,
       action: () => setShowProfileModal(true),
     },
     {
       title: "Contact Support",
-      icon: <HelpIcon color="info" />,
+      icon: <InfoIcon color="info" />,
       action: () => window.open("mailto:pelumifadolapo7@gmail.com"),
     },
     {
       title: colorMode === "dark" ? "Light Theme" : "Dark Theme",
       icon: colorMode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />,
       action: () => toggleColorMode(),
+    },
+    {
+      title: isActiveGuides ? "Turn Off Guides" : "Turn On Guides",
+      icon: <HelpIcon color="primary" />,
+      action: handleToggleGuides,
     },
     {
       title: "Logout",
