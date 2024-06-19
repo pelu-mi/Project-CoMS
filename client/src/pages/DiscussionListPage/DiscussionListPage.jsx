@@ -63,7 +63,7 @@ export const DiscussionListPage = () => {
                 discussionId={discussion._id}
                 title={discussion.title}
                 author={{
-                  authorId: discussion.creator,
+                  _id: discussion.creator,
                   firstName: discussion.firstName,
                   lastName: discussion.lastName,
                 }}
