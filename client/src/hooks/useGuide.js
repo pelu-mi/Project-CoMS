@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { useUser } from "context";
-import { useUpdateUserMutation } from "services/api/user/useUpdateUserMutation";
 import { useSnackbar } from "notistack";
+import { useTurnOnGuidesMutation } from "services/api/guidedTour/useTurnOnGuidesMutation";
+import { useTurnOffGuidesMutation } from "services/api/guidedTour/useTurnOffGuidesMutation";
 
 export const useGuide = () => {
   const { user, handleSetUser } = useUser();
@@ -17,36 +18,32 @@ export const useGuide = () => {
     );
   }, [user]);
 
-  const { mutateAsync: updateUser } = useUpdateUserMutation({
+  const mutationOptions = (showSuccessMessage = false) => ({
     onSuccess: async (data) => {
-      if (isActiveGuides) {
-        enqueueSnackbar("Turned off guides successfully", {
-          variant: "success",
-        });
+      if (showSuccessMessage) {
+        enqueueSnackbar(data.message, { variant: "success" });
       }
-
       handleSetUser(data);
     },
-    onError: () => {
-      const message = isActiveGuides
-        ? "Turned off guides failed"
-        : "Turned on guides failed";
-
-      enqueueSnackbar(message, { variant: "error" });
+    onError: (error) => {
+      enqueueSnackbar(error.message, { variant: "error" });
     },
   });
 
-  const handleToggleGuides = async () => {
-    const payload = {
-      _id: user._id,
-      isCompleteCourseListTour: isActiveGuides,
-      isCompleteCourseDetailsTour: isActiveGuides,
-      isCompleteForumListTour: isActiveGuides,
-      isCompleteCourseForumTour: isActiveGuides,
-      isCompleteDiscussionTour: isActiveGuides,
-    };
+  const { mutateAsync: turnOnGuides } = useTurnOnGuidesMutation(
+    mutationOptions()
+  );
 
-    await updateUser(payload);
+  const { mutateAsync: turnOffGuides } = useTurnOffGuidesMutation(
+    mutationOptions(true)
+  );
+
+  const handleToggleGuides = async () => {
+    if (isActiveGuides) {
+      await turnOffGuides();
+    } else {
+      await turnOnGuides();
+    }
   };
   return { isActiveGuides, handleToggleGuides };
 };
