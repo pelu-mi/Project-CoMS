@@ -24,35 +24,37 @@ export const DiscussionModal = ({ onClose, ...rest }) => {
 
   return (
     <Modal title="Add Discussion" {...{ ...rest, onClose: handleClose }}>
-      <Grid container mt={4} gap={3}>
-        <TextField
-          label="Topic *"
-          placeholder="Enter your discussion topic"
-          fullWidth
-          error={errors.title}
-          helperText={errors.title?.message}
-          {...register("title")}
-        />
+      <form onSubmit={handleSubmit}>
+        <Grid container mt={4} gap={3}>
+          <TextField
+            label="Topic *"
+            placeholder="Enter your discussion topic"
+            fullWidth
+            error={errors.title}
+            helperText={errors.title?.message}
+            {...register("title")}
+          />
 
-        <Grid container spacing={2}>
-          <Grid item sm={6} sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              disableRipple
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button sx={{ height: "100%" }} fullWidth onClick={handleSubmit}>
-              Add Disscussion
-            </Button>
+          <Grid container spacing={2}>
+            <Grid item sm={6} sx={{ display: { xs: "none", sm: "block" } }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                disableRipple
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Button type="submit" sx={{ height: "100%" }} fullWidth>
+                Add Disscussion
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </form>
     </Modal>
   );
 };
