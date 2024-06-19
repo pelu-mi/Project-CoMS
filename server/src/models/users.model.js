@@ -40,6 +40,18 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: "false",
     },
+    isCompleteForumListTour: {
+      type: Boolean,
+      default: "false",
+    },
+    isCompleteCourseForumTour: {
+      type: Boolean,
+      default: "false",
+    },
+    isCompleteDiscussionTour: {
+      type: Boolean,
+      default: "false",
+    },
   },
 
   {
