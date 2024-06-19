@@ -564,9 +564,7 @@ async function getForumDiscussions(payload) {
 
 async function getDiscussionComments(payload) {
   const { discussionId } = payload;
-  const discussionName = await discussion
-    .findById(discussionId)
-    .select("title");
+  const discussionName = await discussion.findById(discussionId);
   if (!discussionName) {
     return {
       message: "discussion not found",
@@ -590,7 +588,7 @@ async function getDiscussionComments(payload) {
     message: "Comments listed below",
     statusCode: 201,
     status: "success",
-    name: discussionName.title,
+    discussionDetails: discussionName,
     data: comments,
   };
 }
