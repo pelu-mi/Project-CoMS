@@ -135,7 +135,7 @@ export const DiscussionDetailPage = () => {
           </Typography>
         </Breadcrumbs>
 
-        <Typography variant="h4" mt={4} mb={3}>
+        <Typography variant="h4" mt={4} mb={3} textAlign="center">
           {discussionDetails.title}
         </Typography>
 

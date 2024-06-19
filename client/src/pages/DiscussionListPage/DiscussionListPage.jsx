@@ -121,7 +121,7 @@ export const DiscussionListPage = () => {
           </Typography>
         </Breadcrumbs>
 
-        <Typography variant="h4" mt={4}>
+        <Typography variant="h4" mt={4} textAlign="center">
           {courseName} Forum
         </Typography>
 
