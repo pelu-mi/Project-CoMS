@@ -26,6 +26,7 @@ export const CourseCard = ({
   name,
   description,
   onClick,
+  hideEditIcon = false,
 }) => {
   const { user } = useUser();
   const [openEditCourseModal, setOpenEditCourseModal] = useState(false);
@@ -45,7 +46,7 @@ export const CourseCard = ({
               title={name}
             />
 
-            {user.role === ROLES.instructor && (
+            {user.role === ROLES.instructor && !hideEditIcon && (
               <StyledIconWrapper variant="outlined" onClick={handleOnEdit}>
                 <EditIcon color="primary" />
               </StyledIconWrapper>
@@ -87,4 +88,5 @@ CourseCard.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   onClick: PropTypes.func,
+  hideEditIcon: PropTypes.func,
 };

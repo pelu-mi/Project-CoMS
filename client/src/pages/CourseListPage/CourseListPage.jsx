@@ -151,7 +151,7 @@ export const CourseListPage = () => {
           >
             <Typography
               variant="h5"
-              sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
+              sx={{ my: { xs: "16px", sm: "14px" }, pr: "16px", flexGrow: 20 }}
             >
               {renderTitle()}
             </Typography>
