@@ -274,6 +274,13 @@ async function getStudentCourseList(req, res) {
   }
 }
 
+/**
+ * forgotPassword - Request for OTP code
+ *
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function forgotPassword(req, res) {
   try {
     const response = await usersServices.forgotPassword(req.body);
@@ -286,6 +293,13 @@ async function forgotPassword(req, res) {
   }
 }
 
+/**
+ * resetPassword - Reset user's password
+ *
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function resetPassword(req, res) {
   try {
     const response = await usersServices.resetPassword(req.body);
@@ -298,6 +312,13 @@ async function resetPassword(req, res) {
   }
 }
 
+/**
+ * updateUser - Update User information
+ *
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function updateUser(req, res) {
   try {
     const response = await usersServices.updateUser(req.body);
@@ -310,6 +331,12 @@ async function updateUser(req, res) {
   }
 }
 
+/**
+ * createDiscussion - Create a new Discussion
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function createDiscussion(req, res) {
   try {
     const response = await usersServices.createDiscussion(req.user, req.body);
@@ -322,6 +349,12 @@ async function createDiscussion(req, res) {
   }
 }
 
+/**
+ * createDiscussion - Create a new comment
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function createComment(req, res) {
   try {
     const response = await usersServices.createComment(req.user, req.body);
@@ -334,6 +367,12 @@ async function createComment(req, res) {
   }
 }
 
+/**
+ * getForumDiscussion - Get all Discussions under a course
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getForumDiscussions(req, res) {
   try {
     const response = await usersServices.getForumDiscussions(req.params);
@@ -346,6 +385,12 @@ async function getForumDiscussions(req, res) {
   }
 }
 
+/**
+ * getDiscussionComments - Get all comments under a discussion
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function getDiscussionComments(req, res) {
   try {
     const response = await usersServices.getDiscussionComments(req.params);
@@ -358,6 +403,12 @@ async function getDiscussionComments(req, res) {
   }
 }
 
+/**
+ * deleteDiscussion - Set delete = true for a discussion
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function deleteDiscussion(req, res) {
   try {
     const response = await usersServices.deleteDiscussion(req.body);
@@ -370,6 +421,12 @@ async function deleteDiscussion(req, res) {
   }
 }
 
+/**
+ * deleteComment - Set delete = true for a comment
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function deleteComment(req, res) {
   try {
     const response = await usersServices.deleteComment(req.body);
@@ -382,6 +439,12 @@ async function deleteComment(req, res) {
   }
 }
 
+/**
+ * switchOffGuidetour - set all guide tour flags to true
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function switchOffGuidetour(req, res) {
   try {
     const response = await usersServices.switchOffGuidetour(req.user);
@@ -394,6 +457,12 @@ async function switchOffGuidetour(req, res) {
   }
 }
 
+/**
+ * switchOnGuidetour - set all guide tour flags to false
+ *
+ * @param {object} req - Request Object
+ * @param {object} res - Response Object
+ */
 async function switchOnGuidetour(req, res) {
   try {
     const response = await usersServices.switchOnGuidetour(req.user);

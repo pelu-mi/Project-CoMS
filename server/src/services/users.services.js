@@ -417,6 +417,12 @@ async function getStudentCourseList(user) {
   };
 }
 
+/**
+ * forgotPassword - Request for OTP code from server to reset password
+ * 
+ * @param {Object} payload - contains user's email
+ * @returns  success or failure status
+ */
 async function forgotPassword(payload) {
   const { email } = payload;
   const foundUser = await users.findOne({ email: email });
@@ -448,6 +454,12 @@ async function forgotPassword(payload) {
   };
 }
 
+/**
+ * resetPassword - Reset user password
+ * 
+ * @param {Object} payload - contains user's email and reset code
+ * @returns  success or failure status
+ */
 const resetPassword = async (payload) => {
   const { email, resetPin } = payload;
 
@@ -480,6 +492,12 @@ const resetPassword = async (payload) => {
   };
 };
 
+/**
+ * updateUser - Update user's information
+ * 
+ * @param {Object} payload - contains user's information to be changed
+ * @returns  success or failure status
+ */
 async function updateUser(payload) {
   const currentUser = await users.findById(payload._id);
   if (!currentUser) {
@@ -533,6 +551,13 @@ async function updateUser(payload) {
   };
 }
 
+/**
+ * createDiscussion - Create a new discussion
+ * 
+ * @param {Object} user - Contains information of user that wants to create new discussion
+ * @param {Object} payload - contains information of discussion to be created
+ * @returns  success or failure status
+ */
 async function createDiscussion(user, payload) {
   payload.creator = user._id;
   payload.firstName = user.firstName;
@@ -546,6 +571,13 @@ async function createDiscussion(user, payload) {
   };
 }
 
+/**
+ * createComment - Create a new comment
+ * 
+ * @param {Object} user - Contains information of user that wants to create new comment
+ * @param {Object} payload - contains information of comment to be created
+ * @returns  success or failure status
+ */
 async function createComment(user, payload) {
   payload.creator = user._id;
   payload.firstName = user.firstName;
@@ -560,6 +592,12 @@ async function createComment(user, payload) {
   };
 }
 
+/**
+ * getForumDiscussion - Get all discussions belonging to a course forum
+ * 
+ * @param {Object} payload - contains information of course
+ * @returns  success or failure status
+ */
 async function getForumDiscussions(payload) {
   const { courseId } = payload;
   const courseName = await course.findById(courseId).select("name");
@@ -591,6 +629,12 @@ async function getForumDiscussions(payload) {
   };
 }
 
+/**
+ * getDiscussionComments - Get all comments belonging to a discussion
+ * 
+ * @param {Object} payload - contains information of discussion
+ * @returns  success or failure status
+ */
 async function getDiscussionComments(payload) {
   const { discussionId } = payload;
   const discussionName = await discussion.findOne({
@@ -625,6 +669,12 @@ async function getDiscussionComments(payload) {
   };
 }
 
+/**
+ * deleteDiscussion - Delete a discussion
+ * 
+ * @param {Object} payload - contains information of discussion
+ * @returns  success or failure status
+ */
 async function deleteDiscussion(payload) {
   const { discussionId } = payload;
 
@@ -651,6 +701,12 @@ async function deleteDiscussion(payload) {
   };
 }
 
+/**
+ * deleteComment - Delete a comment
+ * 
+ * @param {Object} payload - contains information of comment
+ * @returns  success or failure status
+ */
 async function deleteComment(payload) {
   const { commentId } = payload;
 
@@ -677,6 +733,12 @@ async function deleteComment(payload) {
   };
 }
 
+/**
+ * switchOffGuidetour - Set all flags for guide tour to true
+ * 
+ * @param {Object} user - contains information of user
+ * @returns  success or failure status
+ */
 async function switchOffGuidetour(user) {
   const tourUser = await users.findOne({ _id: user._id });
   if (!tourUser) {
@@ -710,6 +772,12 @@ async function switchOffGuidetour(user) {
   };
 }
 
+/**
+ * switchOnGuidetour - Set all flags for guide tour to false
+ * 
+ * @param {Object} user - contains information of user
+ * @returns  success or failure status
+ */
 async function switchOnGuidetour(user) {
   const tourUser = await users.findOne({ _id: user._id });
   if (!tourUser) {

@@ -91,47 +91,58 @@ router.get(
   userControllers.getStudentCourseList
 );
 
+// POST request to /forgotpassword
 router.post("/forgotpassword", userControllers.forgotPassword);
 
+// POST request to /resetpassword
 router.post("/resetpassword", userControllers.resetPassword);
 
+// POST request to /updateuser
 router.post("/updateuser", userControllers.updateUser);
 
+// POST request to /courses/forum/creatediscussion
 router.post(
   "/courses/forum/creatediscussion",
   authMiddleware.authenticate,
   userControllers.createDiscussion
 );
 
+// POST request to /createcomment
 router.post(
   "/courses/forum/createcomment",
   authMiddleware.authenticate,
   userControllers.createComment
 );
 
+// GET request to /courses/forum/discussions/:courseId
 router.get(
   "/courses/forum/discussions/:courseId",
   userControllers.getForumDiscussions
 );
 
+// GET request to /courses/forum/discussions/comments/:discussionId
 router.get(
   "/courses/forum/discussions/comments/:discussionId",
   userControllers.getDiscussionComments
 );
 
+// POST request to /courses/forum/deletecomment
 router.post("/courses/forum/deletecomment", userControllers.deleteComment);
 
+// POST request to /courses/forum/deletediscussion
 router.post(
   "/courses/forum/deletediscussion",
   userControllers.deleteDiscussion
 );
 
+// POST request to /offtour
 router.post(
   "/offtour",
   authMiddleware.authenticate,
   userControllers.switchOffGuidetour
 );
 
+// POST request to /ontour
 router.post(
   "/ontour",
   authMiddleware.authenticate,

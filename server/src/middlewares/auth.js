@@ -85,6 +85,14 @@ const studentAuthenticate = async (req, res, next) => {
   }
 };
 
+/**
+ * authenticate - Validate the user based on the jwt
+ *
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next function to be executed
+ * @returns Response object
+ */
 const authenticate = async (req, res, next) => {
   try {
     const authorization = req.headers.authorization;
