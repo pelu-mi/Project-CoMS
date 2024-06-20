@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Box, Tooltip, Typography } from "@mui/material";
 import {
@@ -7,6 +10,9 @@ import {
 } from "components/CommentCard/CommentCard.styled";
 import moment from "moment";
 
+/**
+ * Comment Avatar
+ */
 export const CommentAvatar = ({ author, date }) => {
   return (
     <StyledAuthorContainer>
@@ -28,6 +34,7 @@ export const CommentAvatar = ({ author, date }) => {
   );
 };
 
+// Specify types of props to be received by the CommentAvatar
 CommentAvatar.propTypes = {
   author: PropTypes.object.isRequired,
   date: PropTypes.string.isRequired,

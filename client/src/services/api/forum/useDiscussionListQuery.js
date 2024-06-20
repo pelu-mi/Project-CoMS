@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GET_DISCUSSIONS_API_KEY } from "services/constants";
 import { apiGetRequest } from "services/helpers/apiGetRequest";
 
+// Fetch list of discussions for a given course
 export const useDiscussionListQuery = (courseId, options) => {
   const { data, ...rest } = useQuery({
     queryKey: [`${GET_DISCUSSIONS_API_KEY}/${courseId}`],

@@ -1,7 +1,13 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import { StyledFab, StyledQuestionMarkIcon } from "./GuidedButton.styled";
 
+/**
+ * Guided Button
+ */
 export const GuidedButton = ({ onClick }) => {
   return (
     <StyledFab variant="extended" color="primary" size="small" {...{ onClick }}>
@@ -13,6 +19,7 @@ export const GuidedButton = ({ onClick }) => {
   );
 };
 
+// Specify types of props to be received by the GuidedButton
 GuidedButton.propTypes = {
   onClick: PropTypes.func,
 };

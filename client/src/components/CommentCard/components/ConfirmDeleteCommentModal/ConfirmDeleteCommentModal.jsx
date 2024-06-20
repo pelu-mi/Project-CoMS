@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { ConfirmModal } from "components/ConfirmModal";
 import { useSnackbar } from "notistack";
@@ -7,6 +10,9 @@ import {
   StyledTypography,
 } from "./ConfirmDeleteCommentModal.styled";
 
+/**
+ * Confirm Delete Comment Modal
+ */
 export const ConfirmDeleteCommentModal = ({
   commentId,
   content,

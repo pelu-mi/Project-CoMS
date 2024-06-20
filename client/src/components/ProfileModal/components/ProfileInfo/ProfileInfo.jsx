@@ -1,7 +1,13 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Button, Grid, Typography } from "@mui/material";
 import { useUser } from "context";
 
+/**
+ * Profile Information
+ */
 export const ProfileInfo = ({ onEdit }) => {
   const { user } = useUser();
   const { timeZone } = Intl.DateTimeFormat().resolvedOptions();

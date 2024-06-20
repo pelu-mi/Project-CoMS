@@ -1,7 +1,13 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Button, Grid, TextField } from "@mui/material";
 import { useEditProfileForm } from "components/ProfileModal/hooks/useEditProfileForm";
 
+/**
+ * Edit Profile
+ */
 export const EditProfile = ({ onClose, onCancel }) => {
   const {
     register,

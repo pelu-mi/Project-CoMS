@@ -1,9 +1,15 @@
+/**
+ * Import Modules
+ */
 import { useMemo } from "react";
 import { useUser } from "context";
 import { useSnackbar } from "notistack";
 import { useTurnOnGuidesMutation } from "services/api/guidedTour/useTurnOnGuidesMutation";
 import { useTurnOffGuidesMutation } from "services/api/guidedTour/useTurnOffGuidesMutation";
 
+/**
+ * Custom Hook to manage user guides
+ */
 export const useGuide = () => {
   const { user, handleSetUser } = useUser();
   const { enqueueSnackbar } = useSnackbar();

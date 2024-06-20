@@ -1,5 +1,9 @@
+/**
+ * Import Modules
+ */
 import { Box, styled } from "@mui/material";
 
+// Styling for Action Container
 export const StyledActionContainer = styled(Box)({
   display: "flex",
   gap: "16px",
@@ -7,6 +11,7 @@ export const StyledActionContainer = styled(Box)({
   flexWrap: "wrap-reverse",
 });
 
+// Styling for Discussion Container
 export const StyledDiscussionContainer = styled(Box)({
   minHeight: "40vh",
   display: "flex",

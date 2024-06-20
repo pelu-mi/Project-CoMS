@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Breadcrumbs,
@@ -24,6 +27,9 @@ import { useDiscussionListQuery } from "services/api/forum/useDiscussionListQuer
 import { Loader } from "components/Loader";
 import { DiscussionListTour } from "./components/DiscussionListTour";
 
+/**
+ * Discussion List Page
+ */
 export const DiscussionListPage = () => {
   const { courseId } = useParams();
   const theme = useTheme();

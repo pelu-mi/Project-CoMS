@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { Box, Button, Card, Typography, styled } from "@mui/material";
 import { Avatar } from "components/Avatar";
 
@@ -23,6 +26,7 @@ export const StyledIconWrapper = styled(Button)({
   height: "fit-content",
 });
 
+// Styling for Author Container
 export const StyledAuthorContainer = styled(Box)({
   display: "flex",
   alignItems: "center",
@@ -30,6 +34,7 @@ export const StyledAuthorContainer = styled(Box)({
   gap: "8px",
 });
 
+// Styling for Avatar
 export const StyledAvatar = styled(Avatar)(({ theme }) => ({
   ...theme.typography.h6,
   fontWeight: 500,

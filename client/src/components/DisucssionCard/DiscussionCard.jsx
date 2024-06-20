@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Box, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,6 +19,9 @@ import { useState } from "react";
 import { ConfirmDeleteDiscussionModal } from "./components/ConfirmDeleteDiscussionModal";
 import moment from "moment";
 
+/**
+ * Discussion Card
+ */
 export const DiscussionCard = ({
   discussionId,
   title,
@@ -83,6 +89,7 @@ export const DiscussionCard = ({
   );
 };
 
+// Specify types of props to be received by the DiscussionCard
 DiscussionCard.propTypes = {
   discussionId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

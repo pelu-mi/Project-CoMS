@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { createContext, useContext, useMemo, useState } from "react";
 
@@ -5,6 +8,9 @@ export const COLOR_MODE_LOCAL_STORAGE_KEY = "colorMode";
 
 const ColorModeContext = createContext();
 
+/**
+ * Color mode provider
+ */
 export const ColorModeProvider = ({ children }) => {
   const [colorMode, setColorMode] = useState(() => {
     const storedColorMode = localStorage.getItem(COLOR_MODE_LOCAL_STORAGE_KEY);

@@ -1,3 +1,4 @@
+// Light Mode Colour scheme
 export const lightPalette = {
   primary: {
     main: "#3851DD",
@@ -29,6 +30,7 @@ export const lightPalette = {
   },
 };
 
+// Dark Mode Colour scheme
 export const darkPalette = {
   primary: {
     main: "#75B8FF",

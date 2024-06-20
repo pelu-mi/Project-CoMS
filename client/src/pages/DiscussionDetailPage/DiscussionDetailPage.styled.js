@@ -1,7 +1,11 @@
+/**
+ * Import Modules
+ */
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import { Avatar } from "components/Avatar";
 
+// Styling for Avatar
 export const StyledAvatar = styled(Avatar)(({ theme }) => ({
   ...theme.typography.body1,
   fontWeight: 500,
@@ -19,12 +23,14 @@ export const StyledTypography = styled(Typography)({
   wordBreak: "break-word",
 });
 
+// Styling for Comment Container
 export const StyledCommentContainer = styled(Box)({
   minHeight: "40vh",
   display: "flex",
   flexDirection: "column",
 });
 
+// Styling for Comment Container
 export const StyledCommentForm = styled("form")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",

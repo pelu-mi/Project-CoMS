@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { Button, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -9,6 +12,9 @@ import {
   StyledRightActionContainer,
 } from "./TooltipGuide.styled";
 
+/**
+ * Tool tip Guide
+ */
 export const TooltipGuide = ({
   continuous,
   index,
@@ -86,6 +92,7 @@ export const TooltipGuide = ({
   );
 };
 
+// Specify types of props to be received by the TooltipGuide
 TooltipGuide.propTypes = {
   continuous: PropTypes.bool,
   showProgress: PropTypes.bool,

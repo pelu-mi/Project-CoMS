@@ -1,5 +1,9 @@
+/**
+ * Import Modules
+ */
 import { Box, styled } from "@mui/material";
 
+// Styling for Rule Container
 export const StyledRuleContainer = styled(Box)(({ theme }) => ({
   padding: "24px",
   borderRadius: "8px",

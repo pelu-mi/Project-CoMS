@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Button,
@@ -27,6 +30,7 @@ export const StyledCardActionArea = styled(CardActionArea)({
   justifyContent: "flex-start",
 });
 
+// Styling for Card Content
 export const StyledCardContent = styled(CardContent)(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
@@ -48,12 +52,14 @@ export const StyledIconWrapper = styled(Button)({
   height: "fit-content",
 });
 
+// Styling for Author container
 export const StyledAuthorContainer = styled(Box)({
   display: "flex",
   alignItems: "center",
   gap: "8px",
 });
 
+// Styling for Avater
 export const StyledAvatar = styled(Avatar)(({ theme }) => ({
   ...theme.typography.body1,
   fontWeight: 500,

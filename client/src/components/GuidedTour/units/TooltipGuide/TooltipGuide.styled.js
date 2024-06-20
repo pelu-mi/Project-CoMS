@@ -1,6 +1,10 @@
+/**
+ * Import Modules
+ */
 import { Box, Paper, styled } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
+// Styling for paper
 export const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: "24px",
   display: "flex",
@@ -15,6 +19,7 @@ export const StyledPaper = styled(Paper)(({ theme }) => ({
   },
 }));
 
+// Styling for Closed Icon
 export const StyledClosedIcon = styled(CloseIcon)({
   cursor: "pointer",
   marginLeft: "auto",
@@ -23,12 +28,14 @@ export const StyledClosedIcon = styled(CloseIcon)({
   right: "20px",
 });
 
+// Styling for Action container
 export const StyledActionContainer = styled(Box)({
   display: "flex",
   gap: "16px",
   marginTop: "20px",
 });
 
+// Styling for Right action container
 export const StyledRightActionContainer = styled(Box)({
   display: "flex",
   gap: "12px",

@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import {
   Box,
   Breadcrumbs,
@@ -33,6 +36,9 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { DiscussionDetailTour } from "./components/DiscussionDetailTour";
 
+/**
+ * Discussion Detail page
+ */
 export const DiscussionDetailPage = () => {
   const { user } = useUser();
   const { courseId, discussionId } = useParams();

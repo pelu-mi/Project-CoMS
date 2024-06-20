@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import InboxIcon from "@mui/icons-material/Inbox";
 import { CourseCard } from "components/CourseCard";
@@ -12,6 +15,9 @@ import { useCourseListQuery } from "services/api/course/useCourseListQuery";
 import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
 import { ForumListTour } from "./components/ForumListTour";
 
+/**
+ * Forum List page
+ */
 export const ForumListPage = () => {
   const { user } = useUser();
   const navigate = useNavigate();

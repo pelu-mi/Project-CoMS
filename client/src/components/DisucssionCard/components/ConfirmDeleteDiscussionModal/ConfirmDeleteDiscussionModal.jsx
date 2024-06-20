@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { ConfirmModal } from "components/ConfirmModal";
 import { useDeleteDiscussionMutation } from "services/api/forum/useDeleteDiscussionMutation";
@@ -10,6 +13,9 @@ import {
   StyledTypography,
 } from "components/CommentCard/components/ConfirmDeleteCommentModal/ConfirmDeleteCommentModal.styled";
 
+/**
+ * Confirm Delete Discussion Modal
+ */
 export const ConfirmDeleteDiscussionModal = ({
   discussionId,
   discussionTitle,

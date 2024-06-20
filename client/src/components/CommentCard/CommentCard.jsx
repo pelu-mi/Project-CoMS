@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import PropTypes from "prop-types";
 import { useUser } from "context";
 import { Box, Typography } from "@mui/material";
@@ -8,6 +11,9 @@ import { CommentAvatar } from "./units/CommentAvatar";
 import { ConfirmDeleteCommentModal } from "./components/ConfirmDeleteCommentModal";
 import { useState } from "react";
 
+/**
+ * Comment Card
+ */
 export const CommentCard = ({ commentId, content, author, date, setComments }) => {
   const { user } = useUser();
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false);
@@ -52,6 +58,7 @@ export const CommentCard = ({ commentId, content, author, date, setComments }) =
   );
 };
 
+// Specify types of props to be received by the CommentCard
 CommentCard.propTypes = {
   commentId: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,

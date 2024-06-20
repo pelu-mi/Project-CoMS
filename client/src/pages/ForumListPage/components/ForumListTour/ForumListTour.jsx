@@ -1,3 +1,6 @@
+/**
+ * Import Modules
+ */
 import { useUser } from "context";
 import { useState } from "react";
 import { STATUS } from "react-joyride";
@@ -5,6 +8,9 @@ import { GuidedTour } from "components/GuidedTour";
 import { GuidedButton } from "components/GuidedButton";
 import { useUpdateUserMutation } from "services/api/user/useUpdateUserMutation";
 
+/**
+ * Forum List Tour
+ */
 export const ForumListTour = (props) => {
   const { user, handleSetUser } = useUser();
   const [showTutorial, setShowTutorial] = useState(false);

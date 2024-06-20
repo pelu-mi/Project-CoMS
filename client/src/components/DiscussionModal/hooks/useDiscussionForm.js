@@ -15,6 +15,9 @@ const validationSchema = object({
   title: string().required("Topic is required"),
 });
 
+/**
+ * Custom Hook to manage discussion forms
+ */
 export const useDiscussionForm = ({ onClose }) => {
   const { courseId } = useParams();
   const { enqueueSnackbar } = useSnackbar();

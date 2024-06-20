@@ -1,7 +1,13 @@
+/**
+ * Import Modules
+ */
 import ReactJoyride from "react-joyride";
 import { TooltipGuide } from "./units/TooltipGuide";
 import { useTheme } from "@emotion/react";
 
+/**
+ * Guided Tour
+ */
 export const GuidedTour = (props) => {
   const theme = useTheme();
 

@@ -1,6 +1,10 @@
+/**
+ * Import Modules
+ */
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { StyledRuleContainer } from "./ForumRules.styled";
 
+// Forum Rules text
 const rules = [
   {
     title: "Respectful Communication",
@@ -31,6 +35,9 @@ const rules = [
   },
 ];
 
+/**
+ * Forum Rules
+ */
 export const ForumRules = () => {
   return (
     <StyledRuleContainer>

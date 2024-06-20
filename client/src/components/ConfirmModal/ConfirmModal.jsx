@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import { Modal } from "components/Modal";
 import { Button, Grid, Typography } from "@mui/material";
 
+/**
+ * Confirm Modal
+ */
 export const ConfirmModal = ({
   promptString,
   description,
