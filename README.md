@@ -68,11 +68,43 @@ The purpose of this project is to implement the course management platform softw
 - view course list (instructor)
 - view course detail (student)
 - view course detail (instructor) 
+- Forgot Password
+
+
+Some Additional features we implemented includes:
+
+- Input validation across all forms on the interface
+- Edit Course (Instructor)
+- Edit Course Content (Instructor)
+- Profile (Instructor & Student)
+- Search for students when registering students (Instructor)
+- Unregister students (Instructor)
+- Forgot Password (Instructor & Student)
+- Enhanced usability for Registering Students based on feedback from presentation (Instructor)
+- Responsive interface for mobile
+
+
+In Phase 2, we were able to employ Lean UX and within the sprint, we also completed these features
+- Guided tour
+  - Turn off guided tour for all pages
+  - Turn on guided tour for all pages
+  - Automatically select based on system theme on first load
+- Dark Mode
+  - Light Mode
+- Forum
+  - Create Discussion
+  - Delete Discussion
+  - Create Comment
+  - Delete comment
+- Edit Profile
+  - Edit first and last name
+
+
 
 To successfully implement this, we employed the use of the MERN stack. MongoDB Atlas is the interface with which we use to interact with our MongoDB instance. The server was built using ExpressJS and NodeJS. The interface was built using React and Vite also aided in speeding up the process of development. 
 
 
-As it is, this project is not complete. This is just the MVP created after the first development sprint. Star this repository to watch out for more changes to be made to this application within the next few days. 
+As it is, this project is not complete. This is just the MVP created after the second development sprint. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -147,7 +179,7 @@ In each window, run this command
 <!-- ROADMAP -->
 ## Roadmap
 
-_To be decided in the LeanUX sprint in the coming days_
+_To be decided_
 
 <!--
 - [x] Add Changelog
@@ -181,7 +213,7 @@ See `LICENSE.txt` for more information.
 
 **Emmanuel Aimuel** - [@Daxtterr](https://github.com/Daxtterr) - [aimuelemmanuel@gmail.com](mailto:aimuelemmanuel@gmail.com)
 
-**Oluwapelumi Fadolapo** - [@pelu-mi](https://twitter.com/your_username) - pelumifadolapo7@gmail.com
+**Oluwapelumi Fadolapo** - [@pelu-mi](https://github.com/pelu-mi) - [pelumifadolapo7@gmail.com](mailto:pelumifadolapo7@gmail.com)
 
 ================================================================
 
@@ -204,6 +236,7 @@ Here are some resources we found useful during the process of building this appl
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
 * [Mongoose Documentation](https://mongoosejs.com/docs/)
+* [Coolors contrast checker](https://coolors.co/contrast-checker/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
