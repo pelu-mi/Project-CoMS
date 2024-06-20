@@ -3,7 +3,6 @@
  */
 import {
   Autocomplete,
-  Avatar,
   Button,
   Grid,
   IconButton,
@@ -29,9 +28,9 @@ import { GET_REGISTERED_STUDENTS_API_KEY } from "services/constants";
 import { useRegisteredStudentsQuery } from "services/api/courseDetail/useRegisteredStudentsQuery";
 import { useStudentsQuery } from "services/api/courseDetail/useStudentsQuery";
 import { sortByKey } from "utils/sortByKey";
-import { stringAvatar } from "utils/stringAvatar";
 import { detectStudentChanges } from "utils/detectStudentChanges";
 import { ConfirmDiscardModal } from "./units/ConfirmDiscardModal";
+import { Avatar } from "components/Avatar";
 
 /**
  * Add Student Modal
@@ -121,7 +120,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
               <ListItem {...props} value={option._id} key={option._id}>
                 <Avatar
                   src="/.jpg"
-                  {...stringAvatar(`${option.firstName} ${option.lastName}`)}
+                  name={`${option.firstName} ${option.lastName}`}
                 />
                 <Typography ml="14px">
                   {option.firstName} {option.lastName}
@@ -161,9 +160,7 @@ export const AddStudentModal = ({ onClose, ...rest }) => {
                     <ListItemIcon value={student._id}>
                       <Avatar
                         src="/.jpg"
-                        {...stringAvatar(
-                          `${student.firstName} ${student.lastName}`
-                        )}
+                        name={`${student.firstName} ${student.lastName}`}
                       />
                     </ListItemIcon>
                     <Typography mr="auto">

@@ -1,29 +1,29 @@
 /**
  * Import Modules
  */
-import {
-  Avatar,
-  Box,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useUser } from "context";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import InfoIcon from "@mui/icons-material/Info";
+import { useColorMode, useUser } from "context";
 import { useState } from "react";
 import { StyledButton } from "./UserMenus.styled";
 import { ConfirmLogoutModal } from "../ConfirmLogoutModal";
-import { stringAvatar } from "utils/stringAvatar";
 import { ProfileModal } from "components/ProfileModal";
+import { Avatar } from "components/Avatar";
+import { useGuide } from "hooks/useGuide";
 
 /**
  * User Menus
  */
 export const UserMenus = () => {
   const { user } = useUser();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { isActiveGuides, handleToggleGuides } = useGuide();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
@@ -32,8 +32,23 @@ export const UserMenus = () => {
   const settings = [
     {
       title: "Profile",
-      icon: <AccountCircleIcon color="primary" />,
+      icon: <AccountCircleIcon color="student" />,
       action: () => setShowProfileModal(true),
+    },
+    {
+      title: "Contact Support",
+      icon: <InfoIcon color="info" />,
+      action: () => window.open("mailto:pelumifadolapo7@gmail.com"),
+    },
+    {
+      title: colorMode === "dark" ? "Light Theme" : "Dark Theme",
+      icon: colorMode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />,
+      action: () => toggleColorMode(),
+    },
+    {
+      title: isActiveGuides ? "Turn Off Guides" : "Turn On Guides",
+      icon: <HelpIcon color="primary" />,
+      action: handleToggleGuides,
     },
     {
       title: "Logout",
@@ -56,17 +71,25 @@ export const UserMenus = () => {
         <Tooltip title="Open settings">
           <StyledButton
             startIcon={
-              <Avatar
-                src="/.jpg"
-                {...stringAvatar(`${user.firstName} ${user.lastName}`)}
-              />
+              <Avatar src="/.jpg" name={`${user.firstName} ${user.lastName}`} />
             }
             endIcon={<ExpandMoreIcon />}
             variant="outlined"
             disableRipple
             onClick={handleOpenUserMenu}
           >
-            {user.firstName}
+            <Typography
+              variant="button"
+              sx={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                maxWidth: "148px",
+                textTransform: "capitalize",
+              }}
+            >
+              {user.firstName}
+            </Typography>
           </StyledButton>
         </Tooltip>
         <Menu
@@ -94,7 +117,7 @@ export const UserMenus = () => {
               }}
             >
               {icon}
-              <Typography textAlign="center" onClick={action} ml="12px">
+              <Typography textAlign="center" ml="12px">
                 {title}
               </Typography>
             </MenuItem>

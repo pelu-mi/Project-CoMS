@@ -2,6 +2,7 @@
  * Import Modules
  */
 import PropTypes from "prop-types";
+import { useMemo } from "react";
 import {
   CssBaseline,
   GlobalStyles,
@@ -12,12 +13,16 @@ import "@fontsource/inter/300.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/700.css";
-import theme from "./theme";
+import { useColorMode } from "context/ColorModeProvider";
+import getTheme from "./theme";
 
 /**
  * Theme Provider
  */
 export const ThemeProvider = ({ children }) => {
+  const { colorMode } = useColorMode();
+  const theme = useMemo(() => getTheme(colorMode), [colorMode]);
+
   return (
     <MuiThemeProvider theme={theme}>
       <GlobalStyles
@@ -25,7 +30,8 @@ export const ThemeProvider = ({ children }) => {
           html,
           body,
           #root {
-            height: 100%;
+            min-height: 100%;
+            scroll-behavior: smooth;
           }
 
           body {

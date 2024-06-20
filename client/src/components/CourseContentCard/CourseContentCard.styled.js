@@ -16,9 +16,10 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   height: "100%",
   minHeight: "227px",
   borderRadius: "8px",
-  border: `1px solid ${theme.palette.grey[300]}`,
+  border: `1px solid ${theme.palette.divider}`,
   display: "flex",
   flexDirection: "column",
+  boxShadow: theme.customVariables.boxShadow,
 }));
 
 // Styling for card media
@@ -35,13 +36,12 @@ export const StyledIconWrapper = styled(Button)({
   right: "16px",
   padding: "4px",
   minWidth: "34px",
-  background: "white",
 });
 
 // Styling for Card Content
 export const StyledCardContent = styled(CardContent)({
   paddingBottom: "26px",
-  marginBottom: "auto"
+  marginBottom: "auto",
 });
 
 // Styling for Typography
@@ -69,5 +69,5 @@ export const StyledButton = styled(Button)(({ theme }) => ({
   width: "100%",
   padding: "12px",
   borderRadius: 0,
-  borderTop: `1px solid ${theme.palette.grey[300]}`,
+  borderTop: `1px solid ${theme.palette.divider}`,
 }));

@@ -1,7 +1,7 @@
 /**
  * Import Modules
  */
-import { Box, CardMedia, Typography, styled } from "@mui/material";
+import { Box, CardMedia, Grid, Typography, styled } from "@mui/material";
 
 // Styling for Banner
 export const StyledBanner = styled(CardMedia)(({ theme, image }) => ({
@@ -24,7 +24,7 @@ export const StyledTitleContainer = styled(Box)(({ theme }) => ({
 
 // Styling for Typography Wrapper
 export const StyledTypographyWrapper = styled(Box)({
-  flexBasis: "60%",
+  flexBasis: "100%",
   flexGrow: "100",
 });
 
@@ -40,12 +40,11 @@ export const StyledTypography = styled(Typography)({
 });
 
 // Styling for Title Action container
-export const StyledTitleActionContainer = styled(Box)({
-  display: "flex",
+export const StyledTitleActionContainer = styled(Grid)({
   flexWrap: "wrap-reverse",
   flexGrow: "1",
   height: "100%",
-  gap: "16px",
+  justifyContent: "flex-end",
 });
 
 // Styling for Empty Layout

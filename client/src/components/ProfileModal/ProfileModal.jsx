@@ -1,60 +1,55 @@
 /**
  * Import Modules
  */
-import { Button, Grid, Typography } from "@mui/material";
+import { useState } from "react";
 import { Modal } from "components/Modal";
 import PropTypes from "prop-types";
 import { useUser } from "context";
+import { ProfileInfo } from "./components/ProfileInfo";
+import { EditProfile } from "./components/EditProfile";
+import { Avatar } from "components/Avatar";
+import { Box } from "@mui/material";
 
 /**
  * Profile Modal
  */
 export const ProfileModal = ({ onClose, ...rest }) => {
   const { user } = useUser();
-  const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleClose = () => {
+    setIsEditing(false);
+    onClose();
+  };
 
   return (
     <Modal
-      title={`${user.firstName} ${user.lastName}`}
+      title={
+        isEditing ? (
+          "Edit Profile"
+        ) : (
+          <Box
+            display="flex"
+            alignItems="center"
+            gap="12px"
+            textTransform="capitalize"
+          >
+            <Avatar name={`${user.firstName} ${user.lastName}`} />
+            {user.firstName} {user.lastName}
+          </Box>
+        )
+      }
       contentStyles={{ maxWidth: "450px" }}
-      {...{ ...rest, onClose }}
+      {...{ ...rest, onClose: handleClose }}
     >
-      <Grid container mt={4} gap={3} display="flex" justifyContent="center">
-        <Grid container spacing={1}>
-          <Grid item xs={4} sm={3}>
-            <Typography>Email:</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <Typography sx={{ wordBreak: "break-word" }}>
-              {user.email}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={4} sm={3}>
-            <Typography>Timezone:</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <Typography sx={{ wordBreak: "break-word" }}>{timeZone}</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={4} sm={3}>
-            <Typography>Role:</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            <Typography
-              sx={{ wordBreak: "break-word", textTransform: "capitalize" }}
-            >
-              {user.role}
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Button variant="outlined" href={`mailto:pelumifadolapo7@gmail.com`}>
-          Contact Support
-        </Button>
-      </Grid>
+      {!isEditing ? (
+        <ProfileInfo onEdit={() => setIsEditing(true)} />
+      ) : (
+        <EditProfile
+          onClose={() => handleClose()}
+          onCancel={() => setIsEditing(false)}
+        />
+      )}
     </Modal>
   );
 };

@@ -1,0 +1,1 @@
+export { CourseListTour } from "./CourseListTour";

@@ -2,119 +2,126 @@
  * Import Modules
  */
 import { createTheme, responsiveFontSizes } from "@mui/material";
+import { darkPalette, lightPalette } from "./palette";
 
 /**
- * Theme 1
+ * Theme
  */
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#3851DD",
-      background: "#F5F6FF",
-      icon: "#C3CBF5",
+const getTheme = (mode) => {
+  const theme = createTheme({
+    palette: {
+      mode,
+      ...(mode === "light" ? lightPalette : darkPalette),
     },
-    secondary: {
-      main: "#313131",
-    },
-    error: {
-      main: "#E95252",
-      background: "#FEF0F0",
-    },
-    success: {
-      main: "#20C11D",
-      background: "#F4FCF4",
-    },
-    text: {
-      primary: "#313131",
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 763,
-      md: 1024,
-      lg: 1440,
-      xl: 1920,
-    },
-  },
-  typography: {
-    fontFamily: ["Inter", "Arial", "sans-serif"].join(","),
-    h1: {
-      fontWeight: 500,
-    },
-    h2: {
-      fontWeight: 500,
-    },
-    h3: {
-      fontWeight: 500,
-    },
-    h4: {
-      fontWeight: 600,
-    },
-    h5: {
-      fontWeight: 600,
-    },
-    h6: {
-      fontWeight: 600,
-    },
-    button: {
-      textTransform: "none",
-      fontSize: "16px",
-      fontWeight: 600,
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        contained: {
-          padding: "12px 20px",
-        },
-        outlined: {
-          padding: "12px 20px",
-        },
-        outlinedSecondary: ({ theme }) => ({
-          borderColor: theme.palette.grey[400],
-        }),
-      },
-      defaultProps: {
-        disableElevation: true,
-        variant: "contained",
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 763,
+        md: 1024,
+        lg: 1440,
+        xl: 1920,
       },
     },
-    MuiDivider: {
-      styleOverrides: {
-        root: ({ theme }) => ({
-          fontSize: "14px",
-          fontWeight: 500,
-          color: theme.palette.grey[400],
-        }),
+    typography: {
+      fontFamily: ["Inter", "Arial", "sans-serif"].join(","),
+      h1: {
+        fontWeight: 500,
+      },
+      h2: {
+        fontWeight: 500,
+      },
+      h3: {
+        fontWeight: 500,
+      },
+      h4: {
+        fontWeight: 600,
+      },
+      h5: {
+        fontWeight: 600,
+      },
+      h6: {
+        fontWeight: 600,
+      },
+      button: {
+        textTransform: "none",
+        fontSize: "16px",
+        fontWeight: 600,
       },
     },
-    MuiLink: {
-      styleOverrides: {
-        root: {
-          fontWeight: 500,
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            "&>.Mui-disabled": {
+              background:
+                theme.palette.mode === "light"
+                  ? theme.palette.grey[200]
+                  : theme.palette.grey[900],
+            },
+          }),
         },
       },
-    },
-    MuiToolbar: {
-      styleOverrides: {
-        root: {
-          minHeight: "64px",
+      MuiButton: {
+        styleOverrides: {
+          contained: {
+            padding: "12px 20px",
+          },
+          outlined: {
+            padding: "12px 20px",
+          },
+          outlinedSecondary: ({ theme }) => ({
+            borderColor:
+              theme.palette.mode === "light"
+                ? theme.palette.grey[400]
+                : theme.palette.grey[700],
+          }),
+          sizeSmall: {
+            padding: "8px 16px",
+            fontSize: "16px",
+          },
+        },
+        defaultProps: {
+          disableElevation: true,
+          variant: "contained",
+        },
+      },
+      MuiDivider: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            fontSize: "14px",
+            fontWeight: 500,
+            color: theme.palette.grey[400],
+          }),
+        },
+      },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            fontWeight: 500,
+          },
+        },
+      },
+      MuiToolbar: {
+        styleOverrides: {
+          root: {
+            minHeight: "64px",
+          },
+        },
+      },
+      MuiAvatar: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            background: theme.palette.primary.main,
+          }),
         },
       },
     },
-    MuiAvatar: {
-      styleOverrides: {
-        root: ({ theme }) => ({
-          background: theme.palette.primary.main,
-        }),
-      },
+    customVariables: {
+      boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",
     },
-  },
-  customVariables: {
-    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.05)",
-  },
-});
+  });
 
-export default responsiveFontSizes(theme);
+  return responsiveFontSizes(theme);
+};
+
+export default getTheme;

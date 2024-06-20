@@ -4,22 +4,32 @@
 import { PageLayout } from "components/PageLayout";
 import { CourseDetailPage } from "pages/CourseDetailPage";
 import { CourseListPage } from "pages/CourseListPage";
+import { DiscussionDetailPage } from "pages/DiscussionDetailPage";
+import { DiscussionListPage } from "pages/DiscussionListPage";
+import { ForumListPage } from "pages/ForumListPage";
 
 import { Route, Routes } from "react-router-dom";
-import { COURSE_LIST_ROUTE } from "routes";
+import { COURSE_LIST_ROUTE, FORUM_LIST_ROUTE } from "routes";
 
 /**
  * Main Page
  */
 export const MainPage = () => {
+  const forumRelativePath = FORUM_LIST_ROUTE.replace("/", "");
+
   return (
-    <PageLayout>
+    <PageLayout disableFullHeight>
       <Routes>
         <Route path="/*" element={<CourseListPage />} />
-        <Route
-          path={`${COURSE_LIST_ROUTE}/:courseId`}
-          element={<CourseDetailPage />}
-        />
+        <Route path={FORUM_LIST_ROUTE} element={<ForumListPage />} />
+        <Route path={`${COURSE_LIST_ROUTE}/:courseId`}>
+          <Route index element={<CourseDetailPage />} />
+          <Route path={forumRelativePath} element={<DiscussionListPage />} />
+          <Route
+            path={`${forumRelativePath}/:discussionId`}
+            element={<DiscussionDetailPage />}
+          />
+        </Route>
       </Routes>
     </PageLayout>
   );

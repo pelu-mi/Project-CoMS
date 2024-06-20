@@ -1,0 +1,1 @@
+export { DiscussionDetailTour } from "./DiscussionDetailTour";

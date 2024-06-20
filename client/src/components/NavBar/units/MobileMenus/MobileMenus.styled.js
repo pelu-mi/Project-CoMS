@@ -7,7 +7,7 @@ import { IconButton, ListItemButton, styled } from "@mui/material";
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   borderRadius: "8px",
   padding: "6px",
-  border: `1px solid ${theme.palette.grey[300]}`,
+  border: `1px solid ${theme.palette.divider}`,
 }));
 
 // Styling for List item buttons

@@ -27,6 +27,7 @@ import { Loader } from "components/Loader";
 import InboxIcon from "@mui/icons-material/Inbox";
 import { COURSE_LIST_ROUTE } from "routes";
 import { CourseModal } from "components/CourseModal";
+import { CourseListTour } from "./components/CourseListTour";
 
 /**
  * Course List Page
@@ -68,6 +69,7 @@ export const CourseListPage = () => {
     if (user.role === ROLES.instructor)
       return (
         <Button
+          className="create-course-step"
           startIcon={<AddIcon />}
           sx={{ minHeight: 56, flexGrow: 1 }}
           onClick={() => setOpenCreateCourseModal(true)}
@@ -88,7 +90,7 @@ export const CourseListPage = () => {
 
     if (courses.length) {
       return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} height="fit-content">
           {courses.map((course, index) => (
             <Grid item key={`${index}-${course.title}`} xs={12} sm={4} md={3}>
               <CourseCard
@@ -125,7 +127,14 @@ export const CourseListPage = () => {
   return (
     <>
       <Box pb={4}>
-        <Typography variant="h4" marginY={4}>
+        <Typography
+          variant="h4"
+          sx={{
+            wordWrap: "break-word",
+            marginY: 4,
+            textTransform: "capitalize",
+          }}
+        >
           Hello{" "}
           <Typography variant="h4" component="span" color="primary">
             {user.firstName}!
@@ -142,7 +151,7 @@ export const CourseListPage = () => {
           >
             <Typography
               variant="h5"
-              sx={{ my: { xs: "16px", sm: 0 }, pr: "16px", flexGrow: 20 }}
+              sx={{ my: { xs: "16px", sm: "14px" }, pr: "16px", flexGrow: 20 }}
             >
               {renderTitle()}
             </Typography>
@@ -159,13 +168,16 @@ export const CourseListPage = () => {
                     </InputAdornment>
                   ),
                 }}
+                disabled={courses.length === 0}
               /> */}
 
               {renderCreateCourseButton()}
             </StyledActionContainer>
           </Box>
 
-          {renderCourses()}
+          <Box display="flex" flexGrow={1} className="course-list-step">
+            {renderCourses()}
+          </Box>
 
           {/* NOTE: Pagination for next phase */}
           {/* <Box display="flex" justifyContent="flex-end" mt={2}>
@@ -178,6 +190,9 @@ export const CourseListPage = () => {
           </Box> */}
         </StyledCourseContainer>
       </Box>
+
+      <CourseListTour />
+
       <CourseModal
         open={openCreateCourseModal}
         onClose={() => setOpenCreateCourseModal(false)}

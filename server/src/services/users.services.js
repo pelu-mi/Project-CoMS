@@ -8,11 +8,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import generateResetPin from "../utils/generateResetPin.js";
 import sendMail from "../utils/sendMail.js";
-
-
+import discussion from "../models/discussion.model.js";
+import comment from "../models/comment.model.js";
 /**
  * createAccount - Create new user account
- * 
+ *
  * @param {Object} payload - Data to use for creating a new account
  * @returns Success or failure status
  */
@@ -52,10 +52,9 @@ async function createAccount(payload) {
   };
 }
 
-
 /**
  * login - Login to existing user account
- * 
+ *
  * @param {Object} payload - Data to use for login to an existing account
  * @returns Success or failure status
  */
@@ -100,12 +99,11 @@ async function login(payload) {
   };
 }
 
-
 /**
  * createCourse - Create a new course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} user - User trying to create a new course
  * @param {Object} payload - Data to use to create new course
  * @returns Success or Failure status
@@ -132,29 +130,31 @@ async function createCourse(user, payload) {
   };
 }
 
-
 /**
  * getInstructorCourseList - Get list of courses created by the instructor
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} user - instructor trying to get the course list
  * @returns Success or Failure status
  */
 async function getInstructorCourseLIst(user) {
-  const foundCourses = await course.find({ instructor: user._id });
+  const courses = await course
+    .find({ instructor: user._id })
+    .populate("discussionCount")
+    .exec();
+
   return {
     message: "Courses displayed below",
     statusCode: 200,
     status: "success",
-    data: foundCourses,
+    data: courses,
   };
 }
 
-
 /**
  * getCourseDetails - Get details of course
- * 
+ *
  * @param {Object} payload - Details of course to be retrieved
  * @returns Success or Failure status
  */
@@ -169,10 +169,9 @@ async function getCourseDetails(payload) {
   };
 }
 
-
 /**
  * getAllCourseContent - Get all course content of course
- * 
+ *
  * @param {Object} payload - Details of course whose content is to be retrieved
  * @returns Success or Failure status
  */
@@ -195,12 +194,11 @@ async function getAllCourseContent(payload) {
   };
 }
 
-
 /**
  * addCourseContent - Add new course content to course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of content to be added
  * @returns Success or Failure status
  */
@@ -215,12 +213,11 @@ async function addCourseContent(payload) {
   };
 }
 
-
 /**
  * addStudents - Register students to course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of students to be added
  * @returns Success or Failure status
  */
@@ -243,12 +240,11 @@ async function addStudents(payload) {
   };
 }
 
-
 /**
  * editCourse - Edit existing course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details to be set
  * @returns Success or Failure status
  */
@@ -277,12 +273,11 @@ async function editCourse(payload) {
   };
 }
 
-
 /**
  * editCourseContent - Edit existing course content
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of content to be set
  * @returns Success or Failure status
  */
@@ -311,12 +306,11 @@ async function editCourseContent(payload) {
   };
 }
 
-
 /**
  * getAllUnregisteredStudents - Get list of unregistered students in a course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of course
  * @returns Success or Failure status
  */
@@ -347,12 +341,11 @@ async function getAllUnregisteredStudents(payload) {
   };
 }
 
-
 /**
  * getAllRegisteredStudents - Get list of registered students in a course
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @param {Object} payload - Details of course
  * @returns Success or Failure status
  */
@@ -384,12 +377,11 @@ async function getAllRegisteredStudents(payload) {
   };
 }
 
-
 /**
  * getAllStudents - Get list of all students on the platform
- * 
+ *
  * Restricted to instructors
- * 
+ *
  * @returns Success or Failure status
  */
 async function getAllStudents() {
@@ -403,26 +395,25 @@ async function getAllStudents() {
   };
 }
 
-
 /**
  * getStudentCourseList - Get list of courses the student is registered in
- * 
+ *
  * Restricted to students
- * 
+ *
  * @param {Object} use - Details of student
  * @returns Success or Failure status
  */
 async function getStudentCourseList(user) {
-  const list = await course.find(
-    { "students.relatedIds": user._id },
-    { students: 0 } // Exclude the students field
-  );
-
+  const courses = await course
+    .find({ "students.relatedIds": user._id })
+    .select("-students") // Exclude the students field
+    .populate("discussionCount")
+    .exec();
   return {
     message: "Courses retrieved successfully",
     statusCode: 200,
     status: "success",
-    data: list,
+    data: courses,
   };
 }
 
@@ -488,6 +479,269 @@ const resetPassword = async (payload) => {
     status: updatedUser,
   };
 };
+
+async function updateUser(payload) {
+  const currentUser = await users.findById(payload._id);
+  if (!currentUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  const updatedUser = await users.findByIdAndUpdate(
+    payload._id,
+    { $set: payload }, // Update the fields provided in the payload
+    { new: true, useFindAndModify: false }
+  );
+
+  // Check if the course was found and updated
+  if (!updatedUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  await comment.updateMany(
+    { creator: payload._id },
+    {
+      $set: {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      },
+    }
+  );
+
+  await discussion.updateMany(
+    { creator: payload._id }, // Match discussions by creator
+    {
+      $set: {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      },
+    }
+  );
+
+  return {
+    message: "User updated successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedUser,
+  };
+}
+
+async function createDiscussion(user, payload) {
+  payload.creator = user._id;
+  payload.firstName = user.firstName;
+  payload.lastName = user.lastName;
+  const newDiscussion = await discussion.create(payload);
+  return {
+    message: "Discussion created successfully",
+    statusCode: 201,
+    status: "success",
+    data: newDiscussion,
+  };
+}
+
+async function createComment(user, payload) {
+  payload.creator = user._id;
+  payload.firstName = user.firstName;
+  payload.lastName = user.lastName;
+
+  const newComment = await comment.create(payload);
+  return {
+    message: "Comment created successfully",
+    statusCode: 201,
+    status: "success",
+    data: newComment,
+  };
+}
+
+async function getForumDiscussions(payload) {
+  const { courseId } = payload;
+  const courseName = await course.findById(courseId).select("name");
+  if (!courseName) {
+    return {
+      message: "Course not found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+  const discussions = await discussion.find({
+    course: courseId,
+    delete: false,
+  });
+  if (!discussions) {
+    return {
+      message: "No discussions found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Discussions listed below",
+    statusCode: 201,
+    status: "success",
+    name: courseName.name,
+    data: discussions,
+  };
+}
+
+async function getDiscussionComments(payload) {
+  const { discussionId } = payload;
+  const discussionName = await discussion.findOne({
+    _id: discussionId,
+    delete: false,
+  });
+  if (!discussionName) {
+    return {
+      message: "discussion not found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+  const comments = await comment.find({
+    discussion: discussionId,
+    delete: false,
+  });
+  if (!comments) {
+    return {
+      message: "No comments found",
+      statusCode: 400,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Comments listed below",
+    statusCode: 201,
+    status: "success",
+    discussionDetails: discussionName,
+    data: comments,
+  };
+}
+
+async function deleteDiscussion(payload) {
+  const { discussionId } = payload;
+
+  // Find the discussion by id and update the 'delete' field to true
+  const updatedDiscussion = await discussion.findByIdAndUpdate(
+    discussionId,
+    { $set: { delete: true } },
+    { new: true }
+  );
+
+  if (!updatedDiscussion) {
+    return {
+      message: "Discussion not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Discussion deleted successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedDiscussion,
+  };
+}
+
+async function deleteComment(payload) {
+  const { commentId } = payload;
+
+  // Find the discussion by id and update the 'delete' field to true
+  const updatedComment = await comment.findByIdAndUpdate(
+    commentId,
+    { $set: { delete: true } },
+    { new: true }
+  );
+
+  if (!updatedComment) {
+    return {
+      message: "Comment not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  return {
+    message: "Comment deleted successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedComment,
+  };
+}
+
+async function switchOffGuidetour(user) {
+  const tourUser = await users.findOne({ _id: user._id });
+  if (!tourUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  // Update the fields to switch off the guide tour
+  const updatedUser = await users.findByIdAndUpdate(
+    user._id,
+    {
+      $set: {
+        isCompleteCourseListTour: true,
+        isCompleteCourseDetailsTour: true,
+        isCompleteForumListTour: true,
+        isCompleteCourseForumTour: true,
+        isCompleteDiscussionTour: true,
+      },
+    },
+    { new: true, useFindAndModify: false }
+  );
+
+  return {
+    message: "Guide tour switched off successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedUser,
+  };
+}
+
+async function switchOnGuidetour(user) {
+  const tourUser = await users.findOne({ _id: user._id });
+  if (!tourUser) {
+    return {
+      message: "User not found",
+      statusCode: 404,
+      status: "failure",
+    };
+  }
+
+  // Update the fields to switch on the guide tour
+  const updatedUser = await users.findByIdAndUpdate(
+    user._id,
+    {
+      $set: {
+        isCompleteCourseListTour: false,
+        isCompleteCourseDetailsTour: false,
+        isCompleteForumListTour: false,
+        isCompleteCourseForumTour: false,
+        isCompleteDiscussionTour: false,
+      },
+    },
+    { new: true, useFindAndModify: false }
+  );
+
+  return {
+    message: "Guide tour switched on successfully",
+    statusCode: 200,
+    status: "success",
+    data: updatedUser,
+  };
+}
 export default {
   createAccount,
   login,
@@ -505,4 +759,13 @@ export default {
   getStudentCourseList,
   forgotPassword,
   resetPassword,
+  updateUser,
+  createDiscussion,
+  createComment,
+  getForumDiscussions,
+  getDiscussionComments,
+  deleteComment,
+  deleteDiscussion,
+  switchOffGuidetour,
+  switchOnGuidetour,
 };

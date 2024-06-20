@@ -15,7 +15,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   height: "100%",
   minHeight: "227px",
   borderRadius: "8px",
-  border: `1px solid ${theme.palette.grey[300]}`,
+  border: `1px solid ${theme.palette.divider}`,
 }));
 
 // Styling for Card action area
@@ -34,18 +34,21 @@ export const StyledCardMedia = styled(CardMedia)(({ theme, image }) => ({
 }));
 
 // Styling for Icon Wrapper
-export const StyledIconWrapper = styled(Button)({
+export const StyledIconWrapper = styled(Button)(({ theme }) => ({
   position: "absolute",
   top: "16px",
   right: "16px",
   padding: "4px",
   minWidth: "34px",
-  background: "white",
+  background: theme.palette.background.paper,
 
   ":hover": {
-    background: "rgba(255, 255, 255,0.8)",
+    background:
+      theme.palette.mode === "light"
+        ? "rgba(255, 255, 255,0.8)"
+        : "rgba(0, 0, 0,0.8)",
   },
-});
+}));
 
 // Styling for Typography
 export const StyledTypography = styled(Typography)({

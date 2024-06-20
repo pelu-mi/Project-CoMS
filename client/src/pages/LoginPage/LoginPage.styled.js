@@ -20,9 +20,10 @@ export const StyledForm = styled("form")(({ theme }) => ({
   alignItems: "center",
   gap: 24,
   padding: 32,
-  border: `1px solid ${theme.palette.grey[300]}`,
+  border: `1px solid ${theme.palette.divider}`,
   borderRadius: 8,
   boxShadow: theme.customVariables.boxShadow,
+  background: theme.palette.background.paper,
 
   [theme.breakpoints.down("md")]: {
     padding: "40px 24px",
@@ -30,7 +31,13 @@ export const StyledForm = styled("form")(({ theme }) => ({
 }));
 
 // Styling for Logo
-export const StyledLogo = styled(LogoIcon)({
+export const StyledLogo = styled(LogoIcon)(({ theme }) => ({
   width: 100,
   height: 100,
-});
+  rect: {
+    fill: theme.palette.primary.main,
+  },
+  path: {
+    fill: theme.palette.background.paper,
+  },
+}));

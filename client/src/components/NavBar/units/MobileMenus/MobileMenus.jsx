@@ -70,7 +70,15 @@ export const MobileMenus = () => {
         <MenuIcon sx={{ width: "28px", height: "28px" }} />
       </StyledIconButton>
 
-      <Drawer open={openMobileNav} onClose={toggleMobileNav(false)}>
+      <Drawer
+        open={openMobileNav}
+        onClose={toggleMobileNav(false)}
+        PaperProps={{
+          sx: {
+            backgroundImage: "none",
+          },
+        }}
+      >
         {DrawerList}
       </Drawer>
     </Box>

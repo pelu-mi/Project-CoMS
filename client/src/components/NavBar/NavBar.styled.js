@@ -7,17 +7,24 @@ import { FullLogoIcon } from "components/Icon";
 // Styling for App bar
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
-  borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  background: "white",
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  background: theme.palette.background.default,
 }));
 
 // Styling for Navigation Logo
-export const StyledNavLogo = styled(FullLogoIcon)({
+export const StyledNavLogo = styled(FullLogoIcon)(({ theme }) => ({
   marginRight: 24,
   cursor: "pointer",
   height: "42px",
   width: "auto",
-});
+
+  "rect, #course-management": {
+    fill: theme.palette.primary.main,
+  },
+  "#book-icon": {
+    fill: theme.palette.background.default,
+  },
+}));
 
 // Styling for Navigation button
 export const StyledNavButton = styled(Button, {

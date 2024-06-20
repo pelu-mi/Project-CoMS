@@ -1,0 +1,1 @@
+export { ForumRules } from "./ForumRules";
